@@ -18,7 +18,6 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String title;
-	private Integer kindId;
 	private String CPU;
 	private String RAM;
 	private String HARDWARE;
@@ -27,11 +26,14 @@ public class Category {
 	private String OS;
 	private boolean hot;
 	private BigInteger price;
+	private BigInteger promotionPrice;
 	private int warrantyTime;
 	private String description;
 	@ManyToOne
 	@JoinColumn(name="brandId")
 	private Brand brand;
+	private Float discount;
+	
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private Collection<Task> tasks;
 	
@@ -46,12 +48,6 @@ public class Category {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public Integer getKindId() {
-		return kindId;
-	}
-	public void setKindId(Integer kindId) {
-		this.kindId = kindId;
 	}
 	public String getCPU() {
 		return CPU;
@@ -124,5 +120,17 @@ public class Category {
 	}
 	public void setTasks(Collection<Task> tasks) {
 		this.tasks = tasks;
+	}
+	public Float getDiscount() {
+		return discount;
+	}
+	public void setDiscount(Float discount) {
+		this.discount = discount;
+	}
+	public BigInteger getPromotionPrice() {
+		return promotionPrice;
+	}
+	public void setPromotionPrice(BigInteger promotionPrice) {
+		this.promotionPrice = promotionPrice;
 	}
 }

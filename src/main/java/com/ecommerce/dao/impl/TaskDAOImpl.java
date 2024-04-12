@@ -49,7 +49,7 @@ public class TaskDAOImpl implements TaskDAO {
 		return category
 				.getTasks()
 				.stream()
-				.collect(Collectors.toList());
+				.collect(Collectors.toList());			
 	}
 
 	@Override

@@ -22,11 +22,7 @@ public class BrandServiceImpl implements BrandService {
 
 	@Override
 	public Brand findByID(int id) {
-		Brand brand = dao.findByID(id);
-		if (brand == null) {
-			System.out.println("Brand is not found");
-		}
-		return brand;
+		return dao.findByID(id);
 	}
 
 }
