@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ecommerce.dao.CategoryDAO;
 import com.ecommerce.entity.Category;
-import com.ecommerce.entity.Task;
+import com.ecommerce.entity.Need;
 
 @SuppressWarnings("unchecked")
 @Transactional
@@ -56,10 +56,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 	}
 
 	@Override
-	public List<Task> getAllTask(int id) {
+	public List<Need> getAllNeed(int id) {
 		Session session = factory.getCurrentSession();
 		//SELECT t.id, t.name FROM Task t INNER JOIN t.categories c WHERE c.id = :categoryId
-		String hql = "FROM Task t INNER JOIN t.categories c WHERE c.id=:categoryId";
+		String hql = "FROM Need n INNER JOIN n.categories c WHERE c.id=:categoryId";
 		Query query = session.createQuery(hql);
 		query.setInteger("categoryId", id);
 		System.out.println(query.list().get(0));

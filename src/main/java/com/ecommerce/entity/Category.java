@@ -2,8 +2,11 @@ package com.ecommerce.entity;
 
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.ecommerce.enums.CategoryStatus;
 
 @Entity
 public class Category {
@@ -32,10 +37,15 @@ public class Category {
 	@ManyToOne
 	@JoinColumn(name="brandId")
 	private Brand brand;
-	private Float discount;
+	private int createBy;
+	private Date createTime;
+	private int updateBy;
+	private Date updateTime;
+	@Enumerated(EnumType.STRING)
+	private CategoryStatus status;
 	
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
-	private Collection<Task> tasks;
+	private Collection<Need> needs;
 	
 	public int getId() {
 		return id;
@@ -115,22 +125,52 @@ public class Category {
 	public void setBrand(Brand brand) {
 		this.brand = brand;
 	}
-	public Collection<Task> getTasks() {
-		return tasks;
+	public Collection<Need> getneeds() {
+		return needs;
 	}
-	public void setTasks(Collection<Task> tasks) {
-		this.tasks = tasks;
-	}
-	public Float getDiscount() {
-		return discount;
-	}
-	public void setDiscount(Float discount) {
-		this.discount = discount;
+	public void setneeds(Collection<Need> needs) {
+		this.needs = needs;
 	}
 	public BigInteger getPromotionPrice() {
 		return promotionPrice;
 	}
 	public void setPromotionPrice(BigInteger promotionPrice) {
 		this.promotionPrice = promotionPrice;
+	}
+	public int getCreateBy() {
+		return createBy;
+	}
+	public void setCreateBy(int createBy) {
+		this.createBy = createBy;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public int getUpdateBy() {
+		return updateBy;
+	}
+	public void setUpdateBy(int updateBy) {
+		this.updateBy = updateBy;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+	public CategoryStatus getStatus() {
+		return status;
+	}
+	public void setStatus(CategoryStatus status) {
+		this.status = status;
+	}
+	public Collection<Need> getNeeds() {
+		return needs;
+	}
+	public void setNeeds(Collection<Need> needs) {
+		this.needs = needs;
 	}
 }

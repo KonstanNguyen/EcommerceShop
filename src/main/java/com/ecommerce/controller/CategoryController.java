@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ecommerce.entity.Category;
-import com.ecommerce.entity.Task;
+import com.ecommerce.entity.Need;
 import com.ecommerce.service.CategoryService;
-import com.ecommerce.service.TaskService;
+import com.ecommerce.service.NeedService;
 
 @Controller
-@RequestMapping("category")
+@RequestMapping("categories")
 public class CategoryController {
 	@Autowired
 	CategoryService service;
 	@Autowired
-	TaskService taskService;
+	NeedService taskService;
 	
 	@RequestMapping("index")
 	public String index(ModelMap model) {
 		List<Category> categories = service.fetchAll();
 		model.addAttribute("categories", categories);
-		return "category";
+		return "";
 	}
 	
 	@RequestMapping("/{id}")
@@ -38,7 +38,7 @@ public class CategoryController {
 	@RequestMapping("{id}/tasks")
 	public String task(ModelMap model, @PathVariable("id") int id) {
 		
-		List<Task> tasks = taskService.fetchAllByCategory(id);
+		List<Need> tasks = taskService.fetchAllByCategory(id);
 		model.addAttribute("tasks", tasks);
 		return "category";
 	}

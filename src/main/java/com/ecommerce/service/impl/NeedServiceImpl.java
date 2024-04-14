@@ -5,27 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ecommerce.dao.TaskDAO;
-import com.ecommerce.entity.Task;
-import com.ecommerce.service.TaskService;
+import com.ecommerce.dao.NeedDAO;
+import com.ecommerce.entity.Need;
+import com.ecommerce.service.NeedService;
 
 @Service
-public class TaskServiceImpl implements TaskService {
+public class NeedServiceImpl implements NeedService {
 	@Autowired
-	TaskDAO dao;
+	NeedDAO dao;
 	
 	@Override
-	public List<Task> fetchAll() {
+	public List<Need> fetchAll() {
 		return dao.fetchAll();
 	}
 
 	@Override
-	public Task findById(int id) {
+	public Need findById(int id) {
 		return dao.findById(id);
 	}
 
 	@Override
-	public List<Task> fetchAllByCategory(int id) {
+	public List<Need> fetchAllByCategory(int id) {
 		return dao.fetchAllByCategory(id);
 	}
 }

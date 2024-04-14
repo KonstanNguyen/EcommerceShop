@@ -8,25 +8,25 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ecommerce.entity.Task;
-import com.ecommerce.service.TaskService;
+import com.ecommerce.entity.Need;
+import com.ecommerce.service.NeedService;
 
 @Controller
 @RequestMapping("task")
 public class TaskController {
 	@Autowired
-	TaskService service;
+	NeedService service;
 	
 	@RequestMapping("index")
 	public String index(ModelMap model) {
-		List<Task> tasks = service.fetchAll();
+		List<Need> tasks = service.fetchAll();
 		model.addAttribute("tasks", tasks);
 		return "task";
 	}
 	
 	@RequestMapping("tasks")
 	public String index(ModelMap model, @PathVariable("id") int id) {
-		Task task = service.findById(id);
+		Need task = service.findById(id);
 		model.addAttribute("task", task);
 		return "task";
 	}

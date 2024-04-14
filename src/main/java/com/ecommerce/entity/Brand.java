@@ -12,16 +12,16 @@ import javax.persistence.OneToMany;
 public class Brand {
 	@Id
 	@GeneratedValue
-	private int ID;
+	private int id;
 	private String name;
 	@OneToMany(mappedBy = "brand", fetch = FetchType.EAGER)
 	private Collection<Category> categories;
 	
-	public int getID() {
-		return ID;
+	public int getid() {
+		return id;
 	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setid(int id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;

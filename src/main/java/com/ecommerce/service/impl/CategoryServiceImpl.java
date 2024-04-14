@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ecommerce.dao.CategoryDAO;
 import com.ecommerce.entity.Category;
-import com.ecommerce.entity.Task;
+import com.ecommerce.entity.Need;
 import com.ecommerce.service.CategoryService;
 
 @Service
@@ -31,11 +31,11 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<Task> getAllTask(int id) {
+	public List<Need> getAllNeed(int id) {
 //		Category category = dao.findByID(id);
 //		List<Task> tasks = new ArrayList<>(category.getTasks());
 //		return tasks;
-		return dao.getAllTask(id);
+		return dao.getAllNeed(id);
 	}
 
 }

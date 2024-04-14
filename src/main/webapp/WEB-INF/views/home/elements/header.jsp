@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!-- HEADER -->
 <header>
 	<!-- TOP HEADER -->
@@ -38,11 +39,13 @@
 				<div class="col-md-6">
 					<div class="header-search">
 						<form>
-							<select class="input-select">
-								<option value="0">All Categories</option>
-								<option value="1">Category 01</option>
-								<option value="1">Category 02</option>
-							</select> <input class="input" placeholder="Search here">
+<!-- 							<select class="input-select"> -->
+<!-- 								<option value="0">Brand</option> -->
+<%-- 								<c:forEach var="brand" items="${ brands }" end="2"> --%>
+<%-- 									<option value="${ brand.id }">${ brand.name }</option> --%>
+<%-- 								</c:forEach> --%>
+<!-- 							</select>  -->
+							<input class="input input-select" placeholder="Search here">
 							<button class="search-btn">Search</button>
 						</form>
 					</div>

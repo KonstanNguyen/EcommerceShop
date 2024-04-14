@@ -12,14 +12,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Task {
+public class Need {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "Category_Tasks",
-			joinColumns = @JoinColumn(name = "taskId"),
+	@JoinTable(name = "Categories_Needs",
+			joinColumns = @JoinColumn(name = "needId"),
 			inverseJoinColumns = @JoinColumn(name = "categoryId"))
 	private Collection<Category> categories;
 	

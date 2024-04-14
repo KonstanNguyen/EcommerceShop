@@ -1,5 +1,7 @@
 package com.ecommerce.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,9 @@ public class BrandController {
 	
 	@RequestMapping
 	public String index(ModelMap model) {
-//		List<Brand> brands = service.fetchAll();
-//		model.addAttribute("brands", brands);
-		return "pages/login";
+		List<Brand> brands = service.fetchAll();
+		model.addAttribute("brands", brands);
+		return "home/pages/home";
 	}
 	
 	@RequestMapping("{id}")
