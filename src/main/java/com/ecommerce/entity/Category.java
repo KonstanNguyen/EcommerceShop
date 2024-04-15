@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -37,12 +38,18 @@ public class Category {
 	@ManyToOne
 	@JoinColumn(name="brandId")
 	private Brand brand;
-	private int createBy;
-	private Date createTime;
-	private int updateBy;
-	private Date updateTime;
 	@Enumerated(EnumType.STRING)
 	private CategoryStatus status;
+	private Byte starts;
+//	@Column(nullable = true)
+//	private int createBy;
+//	@Column(nullable = true)
+//	private Date createTime;
+//	@Column(nullable = true)
+//	private int updateBy;
+//	@Column(nullable = true)
+//	private Date updateTime;
+	
 	
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private Collection<Need> needs;
@@ -137,30 +144,30 @@ public class Category {
 	public void setPromotionPrice(BigInteger promotionPrice) {
 		this.promotionPrice = promotionPrice;
 	}
-	public int getCreateBy() {
-		return createBy;
-	}
-	public void setCreateBy(int createBy) {
-		this.createBy = createBy;
-	}
-	public Date getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-	public int getUpdateBy() {
-		return updateBy;
-	}
-	public void setUpdateBy(int updateBy) {
-		this.updateBy = updateBy;
-	}
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
+//	public int getCreateBy() {
+//		return createBy;
+//	}
+//	public void setCreateBy(int createBy) {
+//		this.createBy = createBy;
+//	}
+//	public Date getCreateTime() {
+//		return createTime;
+//	}
+//	public void setCreateTime(Date createTime) {
+//		this.createTime = createTime;
+//	}
+//	public int getUpdateBy() {
+//		return updateBy;
+//	}
+//	public void setUpdateBy(int updateBy) {
+//		this.updateBy = updateBy;
+//	}
+//	public Date getUpdateTime() {
+//		return updateTime;
+//	}
+//	public void setUpdateTime(Date updateTime) {
+//		this.updateTime = updateTime;
+//	}
 	public CategoryStatus getStatus() {
 		return status;
 	}
@@ -172,5 +179,11 @@ public class Category {
 	}
 	public void setNeeds(Collection<Need> needs) {
 		this.needs = needs;
+	}
+	public Byte getStarts() {
+		return starts;
+	}
+	public void setStarts(Byte starts) {
+		this.starts = starts;
 	}
 }

@@ -1,11 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+
 <!-- HEADER -->
 <header>
 	<!-- TOP HEADER -->
 	<div id="top-header">
 		<div class="container">
 			<ul class="header-links pull-left">
-				<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+				<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
 				<li><a href="#"><i class="fa fa-envelope-o"></i>
 						email@email.com</a></li>
 				<li><a href="#"><i class="fa fa-map-marker"></i> 1734
@@ -39,12 +40,12 @@
 				<div class="col-md-6">
 					<div class="header-search">
 						<form>
-<!-- 							<select class="input-select"> -->
-<!-- 								<option value="0">Brand</option> -->
-<%-- 								<c:forEach var="brand" items="${ brands }" end="2"> --%>
-<%-- 									<option value="${ brand.id }">${ brand.name }</option> --%>
-<%-- 								</c:forEach> --%>
-<!-- 							</select>  -->
+							<!-- 							<select class="input-select"> -->
+							<!-- 								<option value="0">Brand</option> -->
+							<%-- 								<c:forEach var="brand" items="${ brands }" end="2"> --%>
+							<%-- 									<option value="${ brand.id }">${ brand.name }</option> --%>
+							<%-- 								</c:forEach> --%>
+							<!-- 							</select>  -->
 							<input class="input input-select" placeholder="Search here">
 							<button class="search-btn">Search</button>
 						</form>
