@@ -1,4 +1,5 @@
 .vscode/
 build/
-.settings
+.settings/
 database/
+src/main/webapp/WEB-INF/configs
