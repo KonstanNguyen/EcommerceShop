@@ -19,6 +19,9 @@
 	<context:annotation-config />
 	<mvc:annotation-driven/>
 	
+	<!-- Dinh nghia duong dan mac dinh cho PUBLIC -->
+	<mvc:resources mapping="/assets/**" location="/WEB-INF/assets"/>
+	
 	<!-- Cấu hình view -->
 	<bean id="viewResolver" 
 		p:prefix="/WEB-INF/views/" p:suffix=".jsp"

@@ -1,5 +1,5 @@
 <!-- HOT DEAL SECTION -->
-<div id="hot-deal" class="section">
+<div id="hot-deal" class="section" style="background-image: url('./assets/img/hotdeal.png');">
 	<!-- container -->
 	<div class="container">
 		<!-- row -->

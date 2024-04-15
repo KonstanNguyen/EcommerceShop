@@ -7,7 +7,7 @@
 
 main {
   position: relative;
-  background-image: url(../../assets/image/background_login.jpg);
+  background-image: url(./assets/image/background_login.jpg);
   background-size: cover;
   width: 100vw;
   height: 100vh;
