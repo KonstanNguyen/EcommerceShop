@@ -27,6 +27,7 @@ public class BrandController {
 	
 	@RequestMapping
 	public String index(ModelMap model) {
+		int MAX_SIZE = 100;
 		List<Brand> brands = service.fetchAll();
 		List<Category> categories = categoryService.fetchAll();
 		model.addAttribute("brands", brands);
