@@ -27,7 +27,7 @@
 						<div id="tab1" class="tab-pane active">
 							<div class="products-slick" data-nav="#slick-nav-1">
 								<c:forEach var="category" items="${ categories }">
-									<div class="product">
+									<div class="product ">
 											<div class="product-img">
 												<img src="./assets/img/product01.png" alt="">
 											</div>
