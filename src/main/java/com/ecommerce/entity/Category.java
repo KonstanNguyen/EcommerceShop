@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.ecommerce.enums.CategoryStatus;
 
@@ -41,6 +42,9 @@ public class Category {
 	@Enumerated(EnumType.STRING)
 	private CategoryStatus status;
 	private Byte starts;
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+	private Collection<Image> images;
+	
 //	@Column(nullable = true)
 //	private int createBy;
 //	@Column(nullable = true)
@@ -53,7 +57,10 @@ public class Category {
 	
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private Collection<Need> needs;
-	
+	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
+	private Collection<Promotion> promotions;
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+	private Collection<Categories_Suppliers> suppliers;
 	public int getId() {
 		return id;
 	}
