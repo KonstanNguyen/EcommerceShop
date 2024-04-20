@@ -1,5 +1,8 @@
 package com.ecommerce.controller;
 
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,13 +29,19 @@ public class BrandController {
 	CategoryService categoryService;
 	
 	@RequestMapping
-	public String index(ModelMap model) {
-		int MAX_SIZE = 100;
+	public String index(
+//			@RequestParam("page") int page, 
+//			@RequestParam("limit") int limit,
+			ModelMap model) {
 		List<Brand> brands = service.fetchAll();
 		List<Category> categories = categoryService.fetchAll();
 		model.addAttribute("brands", brands);
 		model.addAttribute("categories", categories);
-		return "home/pages/home";
+		
+		LocalDateTime countDownDate = LocalDateTime.of(2045, Month.JANUARY, 5, 15, 37, 25, 0);
+		model.addAttribute("countDownDate", countDownDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss")).toString());
+		
+		return "home/pages/home";	
 //		return "pages/login";
 	}
 	
