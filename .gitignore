@@ -1,6 +1,5 @@
 .vscode/**
 build/**
-.settings/**
 database/**
 src/main/webapp/WEB-INF/configs/**
 .classpath
