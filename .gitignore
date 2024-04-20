@@ -1,8 +1,8 @@
-.vscode/*
-build/*
-.settings/*
-database/*
-src/main/webapp/WEB-INF/configs/*
+.vscode/**
+build/**
+.settings/**
+database/**
+src/main/webapp/WEB-INF/configs/**
 .classpath
 .project
 .settings
