@@ -38,7 +38,7 @@ public class BrandController {
 		model.addAttribute("brands", brands);
 		model.addAttribute("categories", categories);
 		
-		LocalDateTime countDownDate = LocalDateTime.of(2045, Month.JANUARY, 5, 15, 37, 25, 0);
+		LocalDateTime countDownDate = LocalDateTime.of(2020, Month.JANUARY, 5, 15, 37, 25, 0);
 		model.addAttribute("countDownDate", countDownDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss")).toString());
 		
 		return "home/pages/home";	
