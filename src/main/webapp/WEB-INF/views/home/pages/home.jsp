@@ -11,6 +11,7 @@
 	<%@ include file="../elements/navigation.jsp" %>
 	<%@ include file="../elements/section-new-product.jsp" %>
 	<%@ include file="../elements/section-hot-product.jsp" %>
+	<%@ include file="../elements/section-top-selling.jsp" %>
 	<%@ include file="../../elements/footer.jsp" %>
 	<%@ include file="../../elements/jQuery-plugin.jsp" %>
 </body>

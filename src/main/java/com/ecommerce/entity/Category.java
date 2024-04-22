@@ -2,7 +2,6 @@ package com.ecommerce.entity;
 
 import java.math.BigInteger;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.ecommerce.enums.CategoryStatus;
+import com.ecommerce.consts.CategoryStatus;
 
 @Entity
 public class Category {
@@ -38,14 +37,14 @@ public class Category {
 	private int warrantyTime;
 	private String description;
 	@ManyToOne
-	@JoinColumn(name="brandId")
+	@JoinColumn(name = "brandId")
 	private Brand brand;
 	@Enumerated(EnumType.STRING)
 	private CategoryStatus status;
 	private Byte starts;
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
 	private Collection<Image> images;
-	
+
 //	@Column(nullable = true)
 //	private int createBy;
 //	@Column(nullable = true)
@@ -54,9 +53,10 @@ public class Category {
 //	private int updateBy;
 //	@Column(nullable = true)
 //	private Date updateTime;
-	
+
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private Collection<Need> needs;
+
 	public int getId() {
 		return id;
 	}
@@ -140,7 +140,7 @@ public class Category {
 	public BigInteger getPromotionPrice() {
 		return promotionPrice;
 	}
-	
+
 	public void setPromotionPrice(BigInteger promotionPrice) {
 		this.promotionPrice = promotionPrice;
 	}
@@ -192,6 +192,5 @@ public class Category {
 	public void setNeeds(Collection<Need> needs) {
 		this.needs = needs;
 	}
-	
-	
+
 }
