@@ -4,5 +4,3 @@ database/**
 src/main/webapp/WEB-INF/configs/**
 .classpath
 .project
-.settings
-.settings/**
