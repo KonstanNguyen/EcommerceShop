@@ -6,6 +6,8 @@
 
 - [Instruction](#introduction)
 
+- [Structure](#structure)
+
 - [Featured](#feature) 
 
 - [Utilization](#utilization)
@@ -29,6 +31,8 @@
 - Mục đích là tận dụng lại database đã có từ môn CSDL của kỳ trước để làm thành một sản phẩm
 
 - Nhưng vì vấn đề CSDL nên đề tài này chỉ tập trung vào bán laptop là chính
+
+## [Structure](#structure) <a id="structure"></a>
 
 ## [Features](#feature)  <a id="feature"></a>
 
