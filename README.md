@@ -56,4 +56,9 @@
 
 ### [Nguyễn Tấn Nguyên](#KonstanNguyen-effect) <a id="KonstanNguyen-effect"></a>
 
+- Tạo cấu trúc chung cho toàn bộ project.
+- Thiết kế CSDL.
+- Config chung cho cả project.
+- Connect thêm database trên Azure.
+
 ### [Nguyễn Duy Tân](#atlattt-effect) <a id="atlattt-effect"></a>
