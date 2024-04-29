@@ -23,13 +23,13 @@ import com.ecommerce.service.CategoryService;
 @Controller
 @RequestMapping("brands")
 public class BrandController {
-	
+
 	@Autowired
 	BrandService service;
-	
+
 	@Autowired
 	CategoryService categoryService;
-	
+
 	@RequestMapping
 	public String index(
 //			@RequestParam("page") int page, 
