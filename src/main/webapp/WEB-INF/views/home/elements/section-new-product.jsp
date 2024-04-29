@@ -32,7 +32,7 @@
 												<img src="./assets/img/product01.png" alt="">
 											</div>
 											<div class="product-body">
-												<h3 class="product-name"><a href="#">${ category.title }</a></h3>
+												<h3 class="product-name"><a href="./product.htm?id=${category.id }">${ category.title }</a></h3>
 												<h4 class="product-price">
 													<span>${ category.promotionPrice }</span> 
 													<del class="product-old-price">${ category.price }</del>

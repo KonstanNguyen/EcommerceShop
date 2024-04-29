@@ -21,6 +21,10 @@ public class Employee {
 	private String email;
 	@OneToMany(mappedBy = "createBy", fetch = FetchType.EAGER)
     private Collection<Promotion> promotions;
+	@OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
+	private Collection<Cart> carts;
+	@OneToMany(mappedBy="employee",fetch=FetchType.EAGER)
+	private Collection<Invoice> invoices;
 	public int getId() {
 		return id;
 	}

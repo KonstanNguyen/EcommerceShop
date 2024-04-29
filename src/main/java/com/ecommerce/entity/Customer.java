@@ -1,14 +1,23 @@
 package com.ecommerce.entity;
 
+import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+@Entity
 public class Customer {
+	@Id
 	private int id;
 	private String CMND;
 	private String name;
 	private Date dateOfBirth;
 	private String phone;
 	private String email;
+	@OneToMany(mappedBy="customer",fetch=FetchType.EAGER)
+	private Collection<Invoice> invoices;
 	public int getId() {
 		return id;
 	}

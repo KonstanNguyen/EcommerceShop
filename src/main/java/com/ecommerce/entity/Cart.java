@@ -4,14 +4,24 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+@Entity
 public class Cart {
+	@Id
 	private int id;
 	private String username;
 	private String status;
-	private Date createDate;
-	private int employeeId;
-	private int total;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd-MM-yyyy hh:mm:ss")
+	private Date createTime;
+	@ManyToOne
+	@JoinColumn(name="employeeId")
+	private Employee employee;
 	public int getId() {
 		return id;
 	}
@@ -30,17 +40,17 @@ public class Cart {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Date getCreateDate() {
-		return createDate;
+
+	public Employee getEmployee() {
+		return employee;
 	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
-	public int getEmployeeId() {
-		return employeeId;
+	public Date getCreateTime() {
+		return createTime;
 	}
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
-	}
-	
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}	
 }

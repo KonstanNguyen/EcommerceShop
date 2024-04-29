@@ -2,12 +2,26 @@ package com.ecommerce.entity;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Invoice {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String taxCode;
 	private Date date;
-	private int employeeId;
-	private int customerId;
+	@ManyToOne
+	@JoinColumn(name="employeeId")
+	private Employee employee;
+	@ManyToOne
+	@JoinColumn(name="customerId")
+	private Customer customer;
 	public int getId() {
 		return id;
 	}
@@ -26,17 +40,19 @@ public class Invoice {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public int getEmployeeId() {
-		return employeeId;
+	
+	
+	public Employee getEmployee() {
+		return employee;
 	}
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
-	public int getCustomerId() {
-		return customerId;
+	public Customer getCustomer() {
+		return customer;
 	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 	
 }
