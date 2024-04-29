@@ -1,6 +1,7 @@
 package com.ecommerce.dao.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -57,13 +58,8 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 	@Override
 	public List<Need> getAllNeed(int id) {
-		Session session = factory.getCurrentSession();
-		//SELECT t.id, t.name FROM Task t INNER JOIN t.categories c WHERE c.id = :categoryId
-		String hql = "FROM Need n INNER JOIN n.categories c WHERE c.id=:categoryId";
-		Query query = session.createQuery(hql);
-		query.setInteger("categoryId", id);
-		System.out.println(query.list().get(0));
-//		List<Task> list = (List<Task>)query.list();
-		return query.list();
+		Category category = findByID(id);
+		return category.getNeeds().stream().collect(Collectors.toList());
 	}
+
 }
