@@ -25,7 +25,7 @@
 	<bean id="dataSource" 
 	    	class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 			p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-			p:url="jdbc:sqlserver://konstan-server.database.windows.net:1433;database=EcommerceShop;user=konstan@konstan-server;password=Ntn@2003;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;">
+			p:url="jdbc:sqlserver://konstan-server.database.windows.net:1433;database=EcommerceShop;user=web@konstan-server;password=Test@123;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;">
 	</bean>
 	
 	<!-- Cấu hình Hibernate -->
