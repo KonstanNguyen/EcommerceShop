@@ -189,12 +189,4 @@ public class Category {
 		this.starts = starts;
 	}
 
-	public Collection<Need> getNeeds() {
-		return needs;
-	}
-
-	public void setNeeds(Collection<Need> needs) {
-		this.needs = needs;
-	}
-
 }
