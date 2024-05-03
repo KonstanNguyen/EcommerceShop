@@ -62,4 +62,15 @@ public class CategoryDAOImpl implements CategoryDAO {
 		return category.getNeeds().stream().collect(Collectors.toList());
 	}
 
+	@Override
+	public List<Category> fetchPageTopSelling(int pageNo, int pageSize) {
+		Session session = factory.getCurrentSession();
+		Query query = session.createQuery("FROM Category");
+		Integer firstResult = (pageNo - 1) * pageSize;
+		Integer lastResult = firstResult + pageSize;
+		query.setFirstResult(pageNo); // Start from the first result
+		query.setMaxResults(pageSize); // Retrieve 10 results
+		return query.list();
+	}
+
 }

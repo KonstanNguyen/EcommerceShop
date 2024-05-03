@@ -10,4 +10,5 @@ public interface CategoryService {
 	public Category findByID(int id);
 	public List<String> fetchAllCPU();
 	public List<Need> getAllNeed(int id);
+	public List<Category> fetchPageTopSelling(int pageNo, int pageSize);
 }

@@ -38,4 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
 		return dao.getAllNeed(id);
 	}
 
+	public List<Category> fetchPageTopSelling(int pageNo, int pageSize){
+		return dao.fetchPageTopSelling(pageNo, pageSize);
+	}
 }

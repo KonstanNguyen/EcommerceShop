@@ -19,7 +19,7 @@
 <%-- 					</c:forEach> --%>
 					<div>
 						<!-- product widget -->
-						<c:forEach var="category" items="${ categories }" end="2">
+						<c:forEach var="category" items="${ categories }">
 							<div class="product-widget">
 							<div class="product-img">
 								<img src="./assets/img/product07.png" alt="">
@@ -27,7 +27,7 @@
 							<div class="product-body">
 								<p class="product-category">Category</p>
 								<h3 class="product-name">
-									<a href="#">category.title</a>
+									<a href="#">${ category.title }</a>
 								</h3>
 								<h4 class="product-price">
 									${ category.price }
@@ -41,7 +41,7 @@
 
 					<div>
 						<!-- product widget -->
-						<c:forEach var="category" items="${ categories }">
+						<c:forEach var="category" items="${ categories2 }">
 							<div class="product-widget">
 							<div class="product-img">
 								<img src="./assets/img/product07.png" alt="">
@@ -49,7 +49,7 @@
 							<div class="product-body">
 								<p class="product-category">Category</p>
 								<h3 class="product-name">
-									<a href="#">category.title</a>
+									<a href="#">${ category.title }</a>
 								</h3>
 								<h4 class="product-price">
 									${ category.price }
