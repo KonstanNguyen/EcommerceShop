@@ -26,7 +26,7 @@
 									<div class="product-body">
 										<p class="product-category">Category</p>
 										<h3 class="product-name">
-											 <a href="./product.htm?id=${item.id } " title="${ item.title }">${ item.title }</a>
+											 <a href="./product.htm?id=${ item.id } " title="${ item.title }">${ item.title }</a>
 										</h3>
 										<h4 class="product-price">
 											${ item.price }

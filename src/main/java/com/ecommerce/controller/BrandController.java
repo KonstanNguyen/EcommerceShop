@@ -38,7 +38,7 @@ public class BrandController {
 		Integer pageTotal = (int)Math.ceil((double)categories.size()/pagesize);
 		List<PageResponse<Category>> pages = new ArrayList<PageResponse<Category>>();
 		for(int i = 0; i < pageTotal; i++) {
-			pages.add(new PageResponse<>(i, pagesize, pageTotal, categoryService.fetchPageTopSelling(i, pagesize)));
+			pages.add(categoryService.fetchPageTopSelling(i, i == pageTotal-1 ? categories.size()-(i*pagesize) : pagesize));
 		}
 		model.addAttribute("brands", brands);
 		model.addAttribute("categories", categories);

@@ -1,25 +1,22 @@
 package com.ecommerce.dto.response;
 
-import java.util.List;
+import java.util.Collection;
 
 public class PageResponse<T> {
 	private int pageNo;
 	private int pageSize;
-	private int totalPage;
-	private List<T> items;
+	private Collection<T> items;
 	
 	public PageResponse() {}
 	
-	public PageResponse(int pageNo, int pageSize, int totalPage) {
+	public PageResponse(int pageNo, int pageSize) {
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
-		this.totalPage = totalPage;
 	}
 	
-	public PageResponse(int pageNo, int pageSize, int totalPage, List<T> items) {
+	public PageResponse(int pageNo, int pageSize, Collection<T> items) {
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
-		this.totalPage = totalPage;
 		this.items = items;
 	}
 
@@ -39,19 +36,11 @@ public class PageResponse<T> {
 		this.pageSize = pageSize;
 	}
 
-	public int getTotalPage() {
-		return totalPage;
-	}
-
-	public void setTotalPage(int totalPage) {
-		this.totalPage = totalPage;
-	}
-
-	public List<T> getItems() {
+	public Collection<T> getItems() {
 		return items;
 	}
 
-	public void setItems(List<T> items) {
+	public void setItems(Collection<T> items) {
 		this.items = items;
 	}
 }
