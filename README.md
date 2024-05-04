@@ -6,6 +6,8 @@
 
 - [Instruction](#introduction)
 
+- [Structure](#structure)
+
 - [Featured](#feature) 
 
 - [Utilization](#utilization)
@@ -30,6 +32,8 @@
 
 - Nhưng vì vấn đề CSDL nên đề tài này chỉ tập trung vào bán laptop là chính
 
+## [Structure](#structure) <a id="structure"></a>
+
 ## [Features](#feature)  <a id="feature"></a>
 
 ## [Utilization](#utilization) <a id="utilization"></a>
@@ -51,5 +55,10 @@
 ### [Vũ Thị Thanh Thùy](#thanhthuyne2211-effect) <a id="thanhthuyne2211-effect"></a>
 
 ### [Nguyễn Tấn Nguyên](#KonstanNguyen-effect) <a id="KonstanNguyen-effect"></a>
+
+- Tạo cấu trúc chung cho toàn bộ project.
+- Thiết kế CSDL.
+- Config chung cho cả project.
+- Connect thêm database trên Azure.
 
 ### [Nguyễn Duy Tân](#atlattt-effect) <a id="atlattt-effect"></a>

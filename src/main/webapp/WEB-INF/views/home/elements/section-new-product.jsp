@@ -27,15 +27,15 @@
 						<div id="tab1" class="tab-pane active">
 							<div class="products-slick" data-nav="#slick-nav-1">
 								<c:forEach var="category" items="${ categories }">
-									<div class="product">
+									<div class="product ">
 											<div class="product-img">
 												<img src="./assets/img/product01.png" alt="">
 											</div>
 											<div class="product-body">
 <!-- 												style="max-width: 175px; max-height: 40px; text-overflow: ellipsis; overflow: hidden; -->
-												<h3 class="product-name" style="height: 61.56px; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4;"><a href="#" title="${ category.title }">
-													${ category.title }
-												</a></h3>
+												<h3 class="product-name" style="height: 61.56px; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4;">
+                         <a href="./product.htm?id=${category.id } " title="${ category.title }">${ category.title }</a>
+												</h3>
 												<h4 class="product-price">
 													<span>${ category.promotionPrice }</span> 
 													<del class="product-old-price">${ category.price }</del>

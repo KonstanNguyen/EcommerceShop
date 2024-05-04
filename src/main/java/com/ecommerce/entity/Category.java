@@ -41,7 +41,7 @@ public class Category {
 	private Brand brand;
 	@Enumerated(EnumType.STRING)
 	private CategoryStatus status;
-	private Byte starts;
+	private float starts;
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
 	private Collection<Image> images;
 
@@ -176,21 +176,17 @@ public class Category {
 	public void setStatus(CategoryStatus status) {
 		this.status = status;
 	}
-
-	public Byte getStarts() {
-		return starts;
-	}
-
-	public void setStarts(Byte starts) {
-		this.starts = starts;
-	}
-
 	public Collection<Need> getNeeds() {
 		return needs;
 	}
-
 	public void setNeeds(Collection<Need> needs) {
 		this.needs = needs;
+	}
+	public float getStarts() {
+		return starts;
+	}
+	public void setStarts(float starts) {
+		this.starts = starts;
 	}
 
 }
