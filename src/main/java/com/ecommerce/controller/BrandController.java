@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ecommerce.dto.response.PageResponse;
 import com.ecommerce.entity.Brand;
 import com.ecommerce.entity.Category;
 import com.ecommerce.service.BrandService;
@@ -34,14 +36,13 @@ public class BrandController {
 		List<Category> categories = categoryService.fetchAll();
 		Integer pagesize = 3;
 		Integer pageTotal = (int)Math.ceil((double)categories.size()/pagesize);
-		for (int i = 0; i < pageTotal; i++) {
-			
+		List<PageResponse<Category>> pages = new ArrayList<PageResponse<Category>>();
+		for(int i = 0; i < pageTotal; i++) {
+			pages.add(new PageResponse<>(i, pagesize, pageTotal, categoryService.fetchPageTopSelling(i, pagesize)));
 		}
-		List<Category> categoriesPage = categoryService.fetchPageTopSelling(0, 2);
-		List<Category> categoriesPage2 = categoryService.fetchPageTopSelling(1, 2);
 		model.addAttribute("brands", brands);
-		model.addAttribute("categories", categoriesPage);
-		model.addAttribute("categories2", categoriesPage2);
+		model.addAttribute("categories", categories);
+		model.addAttribute("pages", pages);
 		
 		LocalDateTime countDownDate = LocalDateTime.of(2020, Month.JANUARY, 5, 15, 37, 25, 0);
 		model.addAttribute("countDownDate", countDownDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss")).toString());

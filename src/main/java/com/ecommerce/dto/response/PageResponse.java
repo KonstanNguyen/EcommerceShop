@@ -8,6 +8,14 @@ public class PageResponse<T> {
 	private int totalPage;
 	private List<T> items;
 	
+	public PageResponse() {}
+	
+	public PageResponse(int pageNo, int pageSize, int totalPage) {
+		this.pageNo = pageNo;
+		this.pageSize = pageSize;
+		this.totalPage = totalPage;
+	}
+	
 	public PageResponse(int pageNo, int pageSize, int totalPage, List<T> items) {
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
