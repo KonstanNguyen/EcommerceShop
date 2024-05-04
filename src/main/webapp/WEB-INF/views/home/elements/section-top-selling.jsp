@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!-- SECTION -->
 <div class="section">
 	<!-- container -->
@@ -14,52 +14,52 @@
 				</div>
 
 				<div class="products-widget-slick" data-nav="#slick-nav-3">
-<%-- 					<c:forEach var="category" items="${ categories }" status="status"> --%>
-					
-<%-- 					</c:forEach> --%>
-					<div>
-						<!-- product widget -->
-						<c:forEach var="category" items="${ categories }" end="2">
-							<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product07.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">category.title</a>
-								</h3>
-								<h4 class="product-price">
-									${ category.price }
-									<del class="product-old-price">${ category.promotionPrice }</del>
-								</h4>
-							</div>
-						</div>
-						</c:forEach>
-						<!-- /product widget -->
-					</div>
+					<c:forEach var="page" items="${ pages }">
 
-					<div>
-						<!-- product widget -->
-						<c:forEach var="category" items="${ categories }">
-							<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product07.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">category.title</a>
-								</h3>
-								<h4 class="product-price">
-									${ category.price }
-									<del class="product-old-price">${ category.promotionPrice }</del>
-								</h4>
-							</div>
+						<div>
+							<!-- product widget -->
+							<c:forEach var="item" items="${ page.items }">
+								<div class="product-widget">
+									<div class="product-img">
+										<img src="./assets/img/product07.png" alt="">
+									</div>
+									<div class="product-body">
+										<p class="product-category">Category</p>
+										<h3 class="product-name">
+											 <a href="./product.htm?id=${ item.id } " title="${ item.title }">${ item.title }</a>
+										</h3>
+										<h4 class="product-price">
+											${ item.price }
+											<del class="product-old-price">${ item.promotionPrice }</del>
+										</h4>
+									</div>
+								</div>
+							</c:forEach>
+							<!-- /product widget -->
 						</div>
-						</c:forEach>
-						<!-- product widget -->
-					</div>
+					</c:forEach>
+
+					<!-- 					<div> -->
+					<!-- 						product widget -->
+					<%-- 						<c:forEach var="category" items="${ categories2 }"> --%>
+					<!-- 							<div class="product-widget"> -->
+					<!-- 							<div class="product-img"> -->
+					<!-- 								<img src="./assets/img/product07.png" alt=""> -->
+					<!-- 							</div> -->
+					<!-- 							<div class="product-body"> -->
+					<!-- 								<p class="product-category">Category</p> -->
+					<!-- 								<h3 class="product-name"> -->
+					<%-- 									<a href="#">${ category.title }</a> --%>
+					<!-- 								</h3> -->
+					<!-- 								<h4 class="product-price"> -->
+					<%-- 									${ category.price } --%>
+					<%-- 									<del class="product-old-price">${ category.promotionPrice }</del> --%>
+					<!-- 								</h4> -->
+					<!-- 							</div> -->
+					<!-- 						</div> -->
+					<%-- 						</c:forEach> --%>
+					<!-- 						product widget -->
+					<!-- 					</div> -->
 				</div>
 			</div>
 
@@ -183,24 +183,24 @@
 						</div>
 						<!-- product widget -->
 					</div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 					<div>
 						<!-- product widget -->
 						<div class="product-widget">
@@ -256,28 +256,28 @@
 						</div>
 						<!-- product widget -->
 					</div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				</div>
 			</div>
 

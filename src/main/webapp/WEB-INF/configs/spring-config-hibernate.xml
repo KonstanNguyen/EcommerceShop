@@ -15,18 +15,16 @@
 			http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	
 	<!-- Kết nối CSDL -->
-<!-- 	<bean id="dataSource"  -->
-<!-- 	    	class="org.springframework.jdbc.datasource.DriverManagerDataSource" -->
-<!-- 			p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" -->
-<!-- 			p:url="jdbc:sqlserver://localhost:1433; Database=EcommerceShop" -->
-<!-- 			p:username="sa" -->
-<!-- 			p:password="Ntn@2003"> -->
-<!-- 	</bean> -->
 	<bean id="dataSource" 
 	    	class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 			p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
 			p:url="p:url="jdbc:sqlserver://konstan-server-1.database.windows.net:1433;database=EcommerceShop;user=web@konstan-server-1;password=Test@123;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;">">
 	</bean>
+<!-- 	<bean id="dataSource"  -->
+<!-- 	    	class="org.springframework.jdbc.datasource.DriverManagerDataSource" -->
+<!-- 			p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" -->
+<!-- 			p:url="jdbc:sqlserver://konstan-server.database.windows.net:1433;database=EcommerceShop;user=web@konstan-server;password=Test@123;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"> -->
+<!-- 	</bean> -->
 	
 	<!-- Cấu hình Hibernate -->
 	<bean id="sessionFactory" 

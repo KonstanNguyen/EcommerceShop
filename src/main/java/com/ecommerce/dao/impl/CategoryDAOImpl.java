@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ecommerce.dao.CategoryDAO;
+import com.ecommerce.dto.response.PageResponse;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Need;
 
@@ -60,6 +61,18 @@ public class CategoryDAOImpl implements CategoryDAO {
 	public List<Need> getAllNeed(int id) {
 		Category category = findByID(id);
 		return category.getNeeds().stream().collect(Collectors.toList());
+	}
+
+	@Override
+	public PageResponse<Category> fetchPageTopSelling(int pageNo, int pageSize) {
+		Session session = factory.getCurrentSession();
+		Query query = session.createQuery("FROM Category");
+		Integer firstResult = (pageNo - 1) * pageSize;
+		Integer lastResult = firstResult + pageSize;
+		query.setFirstResult(pageNo); // Start from the first result
+		query.setMaxResults(pageSize); // Retrieve 10 results
+		List<Category> categories = query.list();
+		return new PageResponse<Category>(pageNo, pageSize, categories);
 	}
 
 }
