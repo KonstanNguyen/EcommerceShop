@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ecommerce.dto.response.CategoryDTO;
+import com.ecommerce.dto.response.CategoryNewProduct;
 import com.ecommerce.dto.response.CategoryTopSelling;
 import com.ecommerce.entity.Brand;
 import com.ecommerce.entity.Category;
@@ -45,7 +45,7 @@ public class BrandController {
 //		List<Category> categories = categoryService.fetchAll();
 		List<Image> images=new ArrayList<>();
 		model.addAttribute("brands", brands);
-		List<CategoryDTO> categories = categoryService.getcategoryDTO();
+		List<CategoryNewProduct> categories = categoryService.getCategoryNewProduct();
 		model.addAttribute("categories", categories);
 //		for(Category category : categories) {
 //			Image image = imageService.findFirstImageByCategoryId(category.getId());

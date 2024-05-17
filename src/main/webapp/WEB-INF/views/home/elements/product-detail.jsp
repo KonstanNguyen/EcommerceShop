@@ -63,8 +63,8 @@
 					</div>
 					<div>
 						<h3 class="product-price">
-							${ category.promotionPrice }VND
-							<del class="product-old-price">${ category.price }VND</del>
+							${ category.promotionPrice }
+							<del class="product-old-price">${ category.price }</del>
 						</h3>
 						<span class="product-available">${category.status }</span>
 					</div>

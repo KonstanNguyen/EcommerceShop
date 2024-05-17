@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ecommerce.dao.CategoryDAO;
-import com.ecommerce.dto.response.CategoryDTO;
+import com.ecommerce.dto.response.CategoryNewProduct;
 import com.ecommerce.dto.response.CategoryTopSelling;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Need;
@@ -88,10 +88,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 	}
 
 	@Override
-	public List<CategoryDTO> getcategoryDTO() {
+	public List<CategoryNewProduct> getCategoryNewProduct() {
 		List<Category> categories = fetchAll();
-		List<CategoryDTO> categoryDTOs = categories.stream().map(category -> {
-			CategoryDTO categoryDTO = new CategoryDTO();
+		List<CategoryNewProduct> categoryDTOs = categories.stream().map(category -> {
+			CategoryNewProduct categoryDTO = new CategoryNewProduct();
 			categoryDTO.setId(category.getId());
 			categoryDTO.setTitle(category.getTitle());
 			categoryDTO.setPrice(category.getPrice());

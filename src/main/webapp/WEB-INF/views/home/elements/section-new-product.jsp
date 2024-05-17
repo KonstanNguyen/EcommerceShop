@@ -37,8 +37,8 @@
 													title="${category.title}">${category.title}</a>
 											</h3>
 											<h4 class="product-price">
-												<span>${category.promotionPrice}VND</span>
-												<del class="product-old-price">${category.price}VND</del>
+												<span>${category.promotionPrice}</span>
+												<del class="product-old-price">${category.price}</del>
 											</h4>
 											<div class="product-rating">
 												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
