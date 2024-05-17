@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.dao.CategoryDAO;
+import com.ecommerce.dto.response.CategoryTopSelling;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Need;
 import com.ecommerce.service.CategoryService;
@@ -38,4 +39,10 @@ public class CategoryServiceImpl implements CategoryService {
 		return dao.getAllNeed(id);
 	}
 
+	@Override
+	public List<CategoryTopSelling> getTopSelling() {
+		// TODO Auto-generated method stub
+		return dao.getTopSelling();
+	}
+	
 }

@@ -6,18 +6,11 @@ import com.ecommerce.entity.Image;
 
 public class CategoryTopSelling {
 	private int id;
+	private String title;
 	private BigInteger price;
 	private BigInteger promotionPrice;
 	private String brandName;
-	private Image images;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	private Image image;
 
 	public BigInteger getPrice() {
 		return price;
@@ -43,11 +36,28 @@ public class CategoryTopSelling {
 		this.brandName = brandName;
 	}
 
-	public Image getImages() {
-		return images;
+	public Image getImage() {
+		return image;
 	}
 
-	public void setImages(Image images) {
-		this.images = images;
+	public void setImage(Image image) {
+		this.image = image;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 }

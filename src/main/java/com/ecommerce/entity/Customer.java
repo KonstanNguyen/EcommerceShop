@@ -27,8 +27,8 @@ public class Customer {
 	public String getCMND() {
 		return CMND;
 	}
-	public void setCMND(String cMND) {
-		CMND = cMND;
+	public void setCMND(String CMND) {
+		this.CMND = CMND;
 	}
 	public String getName() {
 		return name;

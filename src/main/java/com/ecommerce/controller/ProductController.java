@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ecommerce.entity.Category;
+import com.ecommerce.entity.Image;
 import com.ecommerce.service.CategoryService;
+import com.ecommerce.service.ImageService;
 
 @Controller
 @RequestMapping("/product")
@@ -17,7 +19,8 @@ public class ProductController {
 
     @Autowired
     CategoryService categoryService;
-
+    @Autowired
+    ImageService imageService;
     @RequestMapping
     public String index(@RequestParam("id") int ID, ModelMap model) {
         Category category = categoryService.findByID(ID);

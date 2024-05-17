@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ecommerce.dao.CategoryDAO;
+import com.ecommerce.dto.response.CategoryTopSelling;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Need;
 
@@ -21,6 +22,13 @@ import com.ecommerce.entity.Need;
 public class CategoryDAOImpl implements CategoryDAO {
 	@Autowired
 	SessionFactory factory;
+	
+	private List<Category> fetchAllTopSelling(){
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Category WHERE hot = true";
+		Query query = session.createQuery(hql);
+		return query.list();
+	}
 	
 	@Override
 	public List<Category> fetchAll() {
@@ -60,6 +68,22 @@ public class CategoryDAOImpl implements CategoryDAO {
 	public List<Need> getAllNeed(int id) {
 		Category category = findByID(id);
 		return category.getNeeds().stream().collect(Collectors.toList());
+	}
+
+	@Override
+	public List<CategoryTopSelling> getTopSelling() {
+		List<Category> categories = fetchAllTopSelling();
+		List<CategoryTopSelling> topSellings = categories.stream().map(category -> {
+			CategoryTopSelling topSelling = new CategoryTopSelling();
+			topSelling.setId(category.getId());
+			topSelling.setTitle(category.getTitle());
+			topSelling.setPrice(category.getPrice());
+			topSelling.setPromotionPrice(category.getPromotionPrice());
+			topSelling.setBrandName(category.getBrand().getName());
+			topSelling.setImage(category.getImages().stream().findFirst().get());
+			return topSelling;
+		}).collect(Collectors.toList());
+		return topSellings;
 	}
 
 }

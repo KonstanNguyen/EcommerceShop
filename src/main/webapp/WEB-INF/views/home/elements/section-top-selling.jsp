@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!-- SECTION -->
 <div class="section">
 	<!-- container -->
@@ -14,51 +14,51 @@
 				</div>
 
 				<div class="products-widget-slick" data-nav="#slick-nav-3">
-<%-- 					<c:forEach var="category" items="${ categories }" status="status"> --%>
-					
-<%-- 					</c:forEach> --%>
+					<%-- 					<c:forEach var="category" items="${ categories }" status="status"> --%>
+
+					<%-- 					</c:forEach> --%>
 					<div>
 						<!-- product widget -->
-						<c:forEach var="category" items="${ categories }" end="2">
+						<c:forEach var="category" items="${ cateTopSellings }" end="2">
 							<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product07.png" alt="">
+								<div class="product-img">
+									<img src="${ category.image.url }" alt="">
+								</div>
+								<div class="product-body">
+									<p class="product-category">${ category.brandName }</p>
+									<h3 class="product-name">
+										<a href="./product.htm?id=${category.id}"}">${category.title}</a>
+									</h3>
+									<h4 class="product-price">
+										${ category.price }
+										<del class="product-old-price">${ category.promotionPrice }</del>
+									</h4>
+								</div>
 							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">category.title</a>
-								</h3>
-								<h4 class="product-price">
-									${ category.price }
-									<del class="product-old-price">${ category.promotionPrice }</del>
-								</h4>
-							</div>
-						</div>
 						</c:forEach>
 						<!-- /product widget -->
 					</div>
 
 					<div>
 						<!-- product widget -->
-						<c:forEach var="category" items="${ categories }">
+						<c:forEach var="category" items="${ cateTopSellings }" end="2">
 							<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product07.png" alt="">
+								<div class="product-img">
+									<img src="${ category.image.url }" alt="">
+								</div>
+								<div class="product-body">
+									<p class="product-category">${ category.brandName }</p>
+									<h3 class="product-name">
+										<a href="./product.htm?id=${category.id}">${category.title}</a>
+									</h3>
+									<h4 class="product-price">
+										${ category.price }
+										<del class="product-old-price">${ category.promotionPrice }</del>
+									</h4>
+								</div>
 							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">category.title</a>
-								</h3>
-								<h4 class="product-price">
-									${ category.price }
-									<del class="product-old-price">${ category.promotionPrice }</del>
-								</h4>
-							</div>
-						</div>
 						</c:forEach>
-						<!-- product widget -->
+						<!-- /product widget -->
 					</div>
 				</div>
 			</div>
@@ -74,210 +74,69 @@
 				<div class="products-widget-slick" data-nav="#slick-nav-4">
 					<div>
 						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product04.png" alt="">
+						<c:forEach var="category" items="${ cateTopSellings }" end="2">
+							<div class="product-widget">
+								<div class="product-img">
+									<img src="${ category.image.url }" alt="">
+								</div>
+								<div class="product-body">
+									<p class="product-category">${ category.brandName }</p>
+									<h3 class="product-name">
+										<a href="./product.htm?id=${category.id}">${category.title}</a>
+									</h3>
+									<h4 class="product-price">
+										${ category.price }
+										<del class="product-old-price">${ category.promotionPrice }</del>
+									</h4>
+								</div>
 							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
+						</c:forEach>
 						<!-- /product widget -->
-
-						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product05.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
-						<!-- /product widget -->
-
-						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product06.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
-						<!-- product widget -->
 					</div>
 
 					<div>
 						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product07.png" alt="">
+						<c:forEach var="category" items="${ cateTopSellings }" end="2">
+							<div class="product-widget">
+								<div class="product-img">
+									<img src="${ category.image.url }" alt="">
+								</div>
+								<div class="product-body">
+									<p class="product-category">${ category.brandName }</p>
+									<h3 class="product-name">
+										<a href="./product.htm?id=${category.id}">${category.title}</a>
+									</h3>
+									<h4 class="product-price">
+										${ category.price }
+										<del class="product-old-price">${ category.promotionPrice }</del>
+									</h4>
+								</div>
 							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
+						</c:forEach>
 						<!-- /product widget -->
-
-						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product08.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
-						<!-- /product widget -->
-
-						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product09.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
-						<!-- product widget -->
 					</div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+
 					<div>
 						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product07.png" alt="">
+						<c:forEach var="category" items="${ cateTopSellings }" end="2">
+							<div class="product-widget">
+								<div class="product-img">
+									<img src="${ category.image.url }" alt="">
+								</div>
+								<div class="product-body">
+									<p class="product-category">${ category.brandName }</p>
+									<h3 class="product-name">
+										<a href="./product.htm?id=${category.id}">${category.title}</a>
+									</h3>
+									<h4 class="product-price">
+										${ category.price }
+										<del class="product-old-price">${ category.promotionPrice }</del>
+									</h4>
+								</div>
 							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
+						</c:forEach>
 						<!-- /product widget -->
-
-						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product04.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
-						<!-- /product widget -->
-
-						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product04.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
-						<!-- product widget -->
 					</div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 				</div>
 			</div>
 
@@ -294,114 +153,46 @@
 				<div class="products-widget-slick" data-nav="#slick-nav-5">
 					<div>
 						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product01.png" alt="">
+						<c:forEach var="category" items="${ cateTopSellings }" end="2">
+							<div class="product-widget">
+								<div class="product-img">
+									<img src="${ category.image.url }" alt="">
+								</div>
+								<div class="product-body">
+									<p class="product-category">${ category.brandName }</p>
+									<h3 class="product-name">
+										<a href="./product.htm?id=${category.id}">${category.title}</a>
+									</h3>
+									<h4 class="product-price">
+										${ category.price }
+										<del class="product-old-price">${ category.promotionPrice }</del>
+									</h4>
+								</div>
 							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
+						</c:forEach>
 						<!-- /product widget -->
-
-						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product02.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
-						<!-- /product widget -->
-
-						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product03.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
-						<!-- product widget -->
 					</div>
 
 					<div>
 						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product04.png" alt="">
+						<c:forEach var="category" items="${ cateTopSellings }" end="2">
+							<div class="product-widget">
+								<div class="product-img">
+									<img src="${ category.image.url }" alt="">
+								</div>
+								<div class="product-body">
+									<p class="product-category">${ category.brandName }</p>
+									<h3 class="product-name">
+										<a href="./product.htm?id=${category.id}">${category.title}</a>
+									</h3>
+									<h4 class="product-price">
+										${ category.price }
+										<del class="product-old-price">${ category.promotionPrice }</del>
+									</h4>
+								</div>
 							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
-						<!-- /product widget -->
-
-						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product05.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
-						<!-- /product widget -->
-
-						<!-- product widget -->
-						<div class="product-widget">
-							<div class="product-img">
-								<img src="./assets/img/product06.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name">
-									<a href="#">product name goes here</a>
-								</h3>
-								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
-								</h4>
-							</div>
-						</div>
-						<!-- product widget -->
+						</c:forEach>
+						<!-- /product widget -->	
 					</div>
 				</div>
 			</div>
