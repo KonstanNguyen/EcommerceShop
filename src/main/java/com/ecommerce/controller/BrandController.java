@@ -6,8 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -56,7 +54,7 @@ public class BrandController {
 		model.addAttribute("cateTopSellings", cateTopSellings);
 		LocalDateTime countDownDate = LocalDateTime.of(2025, Month.JANUARY, 5, 15, 37, 25, 0);
 		model.addAttribute("countDownDate", countDownDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss")).toString());
-		return "home/pages/home";	
+		return "home/pages/all";	
 //		return "pages/login";
 	}
 //	@RequestMapping
