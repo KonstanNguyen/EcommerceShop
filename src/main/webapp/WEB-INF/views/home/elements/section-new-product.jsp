@@ -29,16 +29,7 @@
 								<c:forEach var="category" items="${categories}">
 									<div class="product">
 										<div class="product-img">
-											<c:set var="foundImage" value="false" />
-
-											<c:forEach var="image" items="${images}">
-												<c:if
-													test="${not foundImage and image.getCategory().getId() eq category.id}">
-													<img src="${image.url}" alt="">
-													<c:set var="foundImage" value="true" />
-												</c:if>
-											</c:forEach>
-
+											<img src="${category.image.url}" alt="">
 										</div>
 										<div class="product-body">
 											<h3 class="product-name">

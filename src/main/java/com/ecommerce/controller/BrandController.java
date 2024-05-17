@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ecommerce.dto.response.CategoryDTO;
 import com.ecommerce.dto.response.CategoryTopSelling;
 import com.ecommerce.entity.Brand;
 import com.ecommerce.entity.Category;
@@ -41,15 +42,15 @@ public class BrandController {
 //			@RequestParam("limit") int limit,
 			ModelMap model) {
 		List<Brand> brands = service.fetchAll();
-		List<Category> categories = categoryService.fetchAll();
+//		List<Category> categories = categoryService.fetchAll();
 		List<Image> images=new ArrayList<>();
 		model.addAttribute("brands", brands);
-		
+		List<CategoryDTO> categories = categoryService.getcategoryDTO();
 		model.addAttribute("categories", categories);
-		for(Category category : categories) {
-			Image image = imageService.findFirstImageByCategoryId(category.getId());
-			images.add(image);
-        }
+//		for(Category category : categories) {
+//			Image image = imageService.findFirstImageByCategoryId(category.getId());
+//			images.add(image);
+//        }
 		model.addAttribute("images",images);
 		List<CategoryTopSelling> cateTopSellings = categoryService.getTopSelling();
 		System.out.println(cateTopSellings);
