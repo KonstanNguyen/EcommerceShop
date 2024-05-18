@@ -5,7 +5,8 @@
 	<div class="container">
 		<!-- row -->
 		<div class="row">
-			<div class="col-md-4 col-xs-6">
+		<c:forEach begin="1" end="3">
+		<div class="col-md-4 col-xs-6">
 				<div class="section-title">
 					<h4 class="title">Top selling</h4>
 					<div class="section-nav">
@@ -62,6 +63,9 @@
 					</div>
 				</div>
 			</div>
+			
+		</c:forEach>
+			
 
 			<div class="col-md-4 col-xs-6">
 				<div class="section-title">
@@ -115,7 +119,6 @@
 						</c:forEach>
 						<!-- /product widget -->
 					</div>
-
 					<div>
 						<!-- product widget -->
 						<c:forEach var="category" items="${ cateTopSellings }" end="2">

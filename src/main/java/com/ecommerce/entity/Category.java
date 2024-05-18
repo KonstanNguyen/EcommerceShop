@@ -196,5 +196,4 @@ public class Category {
 	public void setImages(Collection<Image> images) {
 		this.images = images;
 	}
-
 }
