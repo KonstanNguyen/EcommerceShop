@@ -68,7 +68,7 @@
 						</h3>
 						<span class="product-available">${category.status }</span>
 					</div>
-					<!--<p>${category.description} </p> bo duoc --> 
+					<!--<p>${category.description} </p> bo duoc -->
 
 					<div class="product-options">
 						<label> Color <select class="input-select">
@@ -81,8 +81,8 @@
 						<div class="qty-label">
 							Quantity
 							<div class="input-number">
-								<input type="number" value=1> <span class="qty-up">+</span> <span
-									class="qty-down">-</span>
+								<input type="number" value=1> <span class="qty-up">+</span>
+								<span class="qty-down">-</span>
 							</div>
 						</div>
 						<button class="add-to-cart-btn">
@@ -97,7 +97,7 @@
 								compare</a></li>
 					</ul>
 
-				<!-- 	<ul class="product-links">
+					<!-- 	<ul class="product-links">
 						<li>Category:</li>
 						<li><a href="#">Headphones</a></li>
 						<li><a href="#">Accessories</a></li>
@@ -142,6 +142,36 @@
 						<div id="tab2" class="tab-pane fade in">
 							<div class="row">
 								<div class="col-md-12">
+									<table class="table table-striped">
+										<tr>
+											<td>BRAND</td>
+											<td>${category.brand.name}</td>
+										</tr>
+										<tr>
+											<td>CPU</td>
+											<td>${category.CPU}</td>
+										</tr>
+										<tr>
+											<td>RAM</td>
+											<td>${category.RAM}</td>
+										</tr>
+										<tr>
+											<td>HARDWARE</td>
+											<td>${category.HARDWARE}</td>
+										</tr>
+										<tr>
+											<td>CARD</td>
+											<td>${category.CARD}</td>
+										</tr>
+										<tr>
+											<td>SCREEN</td>
+											<td>${category.SCREEN}</td>
+										</tr>
+										<tr>
+											<td>OS</td>
+											<td>${category.OS}</td>
+										</tr>
+									</table>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing
 										elit, sed do eiusmod tempor incididunt ut labore et dolore
 										magna aliqua. Ut enim ad minim veniam, quis nostrud

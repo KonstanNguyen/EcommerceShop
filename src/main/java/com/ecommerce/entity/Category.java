@@ -189,4 +189,11 @@ public class Category {
 		this.starts = starts;
 	}
 
+	public Collection<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(Collection<Image> images) {
+		this.images = images;
+	}
 }

@@ -9,17 +9,17 @@ public class Image {
 	private int id;
 	private String url;
 	@ManyToOne
-	@JoinColumn(name="Id")
+	@JoinColumn(name="category_Id")
 	private Category category;
 
 	public int getId() {
-		return id;
+		return this.id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
 	public String getUrl() {
-		return url;
+		return this.url;
 	}
 	public void setUrl(String url) {
 		this.url = url;
