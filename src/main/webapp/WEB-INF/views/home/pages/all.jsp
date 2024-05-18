@@ -82,11 +82,13 @@
 					<div class="col-md-6">
 						<div class="header-search">
 							<form>
-								<select class="input-select">
-									<option value="0">All Categories</option>
-									<option value="1">Category 01</option>
-									<option value="1">Category 02</option>
-								</select> <input class="input" placeholder="Search here">
+								<!-- 							<select class="input-select"> -->
+							<!-- 								<option value="0">Brand</option> -->
+							<%-- 								<c:forEach var="brand" items="${ brands }" end="2"> --%>
+							<%-- 									<option value="${ brand.id }">${ brand.name }</option> --%>
+							<%-- 								</c:forEach> --%>
+							<!-- 							</select>  -->
+								<input class="input" placeholder="Search here">
 								<button class="search-btn">Search</button>
 							</form>
 						</div>
@@ -188,11 +190,9 @@
 				<ul class="main-nav nav navbar-nav">
 					<li class="active"><a href="#">Home</a></li>
 					<li><a href="#">Hot Deals</a></li>
-					<li><a href="#">Categories</a></li>
-					<li><a href="#">Laptops</a></li>
-					<li><a href="#">Smartphones</a></li>
-					<li><a href="#">Cameras</a></li>
-					<li><a href="#">Accessories</a></li>
+					<li><a href="#">New Product</a></li>
+					<li><a href="#">Tops Selling</a></li>
+					<li><a href="#">All</a></li>
 				</ul>
 				<!-- /NAV -->
 			</div>
@@ -231,6 +231,54 @@
 			<div class="row">
 				<!-- ASIDE -->
 				<div id="aside" class="col-md-3">
+					<!-- aside Widget -->
+					<div class="aside">
+						<h3 class="aside-title">Brand</h3>
+						<div class="checkbox-filter">
+							<c:forEach var = "brand" items="${brands}">
+								<div class="input-checkbox">
+								<input type="checkbox" id="${brand.id}"> 
+								<label
+									for="${brand.id}"> 
+									<span></span> ${brand.name}
+								</label>
+							</div>
+							</c:forEach>
+							<!--  
+							<div class="input-checkbox">
+								<input type="checkbox" id="brand-1"> <label
+									for="brand-1"> <span></span> SAMSUNG <small>(578)</small>
+								</label>
+							</div>
+							<div class="input-checkbox">
+								<input type="checkbox" id="brand-2"> <label
+									for="brand-2"> <span></span> LG <small>(125)</small>
+								</label>
+							</div>
+							<div class="input-checkbox">
+								<input type="checkbox" id="brand-3"> <label
+									for="brand-3"> <span></span> SONY <small>(755)</small>
+								</label>
+							</div>
+							<div class="input-checkbox">
+								<input type="checkbox" id="brand-4"> <label
+									for="brand-4"> <span></span> SAMSUNG <small>(578)</small>
+								</label>
+							</div>
+							<div class="input-checkbox">
+								<input type="checkbox" id="brand-5"> <label
+									for="brand-5"> <span></span> LG <small>(125)</small>
+								</label>
+							</div>
+							<div class="input-checkbox">
+								<input type="checkbox" id="brand-6"> <label
+									for="brand-6"> <span></span> SONY <small>(755)</small>
+								</label>
+							</div> -->
+						</div>
+					</div>
+					<!-- /aside Widget -->
+					
 					<!-- aside Widget -->
 					<div class="aside">
 						<h3 class="aside-title">Categories</h3>
@@ -293,43 +341,7 @@
 					</div>
 					<!-- /aside Widget -->
 
-					<!-- aside Widget -->
-					<div class="aside">
-						<h3 class="aside-title">Brand</h3>
-						<div class="checkbox-filter">
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-1"> <label
-									for="brand-1"> <span></span> SAMSUNG <small>(578)</small>
-								</label>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-2"> <label
-									for="brand-2"> <span></span> LG <small>(125)</small>
-								</label>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-3"> <label
-									for="brand-3"> <span></span> SONY <small>(755)</small>
-								</label>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-4"> <label
-									for="brand-4"> <span></span> SAMSUNG <small>(578)</small>
-								</label>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-5"> <label
-									for="brand-5"> <span></span> LG <small>(125)</small>
-								</label>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-6"> <label
-									for="brand-6"> <span></span> SONY <small>(755)</small>
-								</label>
-							</div>
-						</div>
-					</div>
-					<!-- /aside Widget -->
+					
 
 					<!-- aside Widget -->
 					<div class="aside">
