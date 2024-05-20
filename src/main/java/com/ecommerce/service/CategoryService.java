@@ -2,6 +2,9 @@ package com.ecommerce.service;
 
 import java.util.List;
 
+import com.ecommerce.dto.response.CategoryNewProduct;
+import com.ecommerce.dto.response.CategoryTopSelling;
+import com.ecommerce.dto.response.PageResponse;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Need;
 
@@ -10,5 +13,7 @@ public interface CategoryService {
 	public Category findByID(int id);
 	public List<String> fetchAllCPU();
 	public List<Need> getAllNeed(int id);
-	public List<Category> fetchPageTopSelling(int pageNo, int pageSize);
+	public List<CategoryTopSelling> getTopSelling();
+	public List<CategoryNewProduct> getCategoryNewProduct();
+	public PageResponse<Category> fetchPageTopSelling(int pageNo, int pageSize);
 }
