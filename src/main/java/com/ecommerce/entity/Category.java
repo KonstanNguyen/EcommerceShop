@@ -56,7 +56,10 @@ public class Category {
 
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private Collection<Need> needs;
-
+	
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+	private Collection<Categories_Suppliers> categories_suppliers;
+	
 	public int getId() {
 		return id;
 	}

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import com.ecommerce.dao.CategoryDAO;
 import com.ecommerce.dto.response.CategoryNewProduct;
 import com.ecommerce.dto.response.CategoryTopSelling;
-import com.ecommerce.dto.response.PageResponse;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Need;
 
@@ -112,18 +111,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 			return categoryDTO;
 		}).collect(Collectors.toList());
 		return categoryDTOs;
-	}
-
-	@Override
-	public PageResponse<Category> fetchPageTopSelling(int pageNo, int pageSize) {
-		Session session = factory.getCurrentSession();
-		Query query = session.createQuery("FROM Category");
-		Integer firstResult = (pageNo - 1) * pageSize;
-		Integer lastResult = firstResult + pageSize;
-		query.setFirstResult(pageNo); // Start from the first result
-		query.setMaxResults(pageSize); // Retrieve 10 results
-		List<Category> categories = query.list();
-		return new PageResponse<Category>(pageNo, pageSize, categories);
 	}
 
 }

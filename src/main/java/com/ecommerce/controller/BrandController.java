@@ -3,7 +3,6 @@ package com.ecommerce.controller;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ecommerce.dto.response.CategoryNewProduct;
 import com.ecommerce.dto.response.CategoryTopSelling;
-import com.ecommerce.dto.response.PageResponse;
 import com.ecommerce.entity.Brand;
-import com.ecommerce.entity.Category;
-import com.ecommerce.entity.Image;
 import com.ecommerce.service.BrandService;
 import com.ecommerce.service.CategoryService;
 import com.ecommerce.service.ImageService;
@@ -39,14 +35,14 @@ public class BrandController {
 			ModelMap model) {
 		List<Brand> brands = service.fetchAll();
 //		List<Category> categories = categoryService.fetchAll();
-		List<Image> images=new ArrayList<>();
-		List<Category> categories = categoryService.fetchAllProduct();
-		Integer pagesize = 3;
-		Integer pageTotal = (int)Math.ceil((double)categories.size()/pagesize);
-		List<PageResponse<Category>> pages = new ArrayList<PageResponse<Category>>();
-		for(int i = 0; i < pageTotal; i++) {
-			pages.add(categoryService.fetchPageTopSelling(i, i == pageTotal-1 ? categories.size()-(i*pagesize) : pagesize));
-		}
+//		List<Image> images=new ArrayList<>();
+//		List<Category> categories = categoryService.fetchAllProduct();
+//		Integer pagesize = 3;
+//		Integer pageTotal = (int)Math.ceil((double)categories.size()/pagesize);
+//		List<PageResponse<Category>> pages = new ArrayList<PageResponse<Category>>();
+//		for(int i = 0; i < pageTotal; i++) {
+//			pages.add(categoryService.fetchPageTopSelling(i, i == pageTotal-1 ? categories.size()-(i*pagesize) : pagesize));
+//		}
 		model.addAttribute("brands", brands);
 		List<CategoryNewProduct> categoriesNewProduct = categoryService.getCategoryNewProduct();
 		model.addAttribute("categoriesNewProduct", categoriesNewProduct);
@@ -57,7 +53,7 @@ public class BrandController {
 		List<CategoryTopSelling> cateTopSellings = categoryService.getTopSelling();
 		System.out.println(cateTopSellings);
 		model.addAttribute("cateTopSellings", cateTopSellings);
-		model.addAttribute("pages", pages);
+//		model.addAttribute("pages", pages);
 		
 		LocalDateTime countDownDate = LocalDateTime.of(2020, Month.JANUARY, 5, 15, 37, 25, 0);
 		model.addAttribute("countDownDate", countDownDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss")).toString());
