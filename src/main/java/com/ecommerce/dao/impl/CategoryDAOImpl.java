@@ -113,4 +113,16 @@ public class CategoryDAOImpl implements CategoryDAO {
 		return new PageResponse<Category>(pageNo, pageSize, categories);
 	}
 
+	@Override
+	public List<CategoryTopSelling> getTopSelling() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CategoryNewProduct> getCategoryNewProduct() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
