@@ -26,7 +26,7 @@
 						<!-- tab -->
 						<div id="tab1" class="tab-pane active">
 							<div class="products-slick" data-nav="#slick-nav-1">
-								<c:forEach var="category" items="${categories}">
+								<c:forEach var="category" items="${categoriesNewProduct}">
 									<div class="product">
 										<div class="product-img">
 											<img src="${category.image.url}" alt="">

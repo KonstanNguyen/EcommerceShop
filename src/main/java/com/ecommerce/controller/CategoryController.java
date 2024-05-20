@@ -23,7 +23,7 @@ public class CategoryController {
 	
 	@RequestMapping("index")
 	public String index(ModelMap model) {
-		List<Category> categories = service.fetchAll();
+		List<Category> categories = service.fetchAllProduct();
 		model.addAttribute("categories", categories);
 		return "";
 	}

@@ -24,20 +24,31 @@ import com.ecommerce.entity.Need;
 public class CategoryDAOImpl implements CategoryDAO {
 	@Autowired
 	SessionFactory factory;
-	
-	private List<Category> fetchAllTopSelling(){
+
+	private List<Category> fetchAllNewProduct() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Category";
+		Query query = session.createQuery(hql);
+		return query.list();
+	}
+
+	private List<Category> fetchAllTopSelling() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM Category WHERE hot = true";
 		Query query = session.createQuery(hql);
 		return query.list();
 	}
-	
-	@Override
-	public List<Category> fetchAll() {
+
+	private List<Category> fetchAll() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM Category";
 		Query query = session.createQuery(hql);
 		return query.list();
+	}
+
+	@Override
+	public List<Category> fetchAllProduct() {
+		return fetchAll();
 	}
 
 	@Override
@@ -46,7 +57,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 		String hql = "FROM Category WHERE id = :categoryId";
 		Query query = session.createQuery(hql);
 		query.setParameter("categoryId", id);
-		return (Category)query.uniqueResult();
+		return (Category) query.uniqueResult();
 	}
 
 	@Override
@@ -90,7 +101,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 	@Override
 	public List<CategoryNewProduct> getCategoryNewProduct() {
-		List<Category> categories = fetchAll();
+		List<Category> categories = fetchAllNewProduct();
 		List<CategoryNewProduct> categoryDTOs = categories.stream().map(category -> {
 			CategoryNewProduct categoryDTO = new CategoryNewProduct();
 			categoryDTO.setId(category.getId());
@@ -101,7 +112,9 @@ public class CategoryDAOImpl implements CategoryDAO {
 			return categoryDTO;
 		}).collect(Collectors.toList());
 		return categoryDTOs;
-  @Override
+	}
+
+	@Override
 	public PageResponse<Category> fetchPageTopSelling(int pageNo, int pageSize) {
 		Session session = factory.getCurrentSession();
 		Query query = session.createQuery("FROM Category");
@@ -111,18 +124,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 		query.setMaxResults(pageSize); // Retrieve 10 results
 		List<Category> categories = query.list();
 		return new PageResponse<Category>(pageNo, pageSize, categories);
-	}
-
-	@Override
-	public List<CategoryTopSelling> getTopSelling() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<CategoryNewProduct> getCategoryNewProduct() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

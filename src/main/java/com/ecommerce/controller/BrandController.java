@@ -40,7 +40,7 @@ public class BrandController {
 		List<Brand> brands = service.fetchAll();
 //		List<Category> categories = categoryService.fetchAll();
 		List<Image> images=new ArrayList<>();
-		List<Category> categories = categoryService.fetchAll();
+		List<Category> categories = categoryService.fetchAllProduct();
 		Integer pagesize = 3;
 		Integer pageTotal = (int)Math.ceil((double)categories.size()/pagesize);
 		List<PageResponse<Category>> pages = new ArrayList<PageResponse<Category>>();
@@ -48,8 +48,8 @@ public class BrandController {
 			pages.add(categoryService.fetchPageTopSelling(i, i == pageTotal-1 ? categories.size()-(i*pagesize) : pagesize));
 		}
 		model.addAttribute("brands", brands);
-		List<CategoryNewProduct> categories = categoryService.getCategoryNewProduct();
-		model.addAttribute("categories", categories);
+		List<CategoryNewProduct> categoriesNewProduct = categoryService.getCategoryNewProduct();
+		model.addAttribute("categoriesNewProduct", categoriesNewProduct);
 //		for(Category category : categories) {
 //			Image image = imageService.findFirstImageByCategoryId(category.getId());
 //			images.add(image);

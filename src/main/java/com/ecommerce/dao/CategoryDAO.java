@@ -9,7 +9,7 @@ import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Need;
 
 public interface CategoryDAO {
-	public List<Category> fetchAll();
+	public List<Category> fetchAllProduct();
 	public Category findByID(int id);
 	public List<String> fetchAllCPU();
 	public List<Need> getAllNeed(int id);
