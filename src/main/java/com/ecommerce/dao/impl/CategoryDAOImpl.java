@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ecommerce.dao.CategoryDAO;
+import com.ecommerce.dto.response.CategoryNewProduct;
+import com.ecommerce.dto.response.CategoryTopSelling;
 import com.ecommerce.dto.response.PageResponse;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Need;
@@ -73,6 +75,18 @@ public class CategoryDAOImpl implements CategoryDAO {
 		query.setMaxResults(pageSize); // Retrieve 10 results
 		List<Category> categories = query.list();
 		return new PageResponse<Category>(pageNo, pageSize, categories);
+	}
+
+	@Override
+	public List<CategoryTopSelling> getTopSelling() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CategoryNewProduct> getCategoryNewProduct() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
