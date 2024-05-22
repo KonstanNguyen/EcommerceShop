@@ -10,7 +10,7 @@
 				<li><a href="#">Hot Deals</a></li>
 				<li><a href="#">New Product</a></li>
 				<li><a href="#">Tops Selling</a></li>
-				<li><a href="#">All</a></li>
+				<li><a href="./product.htm">All</a></li>
 			</ul>
 			<!-- /NAV -->
 		</div>

@@ -60,12 +60,10 @@ public class BrandController {
 		return "home/pages/home";	
 //		return "pages/login";
 	}
-//	@RequestMapping
-//	public String brand(@RequestParam(defaultValue = "1") int id, HttpServletRequest req) {
-//		Brand brand = service.findByID(id);
-//		req.setAttribute("brand", brand);
-//		
-//		
-//		return "brand";
-//	}
+
+	@RequestMapping("all")
+	public String allProducts() {
+		
+		return "home/pages/all";
+	}
 }
