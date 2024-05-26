@@ -32,7 +32,7 @@
 											<img src="${category.image.url}" alt="">
 										</div>
 										<div class="product-body">
-											<h3 class="product-name">
+											<h3 class="product-name textOverFlow">
 												<a href="./product.htm?id=${category.id}"
 													title="${category.title}">${category.title}</a>
 											</h3>

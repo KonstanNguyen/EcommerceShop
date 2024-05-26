@@ -6,11 +6,10 @@
 	<div id="top-header">
 		<div class="container">
 			<ul class="header-links pull-left">
-				<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+				<li><a href="#"><i class="fa fa-phone"></i>${ company.phone }</a></li>
 				<li><a href="#"><i class="fa fa-envelope-o"></i>
-						email@email.com</a></li>
-				<li><a href="#"><i class="fa fa-map-marker"></i> 1734
-						Stonecoal Road</a></li>
+						${ company.email }</a></li>
+				<li><a href="#"><i class="fa fa-map-marker"></i> ${ company.address }</a></li>
 			</ul>
 			<ul class="header-links pull-right">
 				<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
@@ -29,7 +28,7 @@
 				<!-- LOGO -->
 				<div class="col-md-3">
 					<div class="header-logo">
-						<a href="#" class="logo"> <img src="./assets/img/logo.png"
+						<a href="#" class="logo"> <img src="${ company.logo.url }"
 							alt="">
 						</a>
 					</div>
@@ -40,12 +39,6 @@
 				<div class="col-md-6">
 					<div class="header-search">
 						<form>
-							<!-- 							<select class="input-select"> -->
-							<!-- 								<option value="0">Brand</option> -->
-							<%-- 								<c:forEach var="brand" items="${ brands }" end="2"> --%>
-							<%-- 									<option value="${ brand.id }">${ brand.name }</option> --%>
-							<%-- 								</c:forEach> --%>
-							<!-- 							</select>  -->
 							<input class="input input-select" placeholder="Search here">
 							<button class="search-btn">Search</button>
 						</form>
@@ -60,7 +53,7 @@
 						<div>
 							<a href="#"> <i class="fa fa-heart-o"></i> <span>Your
 									Wishlist</span>
-								<div class="qty">2</div>
+								<div class="qty">0</div>
 							</a>
 						</div>
 						<!-- /Wishlist -->

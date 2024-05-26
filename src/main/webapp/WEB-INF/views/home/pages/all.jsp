@@ -1,47 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+<!-- <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
 
 <title>Electro - HTML Ecommerce Template</title>
 
-<!-- Google font -->
+Google font
 <link
 	href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700"
 	rel="stylesheet">
 
-<!-- Bootstrap -->
+Bootstrap
 <link type="text/css" rel="stylesheet"
 	href="./assets/css/bootstrap.min.css" />
 
-<!-- Slick -->
+Slick
 <link type="text/css" rel="stylesheet" href="./assets/css/slick.css" />
 <link type="text/css" rel="stylesheet"
 	href="./assets/css/slick-theme.css" />
 
-<!-- nouislider -->
+nouislider
 <link type="text/css" rel="stylesheet"
 	href="./assets/css/nouislider.min.css" />
 
-<!-- Font Awesome Icon -->
+Font Awesome Icon
 <link rel="stylesheet" href="./assets/css/font-awesome.min.css">
 
-<!-- Custom stlylesheet -->
+Custom stlylesheet
 <link type="text/css" rel="stylesheet" href="./assets/css/style.css" />
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
+HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+WARNING: Respond.js doesn't work if you view the page via file://
+[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+		<![endif]
 
+</head> -->
+
+<head>
+<base href="${ pageContext.servletContext.contextPath }/" />
+<%@ include file="../../elements/head.jsp"%>
 </head>
+
 <body>
 	<!-- HEADER -->
 	<header>
@@ -83,11 +91,11 @@
 						<div class="header-search">
 							<form>
 								<!-- 							<select class="input-select"> -->
-							<!-- 								<option value="0">Brand</option> -->
-							<%-- 								<c:forEach var="brand" items="${ brands }" end="2"> --%>
-							<%-- 									<option value="${ brand.id }">${ brand.name }</option> --%>
-							<%-- 								</c:forEach> --%>
-							<!-- 							</select>  -->
+								<!-- 								<option value="0">Brand</option> -->
+								<%-- 								<c:forEach var="brand" items="${ brands }" end="2"> --%>
+								<%-- 									<option value="${ brand.id }">${ brand.name }</option> --%>
+								<%-- 								</c:forEach> --%>
+								<!-- 							</select>  -->
 								<input class="input" placeholder="Search here">
 								<button class="search-btn">Search</button>
 							</form>
@@ -235,16 +243,14 @@
 					<div class="aside">
 						<h3 class="aside-title">Brand</h3>
 						<div class="checkbox-filter">
-							<c:forEach var = "brand" items="${brands}">
+							<%-- <c:forEach var="brand" items="${brands}">
 								<div class="input-checkbox">
-								<input type="checkbox" id="${brand.id}"> 
-								<label
-									for="${brand.id}"> 
-									<span></span> ${brand.name}
-								</label>
-							</div>
-							</c:forEach>
-							<!--  
+									<input type="checkbox" id="${brand.id}"> <label
+										for="${brand.id}"> <span></span> ${brand.name}
+									</label>
+								</div>
+							</c:forEach> --%>
+
 							<div class="input-checkbox">
 								<input type="checkbox" id="brand-1"> <label
 									for="brand-1"> <span></span> SAMSUNG <small>(578)</small>
@@ -274,11 +280,11 @@
 								<input type="checkbox" id="brand-6"> <label
 									for="brand-6"> <span></span> SONY <small>(755)</small>
 								</label>
-							</div> -->
+							</div>
 						</div>
 					</div>
 					<!-- /aside Widget -->
-					
+
 					<!-- aside Widget -->
 					<div class="aside">
 						<h3 class="aside-title">Categories</h3>
@@ -341,13 +347,13 @@
 					</div>
 					<!-- /aside Widget -->
 
-					
+
 
 					<!-- aside Widget -->
 					<div class="aside">
 						<h3 class="aside-title">Top selling</h3>
 
-						<c:forEach var="category" items="${ cateTopSellings }" end="2">
+						<%-- <c:forEach var="category" items="${ cateTopSellings }" end="2">
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="${ category.image.url }" alt="">
@@ -355,7 +361,7 @@
 								<div class="product-body">
 									<p class="product-category">${ category.brandName }</p>
 									<h3 class="product-name">
-										<a href="./product.htm?id=${category.id}"}">${category.title}</a>
+										<a href="./product.htm?id=${category.id}">${category.title}</a>
 									</h3>
 									<h4 class="product-price">
 										${ category.price }
@@ -363,8 +369,12 @@
 									</h4>
 								</div>
 							</div>
-						</c:forEach>
-
+						</c:forEach> --%>
+						<%-- 						<%@ include file="../elements/section-top-selling/slide.jsp"%> --%>
+						<div class="products-widget-slick"
+							data-nav="#slick-nav-${ status.index+2 }">
+							<%@ include file="../elements/section-top-selling/slide.jsp"%>
+						</div>
 					</div>
 					<!-- /aside Widget -->
 				</div>
@@ -386,8 +396,8 @@
 							</label>
 						</div>
 						<ul class="store-grid">
-							<li class="active"><i class="fa fa-th"></i></li>
-							<li><a href="#"><i class="fa fa-th-list"></i></a></li>
+							<li><i class="fa fa-th"></i></li>
+							<li class="active"><a href="#"><i class="fa fa-th-list"></i></a></li>
 						</ul>
 					</div>
 					<!-- /store top filter -->
@@ -395,9 +405,10 @@
 					<!-- store products -->
 					<div class="row">
 						<!-- product -->
-						<div class="col-md-4 col-xs-6">
+<!-- 						<div class="col-md-12"> -->
+						<c:forEach var="category" items="${ categories }">
+							<div class="col-md-4 col-xs-6">
 
-							<c:foreach var="category" items="${categories }">
 								<div class="product">
 									<div class="product-img">
 										<img src="./img/product01.png" alt="">
@@ -439,12 +450,13 @@
 										</button>
 									</div>
 								</div>
-							</c:foreach>
-						</div>
+							</div>
+							<!-- 														<div class="clearfix visible-lg visible-md"></div> -->
+						</c:forEach>
 						<!-- /product -->
 
 						<!-- product -->
-						<div class="col-md-4 col-xs-6">
+						<!-- <div class="col-md-4 col-xs-6">
 							<div class="product">
 								<div class="product-img">
 									<img src="./img/product02.png" alt="">
@@ -487,13 +499,13 @@
 									</button>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /product -->
 
 						<div class="clearfix visible-sm visible-xs"></div>
 
 						<!-- product -->
-						<div class="col-md-4 col-xs-6">
+						<!-- <div class="col-md-4 col-xs-6">
 							<div class="product">
 								<div class="product-img">
 									<img src="./img/product03.png" alt="">
@@ -529,13 +541,13 @@
 									</button>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /product -->
 
 						<div class="clearfix visible-lg visible-md"></div>
 
 						<!-- product -->
-						<div class="col-md-4 col-xs-6">
+						<!-- <div class="col-md-4 col-xs-6">
 							<div class="product">
 								<div class="product-img">
 									<img src="./img/product04.png" alt="">
@@ -571,13 +583,13 @@
 									</button>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /product -->
 
 						<div class="clearfix visible-sm visible-xs"></div>
 
 						<!-- product -->
-						<div class="col-md-4 col-xs-6">
+						<!-- <div class="col-md-4 col-xs-6">
 							<div class="product">
 								<div class="product-img">
 									<img src="./img/product05.png" alt="">
@@ -613,11 +625,11 @@
 									</button>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /product -->
 
 						<!-- product -->
-						<div class="col-md-4 col-xs-6">
+						<!-- <div class="col-md-4 col-xs-6">
 							<div class="product">
 								<div class="product-img">
 									<img src="./img/product06.png" alt="">
@@ -657,13 +669,13 @@
 									</button>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /product -->
 
 						<div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
 
 						<!-- product -->
-						<div class="col-md-4 col-xs-6">
+						<!-- <div class="col-md-4 col-xs-6">
 							<div class="product">
 								<div class="product-img">
 									<img src="./img/product07.png" alt="">
@@ -703,11 +715,11 @@
 									</button>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /product -->
 
 						<!-- product -->
-						<div class="col-md-4 col-xs-6">
+						<!-- <div class="col-md-4 col-xs-6">
 							<div class="product">
 								<div class="product-img">
 									<img src="./img/product08.png" alt="">
@@ -743,13 +755,13 @@
 									</button>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /product -->
 
 						<div class="clearfix visible-sm visible-xs"></div>
 
 						<!-- product -->
-						<div class="col-md-4 col-xs-6">
+						<!-- <div class="col-md-4 col-xs-6">
 							<div class="product">
 								<div class="product-img">
 									<img src="./img/product09.png" alt="">
@@ -785,7 +797,7 @@
 									</button>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /product -->
 					</div>
 					<!-- /store products -->
@@ -944,12 +956,15 @@
 	<!-- /FOOTER -->
 
 	<!-- jQuery Plugins -->
-	<script src="./assets/js/jquery.min.js"></script>
+	<!-- 	<script src="./assets/js/jquery.min.js"></script>
 	<script src="./assets/js/bootstrap.min.js"></script>
 	<script src="./assets/js/slick.min.js"></script>
 	<script src="./assets/js/nouislider.min.js"></script>
 	<script src="./assets/js/jquery.zoom.min.js"></script>
-	<script src="./assets/js/main.js"></script>
+	<script src="./assets/js/main.js"></script> -->
+
+
+	<%@ include file="../../elements/jQuery-plugin.jsp"%>
 
 </body>
 </html>

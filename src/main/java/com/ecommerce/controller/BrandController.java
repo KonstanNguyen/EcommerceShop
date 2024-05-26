@@ -8,26 +8,30 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ecommerce.bean.Company;
 import com.ecommerce.dto.response.CategoryNewProduct;
 import com.ecommerce.dto.response.CategoryTopSelling;
 import com.ecommerce.entity.Brand;
+import com.ecommerce.entity.Category;
 import com.ecommerce.service.BrandService;
 import com.ecommerce.service.CategoryService;
-import com.ecommerce.service.ImageService;
 
 @Controller
 @RequestMapping("brands")
 public class BrandController {
+	
+	@Autowired
+	Company company;
 
 	@Autowired
 	BrandService service;
 
 	@Autowired
 	CategoryService categoryService;
-	@Autowired
-	ImageService imageService;
+
 	@RequestMapping
 	public String index(
 //			@RequestParam("page") int page, 
@@ -46,24 +50,33 @@ public class BrandController {
 		model.addAttribute("brands", brands);
 		List<CategoryNewProduct> categoriesNewProduct = categoryService.getCategoryNewProduct();
 		model.addAttribute("categoriesNewProduct", categoriesNewProduct);
-//		for(Category category : categories) {
-//			Image image = imageService.findFirstImageByCategoryId(category.getId());
-//			images.add(image);
-//        }
-		List<CategoryTopSelling> cateTopSellings = categoryService.getTopSelling();
-		System.out.println(cateTopSellings);
-		model.addAttribute("cateTopSellings", cateTopSellings);
+
 //		model.addAttribute("pages", pages);
-		
-		LocalDateTime countDownDate = LocalDateTime.of(2020, Month.JANUARY, 5, 15, 37, 25, 0);
-		model.addAttribute("countDownDate", countDownDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss")).toString());
-		return "home/pages/home";	
+		return "home/pages/home";
 //		return "pages/login";
 	}
 
 	@RequestMapping("all")
-	public String allProducts() {
-		
+	public String allProducts(ModelMap model) {
+		List<Category> categories = categoryService.fetchAllProduct();
+		model.addAttribute("categories", categories);
+
 		return "home/pages/all";
+	}
+
+	@ModelAttribute("cateTopSellings")
+	public List<CategoryTopSelling> getTopSelling() {
+		return categoryService.getTopSelling();
+	}
+
+	@ModelAttribute("countDownDate")
+	public String getCountDownDate() {
+		LocalDateTime countDownDate = LocalDateTime.of(2020, Month.JANUARY, 5, 15, 37, 25, 0);
+		return countDownDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss")).toString();
+	}
+	
+	@ModelAttribute("company")
+	public Company getCompany() {
+		return company;
 	}
 }

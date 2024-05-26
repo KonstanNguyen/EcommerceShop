@@ -52,7 +52,7 @@
 			<!-- Product details -->
 			<div class="col-md-5">
 				<div class="product-details">
-					<h2 class="product-name">${category.title}</h2>
+					<h2 class="product-name textOverFlow">${category.title}</h2>
 					<div>
 						<div class="product-rating">
 							<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
