@@ -1,7 +1,7 @@
 .vscode/**
 build/**
 database/**
-src/main/webapp/WEB-INF/configs/**
+src/main/webapp/WEB-INF/configs/spring-config-hibernate.xml
 .classpath
 .project
 /build/
