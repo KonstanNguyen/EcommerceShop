@@ -29,7 +29,7 @@ public class NeedDAOImpl implements NeedDAO {
 	@Override
 	public List<Need> fetchAll() {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Task";
+		String hql = "FROM Need";
 		Query query = session.createQuery(hql);
 		return query.list();
 	}
@@ -37,9 +37,9 @@ public class NeedDAOImpl implements NeedDAO {
 	@Override
 	public Need findById(int id) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Task WHERE id = :taskId";
+		String hql = "FROM Need WHERE id = :needId";
 		Query query = session.createQuery(hql);
-		query.setParameter("taskId", id);
+		query.setParameter("needId", id);
 		return (Need)query.uniqueResult();
 	}
 

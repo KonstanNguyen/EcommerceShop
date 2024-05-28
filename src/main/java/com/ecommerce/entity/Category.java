@@ -56,10 +56,13 @@ public class Category {
 
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private Collection<Need> needs;
-	
+
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
 	private Collection<Categories_Suppliers> categories_suppliers;
-	
+
+	@OneToMany(mappedBy = "id.category", fetch = FetchType.LAZY)
+	private Collection<Orders> orders;
+
 	public int getId() {
 		return id;
 	}
@@ -179,15 +182,19 @@ public class Category {
 	public void setStatus(CategoryStatus status) {
 		this.status = status;
 	}
+
 	public Collection<Need> getNeeds() {
 		return needs;
 	}
+
 	public void setNeeds(Collection<Need> needs) {
 		this.needs = needs;
 	}
+
 	public float getStarts() {
 		return starts;
 	}
+
 	public void setStarts(float starts) {
 		this.starts = starts;
 	}
@@ -199,4 +206,21 @@ public class Category {
 	public void setImages(Collection<Image> images) {
 		this.images = images;
 	}
+
+	public Collection<Categories_Suppliers> getCategories_suppliers() {
+		return categories_suppliers;
+	}
+
+	public void setCategories_suppliers(Collection<Categories_Suppliers> categories_suppliers) {
+		this.categories_suppliers = categories_suppliers;
+	}
+
+	public Collection<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Collection<Orders> orders) {
+		this.orders = orders;
+	}
+
 }

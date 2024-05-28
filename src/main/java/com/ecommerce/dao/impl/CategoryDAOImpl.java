@@ -24,20 +24,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Autowired
 	SessionFactory factory;
 
-	private List<Category> fetchAllNewProduct() {
-		Session session = factory.getCurrentSession();
-		String hql = "FROM Category";
-		Query query = session.createQuery(hql);
-		return query.list();
-	}
-
-	private List<Category> fetchAllTopSelling() {
-		Session session = factory.getCurrentSession();
-		String hql = "FROM Category WHERE hot = true";
-		Query query = session.createQuery(hql);
-		return query.list();
-	}
-
 	private List<Category> fetchAll() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM Category";
@@ -84,8 +70,8 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 	@Override
 	public List<CategoryTopSelling> getTopSelling() {
-		List<Category> categories = fetchAllTopSelling();
-		List<CategoryTopSelling> topSellings = categories.stream().map(category -> {
+		List<Category> categories = fetchAll();
+		List<CategoryTopSelling> topSellings = categories.stream().filter(t->t.isHot()).map(category -> {
 			CategoryTopSelling topSelling = new CategoryTopSelling();
 			topSelling.setId(category.getId());
 			topSelling.setTitle(category.getTitle());
@@ -96,12 +82,12 @@ public class CategoryDAOImpl implements CategoryDAO {
 			return topSelling;
 		}).collect(Collectors.toList());
 		return topSellings;
-	}
+	} 
 
 	@Override
 	public List<CategoryNewProduct> getCategoryNewProduct() {
-		List<Category> categories = fetchAllNewProduct();
-		List<CategoryNewProduct> categoryDTOs = categories.stream().map(category -> {
+		List<Category> categories = fetchAll();
+		List<CategoryNewProduct> CategoryNewProducts = categories.stream().map(category -> {
 			CategoryNewProduct categoryDTO = new CategoryNewProduct();
 			categoryDTO.setId(category.getId());
 			categoryDTO.setTitle(category.getTitle());
@@ -110,7 +96,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 			categoryDTO.setImage(category.getImages().stream().findFirst().get());
 			return categoryDTO;
 		}).collect(Collectors.toList());
-		return categoryDTOs;
+		return CategoryNewProducts;
 	}
 
 }

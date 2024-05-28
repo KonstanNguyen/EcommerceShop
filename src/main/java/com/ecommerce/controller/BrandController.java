@@ -16,8 +16,10 @@ import com.ecommerce.dto.response.CategoryNewProduct;
 import com.ecommerce.dto.response.CategoryTopSelling;
 import com.ecommerce.entity.Brand;
 import com.ecommerce.entity.Category;
+import com.ecommerce.entity.Orders;
 import com.ecommerce.service.BrandService;
 import com.ecommerce.service.CategoryService;
+import com.ecommerce.service.OrdersService;
 
 @Controller
 @RequestMapping("brands")
@@ -31,6 +33,9 @@ public class BrandController {
 
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	OrdersService ordersService;
 
 	@RequestMapping
 	public String index(
@@ -78,5 +83,10 @@ public class BrandController {
 	@ModelAttribute("company")
 	public Company getCompany() {
 		return company;
+	}
+	
+	@ModelAttribute("orders")
+	public List<Orders> getOrders() {
+		return ordersService.getOrdersByCartId(1);
 	}
 }
