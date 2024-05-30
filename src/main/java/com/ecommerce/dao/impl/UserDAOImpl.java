@@ -9,32 +9,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ecommerce.dao.CartDAO;
-import com.ecommerce.entity.Cart;
+import com.ecommerce.dao.UserDAO;
+import com.ecommerce.entity.EcoUser;
 
-@Transactional
 @Repository
+@Transactional
 @SuppressWarnings("unchecked")
-public class CartDAOImpl implements CartDAO {
-	
+public class UserDAOImpl implements UserDAO {
+
 	@Autowired
 	SessionFactory factory;
 	
 	@Override
-	public List<Cart> fetchAll(){
+	public List<EcoUser> fetchAll(){
 		Session session = factory.getCurrentSession();
-		String hql = "FROM " + Cart.class.getName();
+		String hql = "FROM " + EcoUser.class.getName();
 		Query query = session.createQuery(hql);
 		return query.list();
 	}
-
+	
 	@Override
-	public Cart find(int id) {
+	public EcoUser findByUsername(String username) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM " + Cart.class.getName() + " WHERE id = :id";
+		String hql = "FROM " + EcoUser.class.getName() + " WHERE username = :username";
 		Query query = session.createQuery(hql);
-		query.setParameter("id", id);
-		return (Cart)query.uniqueResult();
+		query.setParameter("username", username);
+		return (EcoUser)query.uniqueResult();
 	}
 
 }

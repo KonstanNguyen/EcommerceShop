@@ -23,7 +23,7 @@ public class OrdersDAOImpl implements OrdersDAO {
 	@Override
 	public List<Orders> getOrdersByCartId(int id) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Orders";
+		String hql = "FROM " + Orders.class.getName();
 		Query query = session.createQuery(hql);
 		return query.list();
 	}

@@ -26,7 +26,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 	private List<Category> fetchAll() {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Category";
+		String hql = "FROM " + Category.class.getName();
 		Query query = session.createQuery(hql);
 		return query.list();
 	}
@@ -39,7 +39,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Override
 	public Category findByID(int id) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Category WHERE id = :categoryId";
+		String hql = "FROM " + Category.class.getName() + " WHERE id = :categoryId";
 		Query query = session.createQuery(hql);
 		query.setParameter("categoryId", id);
 		return (Category) query.uniqueResult();
@@ -48,7 +48,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Override
 	public List<String> fetchAllCPU() {
 		Session session = factory.getCurrentSession();
-		String hql = "SELECT CPU FROM Category";
+		String hql = "SELECT CPU FROM " + Category.class.getName();
 		Query query = session.createQuery(hql);
 		return query.list();
 	}
@@ -56,7 +56,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Override
 	public List<Category> getAllByCPU(String cpu) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Category WHERE Category.cpu = :cpu";
+		String hql = "FROM " + Category.class.getName() + " WHERE Category.cpu = :cpu";
 		Query query = session.createQuery(hql);
 		query.setParameter("cpu", cpu);
 		return query.list();
