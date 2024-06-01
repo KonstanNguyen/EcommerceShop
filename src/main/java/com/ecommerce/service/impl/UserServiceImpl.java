@@ -22,7 +22,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public EcoUser findByUsername(String username) {
-		return dao.findByUsername(username);
+		EcoUser user = dao.findByUsername(username);
+		return user;
 	}
 
 }

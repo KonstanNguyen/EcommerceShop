@@ -14,11 +14,6 @@ import com.ecommerce.service.ImageService;
 public class ImageServiceImpl implements ImageService{
 	@Autowired
 	ImageDAO dao;
-
-	@Override
-	public Image findFirstImageByCategoryId(int ID) {
-		return dao.findFirstImageByCategoryId(ID);
-	}
 	@Override
 	public List<Image> fetchAll(int ID) {
 		return dao.fetchAll(ID);

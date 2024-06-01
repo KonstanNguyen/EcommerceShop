@@ -12,7 +12,17 @@
 			</ul>
 			<ul class="header-links pull-right">
 				<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-				<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+				<c:choose>
+					<c:when test="${ sessionScope.user != null }">
+						<li><a href="#"><i class="fa fa-user-o"></i> ${ sessionScope.user.name }
+						</a></li>
+						<li><a href="./user/logout.htm">Logout </a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="./user/login.htm"><i class="fa fa-user-o"></i>
+								Login </a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</div>
@@ -67,24 +77,24 @@
 							</a>
 							<div class="cart-dropdown">
 								<div class="cart-list">
-								<c:forEach var="order" items="${ orders }">
-									<div class="product-widget">
-										<div class="product-img">
-											<img src="./assets/img/product01.png" alt="">
+									<c:forEach var="order" items="${ orders }">
+										<div class="product-widget">
+											<div class="product-img">
+												<img src="./assets/img/product01.png" alt="">
+											</div>
+											<div class="product-body">
+												<h3 class="product-name">
+													<a href="#">product name goes here</a>
+												</h3>
+												<h4 class="product-price">
+													<span class="qty">1x</span>$980.00
+												</h4>
+											</div>
+											<button class="delete">
+												<i class="fa fa-close"></i>
+											</button>
 										</div>
-										<div class="product-body">
-											<h3 class="product-name">
-												<a href="#">product name goes here</a>
-											</h3>
-											<h4 class="product-price">
-												<span class="qty">1x</span>$980.00
-											</h4>
-										</div>
-										<button class="delete">
-											<i class="fa fa-close"></i>
-										</button>
-									</div>
-								</c:forEach>
+									</c:forEach>
 									<!-- <div class="product-widget">
 										<div class="product-img">
 											<img src="./assets/img/product01.png" alt="">
@@ -119,32 +129,32 @@
 										</button>
 									</div>
 								</div> -->
-								<div class="cart-summary">
-									<small>3 Item(s) selected</small>
-									<h5>SUBTOTAL: $2940.00</h5>
-								</div>
-								<div class="cart-btns">
-									<a href="#">View Cart</a> <a href="#">Checkout <i
-										class="fa fa-arrow-circle-right"></i></a>
+									<div class="cart-summary">
+										<small>3 Item(s) selected</small>
+										<h5>SUBTOTAL: $2940.00</h5>
+									</div>
+									<div class="cart-btns">
+										<a href="#">View Cart</a> <a href="#">Checkout <i
+											class="fa fa-arrow-circle-right"></i></a>
+									</div>
 								</div>
 							</div>
-						</div>
-						<!-- /Cart -->
+							<!-- /Cart -->
 
-						<!-- Menu Toogle -->
-						<div class="menu-toggle">
-							<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
-							</a>
+							<!-- Menu Toogle -->
+							<div class="menu-toggle">
+								<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
+								</a>
+							</div>
+							<!-- /Menu Toogle -->
 						</div>
-						<!-- /Menu Toogle -->
 					</div>
+					<!-- /ACCOUNT -->
 				</div>
-				<!-- /ACCOUNT -->
+				<!-- row -->
 			</div>
-			<!-- row -->
+			<!-- container -->
 		</div>
-		<!-- container -->
-	</div>
-	<!-- /MAIN HEADER -->
+		<!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->
