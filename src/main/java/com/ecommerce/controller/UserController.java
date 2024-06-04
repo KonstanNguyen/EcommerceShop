@@ -7,11 +7,20 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ecommerce.dto.request.RegisterUser;
 import com.ecommerce.entity.EcoUser;
 import com.ecommerce.service.UserService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("user")
@@ -47,29 +56,49 @@ public class UserController {
 
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user);
-		
-		if(session.getAttribute("uriQuery") == null) {
+
+		if (session.getAttribute("uriQuery") == null) {
 			return "redirect:/brands.htm";
 		}
-		
-		String uri = (String)session.getAttribute("uriQuery");
+
+		String uri = (String) session.getAttribute("uriQuery");
 		session.removeAttribute("uriQuery");
-		
+
 		return "redirect:/" + uri;
 	}
-	
-	/*
-	 * @RequestMapping("register") public String register(ModelMap
-	 * model, @Validated @ModelAttribute("userRegister") RegisterUser user,
-	 * BindingResult errors) { return "pages/registration"; }
-	 * 
-	 * @RequestMapping(value = "register", method = RequestMethod.POST ) public
-	 * String submit(ModelMap model, @Validated @ModelAttribute("userRegister")
-	 * RegisterUser user, BindingResult resutl, Errors errors) { String returnVal =
-	 * "redirect:/brands.htm"; if (resutl.hasErrors() || errors.hasErrors()) {
-	 * model.addAttribute("message", "Vui lòng sửa các lỗi sau đây"); returnVal =
-	 * "pages/registration"; } return returnVal; }
-	 */
+
+	@RequestMapping("/register")
+    public String showRegistrationForm(Model model){
+        // create model object to store form data
+		RegisterUser user = new RegisterUser();
+        model.addAttribute("userRegister", user);
+        return "pages/registration";
+    }
+
+	@RequestMapping(value = "register", method = RequestMethod.POST)
+	public String submit(@ModelAttribute("userRegister") RegisterUser user, BindingResult result) {
+		if (user.getName() == null || user.getName().equals("")) {
+			result.rejectValue("name", "userRegister", "Vui lòng nhập tên");
+        }
+		if (user.getEmail() == null || user.getEmail().equals("")) {
+			result.rejectValue("email", "userRegister", "Vui lòng nhập email");
+        }
+		if (user.getUsername() == null || user.getUsername().equals("")) {
+			result.rejectValue("username", "userRegister", "Vui lòng nhập tài khoản");
+        }
+		if (user.getPassword() == null || user.getUsername().equals("")) {
+			result.rejectValue("password", "userRegister", "Vui lòng nhập mật khẩu");
+        }
+		if (user.getConfirmPassword() == null || user.getConfirmPassword().equals("")) {
+			result.rejectValue("confirmPassword", "userRegister", "Vui lòng xác nhận mật khẩu");
+        }
+		
+		if (result.getFieldErrorCount() == 0) {
+			return "success";
+		}
+		
+		return "pages/registration";
+	}
 
 	@RequestMapping(value = "logout", method = { RequestMethod.POST, RequestMethod.GET })
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
