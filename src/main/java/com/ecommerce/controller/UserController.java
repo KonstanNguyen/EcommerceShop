@@ -33,9 +33,9 @@ public class UserController {
 
 		String username = request.getParameter("username");
 //		String password = request.getParameter("password");
-		
+
 		EcoUser user = userSevice.findByUsername(username);
-		
+
 		if (user == null) {
 			return "redirect:/user/login.htm";
 		}
@@ -44,22 +44,42 @@ public class UserController {
 		cookie.setPath("/EcommerceShop");
 		cookie.setMaxAge(60 * 60 * 24);
 		response.addCookie(cookie);
-		
+
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user);
-
-		return "redirect:/brands.htm";
+		
+		if(session.getAttribute("uriQuery") == null) {
+			return "redirect:/brands.htm";
+		}
+		
+		String uri = (String)session.getAttribute("uriQuery");
+		session.removeAttribute("uriQuery");
+		
+		return "redirect:/" + uri;
 	}
+	
+	/*
+	 * @RequestMapping("register") public String register(ModelMap
+	 * model, @Validated @ModelAttribute("userRegister") RegisterUser user,
+	 * BindingResult errors) { return "pages/registration"; }
+	 * 
+	 * @RequestMapping(value = "register", method = RequestMethod.POST ) public
+	 * String submit(ModelMap model, @Validated @ModelAttribute("userRegister")
+	 * RegisterUser user, BindingResult resutl, Errors errors) { String returnVal =
+	 * "redirect:/brands.htm"; if (resutl.hasErrors() || errors.hasErrors()) {
+	 * model.addAttribute("message", "Vui lòng sửa các lỗi sau đây"); returnVal =
+	 * "pages/registration"; } return returnVal; }
+	 */
 
-	@RequestMapping(value = "logout")
+	@RequestMapping(value = "logout", method = { RequestMethod.POST, RequestMethod.GET })
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		Cookie cookie = new Cookie("uid", null);
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
-		
+
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
-		
+
 		return "redirect:/brands.htm";
 	}
 }

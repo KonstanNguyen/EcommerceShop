@@ -1,6 +1,5 @@
 package com.ecommerce.interceptor;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,30 +18,19 @@ public class AuthInterceptors extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String uid = getCookie(request, "uid");
+		HttpSession session = request.getSession();
 		
-		if (uid == null || uid.equals("")) {
+		EcoUser user = (EcoUser) session.getAttribute("user");
+		if (user == null) {
+			HttpSession session2 = request.getSession();
+			String[] arr = request.getRequestURI().split("/", 3);
+			String uri = arr[arr.length-1];
+			System.out.println(session2.getAttribute("uriQuery"));
+			session2.setAttribute("uriQuery", uri + (request.getQueryString() != null? "?" + request.getQueryString():""));
 			response.sendRedirect(request.getContextPath()+"/user/login.htm");
 			return false;
 		}
-		
-		EcoUser user = userService.findByUsername(uid);
-		if (user == null) {
-			response.sendRedirect(request.getContextPath()+"/user/login.htm");
-			return false;
-		} 
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("user", user);
 
 		return true;
 	}
-	
-	private String getCookie(HttpServletRequest req, String name) {
-        for (Cookie cookie : req.getCookies()) {
-            if (cookie.getName().equals(name))
-                return cookie.getValue();
-        }
-        return null;
-    }
 }
