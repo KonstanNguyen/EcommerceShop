@@ -15,7 +15,6 @@ import com.ecommerce.dto.response.CategoryTopSelling;
 import com.ecommerce.entity.Brand;
 import com.ecommerce.service.BrandService;
 import com.ecommerce.service.CategoryService;
-import com.ecommerce.service.ImageService;
 
 @Controller
 @RequestMapping("brands")
@@ -26,8 +25,6 @@ public class BrandController {
 
 	@Autowired
 	CategoryService categoryService;
-	@Autowired
-	ImageService imageService;
 	@RequestMapping
 	public String index(
 //			@RequestParam("page") int page, 

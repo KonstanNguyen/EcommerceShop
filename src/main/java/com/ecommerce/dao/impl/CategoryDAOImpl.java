@@ -79,7 +79,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Override
 	public List<Need> getAllNeed(int id) {
 		Category category = findByID(id);
-		return category.getNeeds().stream().collect(Collectors.toList());
+		return category.getNeeds().stream().distinct().collect(Collectors.toList());
 	}
 
 	@Override
