@@ -58,9 +58,6 @@ public class Category {
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private Set<Need> needs;
 
-	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
-	private Collection<Categories_Suppliers> categories_suppliers;
-
 	@OneToMany(mappedBy = "id.category", fetch = FetchType.LAZY)
 	private Collection<Orders> orders;
 
@@ -206,14 +203,6 @@ public class Category {
 
 	public void setImages(Collection<Image> images) {
 		this.images = images;
-	}
-
-	public Collection<Categories_Suppliers> getCategories_suppliers() {
-		return categories_suppliers;
-	}
-
-	public void setCategories_suppliers(Collection<Categories_Suppliers> categories_suppliers) {
-		this.categories_suppliers = categories_suppliers;
 	}
 
 	public Collection<Orders> getOrders() {
