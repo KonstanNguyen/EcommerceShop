@@ -2,6 +2,7 @@ package com.ecommerce.entity;
 
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,10 +56,7 @@ public class Category {
 //	private Date updateTime;
 
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
-	private Collection<Need> needs;
-	
-	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
-	private Collection<Categories_Suppliers> categories_suppliers;
+	private Set<Need> needs;
 	
 	public int getId() {
 		return id;
@@ -117,7 +115,7 @@ public class Category {
 	}
 
 	public String getOS() {
-		return OS;
+		return OS; 	
 	}
 
 	public void setOS(String oS) {
@@ -179,10 +177,10 @@ public class Category {
 	public void setStatus(CategoryStatus status) {
 		this.status = status;
 	}
-	public Collection<Need> getNeeds() {
+	public Set<Need> getNeeds() {
 		return needs;
 	}
-	public void setNeeds(Collection<Need> needs) {
+	public void setNeeds(Set<Need> needs) {
 		this.needs = needs;
 	}
 	public float getStarts() {

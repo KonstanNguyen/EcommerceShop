@@ -143,9 +143,21 @@
 							<div class="row">
 								<div class="col-md-12">
 									<table class="table table-striped">
+
 										<tr>
 											<td>BRAND</td>
 											<td>${category.brand.name}</td>
+										</tr>
+										<tr>
+											<td>NEED</td>
+											<td>
+
+												<ul>
+													<c:forEach items="${category.needs}" var="need">
+														<li>${need.name}</li>
+													</c:forEach>
+												</ul>
+											</td>
 										</tr>
 										<tr>
 											<td>CPU</td>
