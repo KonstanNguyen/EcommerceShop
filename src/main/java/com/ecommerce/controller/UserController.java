@@ -15,9 +15,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ecommerce.dto.request.RegisterUser;
 import com.ecommerce.entity.EcoUser;
+import com.ecommerce.service.MailerService;
 import com.ecommerce.service.UserService;
 
 import jakarta.validation.Valid;
@@ -27,6 +29,9 @@ import jakarta.validation.Valid;
 public class UserController {
 	@Autowired
 	UserService userSevice;
+	
+	@Autowired
+	MailerService mailer;
 
 	@RequestMapping("login")
 	public String login(HttpSession session) {
@@ -110,5 +115,26 @@ public class UserController {
 		session.removeAttribute("user");
 
 		return "redirect:/brands.htm";
+	}
+	
+	@RequestMapping("form")
+	public String form() {
+		return "mailer/form";
+	}
+	
+	@RequestMapping("send")
+	public String send(ModelMap model,
+			@RequestParam("from") String from,
+			@RequestParam("to") String to,
+			@RequestParam("subject") String subject,
+			@RequestParam("body") String body) {
+		try {
+			mailer.send(from, to, subject, body);
+			model.addAttribute("message", "Gửi email thành công!");
+		} catch (Exception e) {
+			model.addAttribute("message", "Gửi email thất bại!");
+		}
+		
+		return "mailer/form";
 	}
 }
