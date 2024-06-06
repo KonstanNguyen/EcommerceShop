@@ -19,6 +19,21 @@ public class Invoice {
 	private String phone;
 	private String address;
 
+	public Invoice() {
+		super();
+	}
+
+	public Invoice(int id, String taxCode, Date date, String name, String email, String phone, String address) {
+		super();
+		this.id = id;
+		this.taxCode = taxCode;
+		this.date = date;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -74,6 +89,5 @@ public class Invoice {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 
 }

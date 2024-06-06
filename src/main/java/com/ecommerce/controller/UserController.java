@@ -1,11 +1,22 @@
 package com.ecommerce.controller;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Random;
+import java.util.random.RandomGenerator;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ecommerce.dto.request.RegisterUser;
 import com.ecommerce.entity.EcoUser;
+import com.ecommerce.entity.Invoice;
+import com.ecommerce.service.InvoiceService;
 import com.ecommerce.service.UserService;
 
 import jakarta.validation.Valid;
@@ -27,6 +40,12 @@ import jakarta.validation.Valid;
 public class UserController {
 	@Autowired
 	UserService userSevice;
+
+	@Autowired
+	InvoiceService invoiceService;
+
+	@Autowired
+	SessionFactory factory;
 
 	@RequestMapping("login")
 	public String login(HttpSession session) {
@@ -68,35 +87,35 @@ public class UserController {
 	}
 
 	@RequestMapping("/register")
-    public String showRegistrationForm(Model model){
-        // create model object to store form data
+	public String showRegistrationForm(Model model) {
+		// create model object to store form data
 		RegisterUser user = new RegisterUser();
-        model.addAttribute("userRegister", user);
-        return "pages/registration";
-    }
+		model.addAttribute("userRegister", user);
+		return "pages/registration";
+	}
 
 	@RequestMapping(value = "register", method = RequestMethod.POST)
 	public String submit(@ModelAttribute("userRegister") RegisterUser user, BindingResult result) {
 		if (user.getName() == null || user.getName().equals("")) {
 			result.rejectValue("name", "userRegister", "Vui lòng nhập tên");
-        }
+		}
 		if (user.getEmail() == null || user.getEmail().equals("")) {
 			result.rejectValue("email", "userRegister", "Vui lòng nhập email");
-        }
+		}
 		if (user.getUsername() == null || user.getUsername().equals("")) {
 			result.rejectValue("username", "userRegister", "Vui lòng nhập tài khoản");
-        }
+		}
 		if (user.getPassword() == null || user.getUsername().equals("")) {
 			result.rejectValue("password", "userRegister", "Vui lòng nhập mật khẩu");
-        }
+		}
 		if (user.getConfirmPassword() == null || user.getConfirmPassword().equals("")) {
 			result.rejectValue("confirmPassword", "userRegister", "Vui lòng xác nhận mật khẩu");
-        }
-		
+		}
+
 		if (result.getFieldErrorCount() == 0) {
 			return "success";
 		}
-		
+
 		return "pages/registration";
 	}
 
@@ -110,5 +129,34 @@ public class UserController {
 		session.removeAttribute("user");
 
 		return "redirect:/brands.htm";
+	}
+
+	@RequestMapping("checkout")
+	public String index(ModelMap model) {
+		Random randomNumbers = new Random();
+		Invoice invoice = new Invoice(randomNumbers.nextInt(0, 9999), "123",
+				Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), "Thuy", "tt@gmail.com", "0123456789",
+				"Nha cho dau");
+		model.addAttribute("ecoInvoice", invoice);
+		return "home/pages/checkout";
+	}
+
+	@RequestMapping(value = "checkout", method = { RequestMethod.POST })
+	public String index(HttpServletRequest request) {
+		Invoice invoice = (Invoice)request.getAttribute("ecoInvoice");
+		
+		/*
+		 * Session session = factory.openSession(); Transaction t =
+		 * session.beginTransaction(); try { session.save(invoice); t.commit();
+		 * model.addAttribute("message", "Thêm mới thành công!"); } catch (Exception e)
+		 * { t.rollback(); model.addAttribute("message", "Thêm mới thất bại!"); }
+		 * finally { session.close(); }
+		 */
+		if (invoiceService.insertInvoice(invoice) == true) {
+			request.setAttribute("message", "Them thanh cong");
+		} else {
+			request.setAttribute("message", "Them that bai");
+		}
+		return "home/pages/checkout";
 	}
 }
