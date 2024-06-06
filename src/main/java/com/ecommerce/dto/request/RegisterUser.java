@@ -1,18 +1,8 @@
 package com.ecommerce.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-
 public class RegisterUser {
-	@NotNull
-	@NotEmpty
-	@NotBlank(message = "Không được bỏ trống tên")
 	private String name;
 	private String email;
-	@NotNull
-	@NotEmpty
-	@NotBlank(message = "Không được bỏ trống tên")
 	private String username;
 	private String password;
 	private String confirmPassword;

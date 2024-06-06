@@ -5,18 +5,17 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	   		http://www.springframework.org/schema/beans/spring-beans.xsd
-	   		http://www.springframework.org/schema/context
-	   		http://www.springframework.org/schema/context/spring-context.xsd
-	   		http://www.springframework.org/schema/tx 
-			http://www.springframework.org/schema/tx/spring-tx.xsd
-			http://www.springframework.org/schema/mvc 
-			http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+											http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+											http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+											http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
-		<property name="locations"> <list> Default location inside war file <value>classpath:company.properties</value> 
-		Environment specific location, a fixed path on server <value>file:///opt/my-app/conf/app.properties</value> 
+	<!-- <bean
+	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+		<property name="locations"> <list> Default location inside war file
+	<value>classpath:company.properties</value> 
+		Environment specific location, a fixed path on server
+	<value>file:///opt/my-app/conf/app.properties</value> 
 		</list> </property> <property name="ignoreResourceNotFound" value="true" 
 		/> </bean> -->
 	<bean
@@ -25,7 +24,7 @@
 			<value>classpath:company.properties</value>
 		</property>
 	</bean>
-	
+
 	<bean id="logo" class="com.ecommerce.bean.Logo">
 		<property name="baseUrl" value="${company.logo.baseUrl}"></property>
 		<property name="fileName" value="${company.logo.fileName}"></property>
@@ -38,7 +37,7 @@
 		<property name="email" value="${company.email}" />
 		<property name="address" value="${company.address}" />
 		<property name="description" value="${company.description}" />
-		<property name="logo" ref="logo"/>
+		<property name="logo" ref="logo" />
 	</bean>
 
 </beans>

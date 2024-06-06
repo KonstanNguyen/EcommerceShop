@@ -19,7 +19,7 @@ $("#form-login").on("submit", function(event) {
 
 function validateInput(input, errorElement, errorMessage) {
 	if (input.length === 0) {
-		errorElement.text(errorMessage +" này không được bỏ trống.").toggleClass("display-error", true);
+		errorElement.text(errorMessage + " này không được bỏ trống.").toggleClass("display-error", true);
 		return false;
 	} else if (/[^\u0000-\u007F]/.test(input)) {
 		errorElement.text(errorMessage + " không được chứa ký tự tiếng Việt.").toggleClass("display-error", true);

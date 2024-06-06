@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,8 +19,6 @@ import com.ecommerce.dto.request.RegisterUser;
 import com.ecommerce.entity.EcoUser;
 import com.ecommerce.service.MailerService;
 import com.ecommerce.service.UserService;
-
-import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("user")
@@ -122,7 +118,7 @@ public class UserController {
 		return "mailer/form";
 	}
 	
-	@RequestMapping("send")
+	@RequestMapping(value = "send")
 	public String send(ModelMap model,
 			@RequestParam("from") String from,
 			@RequestParam("to") String to,
