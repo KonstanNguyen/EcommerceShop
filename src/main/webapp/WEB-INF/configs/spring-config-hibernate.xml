@@ -18,7 +18,7 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		p:url="jdbc:sqlserver://ATLAT; Database=EcommerceShop"
+		p:url="jdbc:sqlserver://ATLAT; Database=EcommerceShop1"
 		p:username="sa" p:password="12">
 	</bean>
 	<!-- <bean id="dataSource"

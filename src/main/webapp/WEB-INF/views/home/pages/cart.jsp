@@ -31,7 +31,6 @@
 					</div>
 				</div>
 				<c:forEach items="${orders }" var="order">
-					<form method="post" action="/cart.htm?id=${order.id }">
 						<input type="hidden" name="orderID" value="${order.id }">
 						<div class="row border-top border-bottom">
 							<div class="row main align-items-center">
@@ -53,13 +52,13 @@
                                       ${order.categories.promotionPrice }</c:when>
 										<c:otherwise>${order.categories.price }</c:otherwise>
 									</c:choose>
-									<button>
+									<button class="delete-category" data-id="${order.id}">
 										<span class="close">Delete</span>
 									</button>
 								</div>
 							</div>
 						</div>
-					</form>
+
 				</c:forEach>
 				<!-- 					<div class="row main align-items-center"> -->
 				<!-- <div class="col-2">
@@ -155,6 +154,18 @@
             });
         });
     });
+	      	//Xử lý phần xóa sản phẩm
+	document.addEventListener('DOMContentLoaded',function(){
+		document.querySelectAll('.detele-category').forEach(function(button){
+			button.addEventListener('click',function(){
+				const orderID = button.getAttribute('data-id');
+				fetch('cart.htm',{
+					method:'DELETE',
+					headers:{}
+				})
+			})
+		})
+	})
     </script>
 </body>
 </html>

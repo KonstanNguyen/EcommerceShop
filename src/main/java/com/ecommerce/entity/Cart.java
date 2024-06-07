@@ -19,12 +19,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Cart {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private String id;
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private EcoUser user;
-	private String status;
+	private boolean status;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date createTime;
@@ -32,13 +31,6 @@ public class Cart {
 	@OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
 	private Collection<Orders> orders;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public EcoUser getUsername() {
 		return user;
@@ -46,14 +38,6 @@ public class Cart {
 
 	public void setUsername(EcoUser user) {
 		this.user = user;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	public Date getCreateTime() {
@@ -70,6 +54,26 @@ public class Cart {
 
 	public void setOrders(Collection<Orders> orders) {
 		this.orders = orders;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public EcoUser getUser() {
+		return user;
+	}
+
+	public void setUser(EcoUser user) {
+		this.user = user;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 }
