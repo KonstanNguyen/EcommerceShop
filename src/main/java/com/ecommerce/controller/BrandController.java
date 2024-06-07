@@ -157,14 +157,12 @@ public class BrandController {
 		return total;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String deleteOrder(@RequestParam("id") int orderId, HttpSession session) {
-		EcoUser user = (EcoUser) session.getAttribute("user");
-		if (session.getAttribute("user") == null) {
-			return "Error here ";
-		}
-		Orders order = orderService.findByID(orderId);
-		orderService.deleteOrder(order);
-		return "redirect:/product.htm";
-	}
+	/*
+	 * @RequestMapping(method = RequestMethod.POST) public String
+	 * deleteOrder(@RequestParam("id") int orderId, HttpSession session) { EcoUser
+	 * user = (EcoUser) session.getAttribute("user"); if
+	 * (session.getAttribute("user") == null) { return "Error here "; } Orders order
+	 * = orderService.findByID(orderId); orderService.deleteOrder(order); return
+	 * "redirect:/product.htm"; }
+	 */
 }

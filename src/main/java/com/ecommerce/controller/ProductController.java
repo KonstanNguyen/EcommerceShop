@@ -39,16 +39,6 @@ public class ProductController {
 	@Autowired
 	Company company;
 
-<<<<<<< HEAD
-    @Autowired
-    CategoryService categoryService;
-    @RequestMapping()
-    public String index(@RequestParam("id") int ID, ModelMap model) {
-        Category category = categoryService.findByID(ID);
-        model.addAttribute("category", category);
-        return "home/pages/product";
-    }
-=======
 	@RequestMapping
 	public String index(@RequestParam("id") int ID, ModelMap model) {
 		Category category = categoryService.findByID(ID);
@@ -133,5 +123,4 @@ public class ProductController {
 	public Company getCompany() {
 		return company;
 	}
->>>>>>> origin/v16.05.2024
 }
