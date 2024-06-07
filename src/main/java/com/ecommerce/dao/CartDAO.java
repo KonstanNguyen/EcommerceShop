@@ -6,5 +6,5 @@ import com.ecommerce.entity.Cart;
 
 public interface CartDAO {
 	public List<Cart> fetchAll();
-	public Cart find(int id);
+	public Cart findCartByUserId(int userId);
 }

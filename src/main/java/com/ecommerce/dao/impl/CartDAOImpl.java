@@ -29,11 +29,11 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	@Override
-	public Cart find(int id) {
+	public Cart findCartByUserId(int userId){
 		Session session = factory.getCurrentSession();
-		String hql = "FROM " + Cart.class.getName() + " WHERE id = :id";
+		String hql = "FROM " + Cart.class.getName() + " WHERE user.id = :userId";
 		Query query = session.createQuery(hql);
-		query.setParameter("id", id);
+		query.setParameter("userId", userId);
 		return (Cart)query.uniqueResult();
 	}
 

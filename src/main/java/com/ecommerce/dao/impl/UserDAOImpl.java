@@ -36,5 +36,4 @@ public class UserDAOImpl implements UserDAO {
 		query.setParameter("username", username);
 		return (EcoUser)query.uniqueResult();
 	}
-
 }

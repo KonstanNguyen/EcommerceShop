@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,32 +26,43 @@
 								<b>Shopping Cart</b>
 							</h4>
 						</div>
-						<div class="col align-self-center text-right text-muted">3
+						<div class="col align-self-center text-right text-muted">${totalItem}
 							items</div>
 					</div>
 				</div>
-				<div class="row border-top border-bottom">
-					<div class="row main align-items-center">
-						<div class="col-2">
-							<img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg">
+				<c:forEach items="${orders }" var="order">
+					<form method="post" action="/cart.htm?id=${order.id }">
+						<input type="hidden" name="orderID" value="${order.id }">
+						<div class="row border-top border-bottom">
+							<div class="row main align-items-center">
+								<div class="col-2">
+									<img class="img-fluid" src="./assets/img/product01.png">
+								</div>
+								<div class="col">
+									<div class="row text-muted">${order.categories.brand.name }</div>
+									<div class="row">${order.categories.title}</div>
+								</div>
+								<div class="col">
+									<span class="button-like decrement">-</span> <span
+										class="border value">${order.quantity}</span> <span
+										class="button-like increment">+</span>
+								</div>
+								<div class="col">
+									<c:choose>
+										<c:when test="${order.categories.promotionPrice != null}">
+                                      ${order.categories.promotionPrice }</c:when>
+										<c:otherwise>${order.categories.price }</c:otherwise>
+									</c:choose>
+									<button>
+										<span class="close">Delete</span>
+									</button>
+								</div>
+							</div>
 						</div>
-						<div class="col">
-							<div class="row text-muted">Shirt</div>
-							<div class="row">Cotton T-shirt</div>
-						</div>
-						<div class="col">
-							<span class="button-like decrement">-</span> <span
-								class="border value">1</span> <span
-								class="button-like increment">+</span>
-						</div>
-						<div class="col">
-							&euro; 44.00 <span class="close">Delete</span>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="row main align-items-center">
-						<div class="col-2">
+					</form>
+				</c:forEach>
+				<!-- 					<div class="row main align-items-center"> -->
+				<!-- <div class="col-2">
 							<img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg">
 						</div>
 						<div class="col">
@@ -66,26 +78,25 @@
 							&euro; 44.00 <span class="close">Delete</span>
 						</div>
 					</div>
-				</div>
-				<div class="row border-top border-bottom">
-					<div class="row main align-items-center">
-						<div class="col-2">
-							<img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg">
+					<div class="row border-top border-bottom">
+						<div class="row main align-items-center">
+							<div class="col-2">
+								<img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg">
+							</div>
+							<div class="col">
+								<div class="row text-muted">Shirt</div>
+								<div class="row">Cotton T-shirt</div>
+							</div>
+							<div class="col">
+								<span class="button-like decrement">-</span> <span
+									class="border value">1</span> <span
+									class="button-like increment">+</span>
+							</div>
+							<div class="col">
+								&euro; 44.00 <span class="close">Delete</span>
+							</div>
 						</div>
-						<div class="col">
-							<div class="row text-muted">Shirt</div>
-							<div class="row">Cotton T-shirt</div>
-						</div>
-						<div class="col">
-							<span class="button-like decrement">-</span> <span
-								class="border value">1</span> <span
-								class="button-like increment">+</span>
-						</div>
-						<div class="col">
-							&euro; 44.00 <span class="close">Delete</span>
-						</div>
-					</div>
-				</div>
+					</div> -->
 				<div class="back-to-shop">
 					<a href="./brands.htm">&leftarrow;</a><span class="text-muted">Back
 						to shop</span>
@@ -101,7 +112,7 @@
 				<div class="row"
 					style="border-top: 1px solid rgba(0, 0, 0, .1); padding: 2vh 0;">
 					<div class="col">TOTAL PRICE</div>
-					<div class="col text-right">&euro; 137.00</div>
+					<div class="col text-right">${total }</div>
 				</div>
 				<a href="./checkout.htm">
 					<button class="btn">CHECKOUT</button>

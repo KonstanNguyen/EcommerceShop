@@ -10,8 +10,7 @@ import javax.persistence.Id;
 @Entity
 public class Invoice {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private String id;
 	private String taxCode;
 	private Date date;
 	private String name;
@@ -19,13 +18,6 @@ public class Invoice {
 	private String phone;
 	private String address;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getTaxCode() {
 		return taxCode;
@@ -73,6 +65,14 @@ public class Invoice {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 

@@ -50,69 +50,72 @@
 			<!-- /Product thumb imgs -->
 
 			<!-- Product details -->
-			<div class="col-md-5">
-				<div class="product-details">
-					<h2 class="product-name textOverFlow">${category.title}</h2>
-					<div>
-						<div class="product-rating">
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-								class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-								class="fa fa-star-o"></i>
-						</div>
-						<a class="review-link" href="#">10 Review(s) | Add your review</a>
-					</div>
-					<div>
-						<h3 class="product-price">
-							${ category.promotionPrice }
-							<del class="product-old-price">${ category.price }</del>
-						</h3>
-						<span class="product-available">${category.status }</span>
-					</div>
-					<!--<p>${category.description} </p> bo duoc -->
-
-					<div class="product-options">
-						<label> Color <select class="input-select">
-								<option value="0">Red</option>
-						</select>
-						</label>
-					</div>
-
-					<div class="add-to-cart">
-						<div class="qty-label">
-							Quantity
-							<div class="input-number">
-								<input type="number" value=1> <span class="qty-up">+</span>
-								<span class="qty-down">-</span>
+			<form method="post">
+				<div class="col-md-5">
+					<div class="product-details">
+						<h2 class="product-name textOverFlow">${category.title}</h2>
+						<div>
+							<div class="product-rating">
+								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+									class="fa fa-star-o"></i>
 							</div>
+							<a class="review-link">10 Review(s) | Add your
+								review</a>
 						</div>
-						<button class="add-to-cart-btn">
-							<i class="fa fa-shopping-cart"></i> add to cart
-						</button>
-					</div>
+						<div>
+							<h3 class="product-price">
+								${ category.promotionPrice }
+								<del class="product-old-price">${ category.price }</del>
+							</h3>
+							<span class="product-available">${category.status }</span>
+						</div>
+						<!--<p>${category.description} </p> bo duoc -->
 
-					<ul class="product-btns">
-						<li><a href="#"><i class="fa fa-heart-o"></i> add to
-								wishlist</a></li>
-						<li><a href="#"><i class="fa fa-exchange"></i> add to
-								compare</a></li>
-					</ul>
+						<div class="product-options">
+							<label> Color <select class="input-select">
+									<option value="0">Red</option>
+							</select>
+							</label>
+						</div>
+						<input type="hidden" name="categoryId" value="${category.id}">
+						<div class="add-to-cart">
+							<div class="qty-label">
+								Quantity
+								<div class="input-number">
+									<input type="number" value=1 name="quantity"> <span
+										class="qty-up">+</span> <span class="qty-down">-</span>
+								</div>
+							</div>
+							<button class="add-to-cart-btn">
+								<i class="fa fa-shopping-cart"></i> add-to-cart
+							</button>
+						</div>
 
-					<!-- 	<ul class="product-links">
+						<ul class="product-btns">
+							<li><a href="#"><i class="fa fa-heart-o"></i> add to
+									wishlist</a></li>
+							<li><a href="#"><i class="fa fa-exchange"></i> add to
+									compare</a></li>
+						</ul>
+
+						<!-- 	<ul class="product-links">
 						<li>Category:</li>
 						<li><a href="#">Headphones</a></li>
 						<li><a href="#">Accessories</a></li>
 					</ul> -->
 
-					<ul class="product-links">
-						<li>Share:</li>
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-						<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-					</ul>
+						<ul class="product-links">
+							<li>Share:</li>
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							<li><a href="#"><i class="fa fa-envelope"></i></a></li>
+						</ul>
 
+					</div>
 				</div>
-			</div>
+			</form>
 			<!-- /Product details -->
 
 			<!-- Product tab -->
@@ -184,14 +187,14 @@
 											<td>${category.OS}</td>
 										</tr>
 									</table>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-										sed do eiusmod tempor incididunt ut labore et dolore magna
-										aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-										ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-										aute irure dolor in reprehenderit in voluptate velit esse
-										cillum dolore eu fugiat nulla pariatur. Excepteur sint
-										occaecat cupidatat non proident, sunt in culpa qui officia
-										deserunt mollit anim id est laborum.</p>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing
+										elit, sed do eiusmod tempor incididunt ut labore et dolore
+										magna aliqua. Ut enim ad minim veniam, quis nostrud
+										exercitation ullamco laboris nisi ut aliquip ex ea commodo
+										consequat. Duis aute irure dolor in reprehenderit in voluptate
+										velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+										sint occaecat cupidatat non proident, sunt in culpa qui
+										officia deserunt mollit anim id est laborum.</p>
 								</div>
 							</div>
 						</div>

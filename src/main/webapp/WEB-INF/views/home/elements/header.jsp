@@ -71,26 +71,25 @@
 						<div class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown"
 								aria-expanded="true"> <i class="fa fa-shopping-cart"></i> <span>Your
-									Cart</span> <c:if test="${ orders.size() > 0 }">
-									<div class="qty">${ orders.size() }</div>
-								</c:if>
+									Cart</span>
+								<div class="qty">${totalItem>0?totalItem:0}</div>
 							</a>
 							<div class="cart-dropdown">
 								<div class="cart-list">
 									<c:forEach var="order" items="${ orders }">
 										<div class="product-widget">
 											<div class="product-img">
-												<img src="./assets/img/product01.png" alt="">
+												<img src="<%-- ${order.category.image.url } --%>./assets/img/product01.png" alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-name">
-													<a href="#">product name goes here</a>
+													<a href="#">${ order.getCategories().title }</a>
 												</h3>
 												<h4 class="product-price">
-													<span class="qty">1x</span>$980.00
+													<span class="qty">${order.quantity}x</span>${order.getCategories().promotionPrice}
 												</h4>
 											</div>
-											<button class="delete">
+											<button formmethod="post" formaction="./delete.htm?id=${order.id }" class="delete" >
 												<i class="fa fa-close"></i>
 											</button>
 										</div>
@@ -128,14 +127,14 @@
 										</button>
 									</div>
 								</div> -->
-									<div class="cart-summary">
-										<small>3 Item(s) selected</small>
-										<h5>SUBTOTAL: $2940.00</h5>
-									</div>
-									<div class="cart-btns">
-										<a href="#">View Cart</a> <a href="#">Checkout <i
-											class="fa fa-arrow-circle-right"></i></a>
-									</div>
+								</div>
+								<div class="cart-summary">
+									<small>${orderCount} Item(s) selected</small>
+									<h5>SUBTOTAL: ${total>0?total:0 }</h5>
+								</div>
+								<div class="cart-btns">
+									<a href="./cart.htm">View Cart</a> <a href="#">Checkout <i
+										class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
 							<!-- /Cart -->

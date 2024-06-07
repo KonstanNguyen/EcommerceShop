@@ -1,24 +1,28 @@
 package com.ecommerce.entity;
 
-import javax.persistence.EmbeddedId;
+import java.math.BigInteger;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Orders {
 
-	@EmbeddedId
-	private OrderId id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	@ManyToOne
+	@JoinColumn(name = "cart_id")
+	private Cart cart;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
 	private int quantity;
-	private int invoiceId;
-
-	public OrderId getId() {
-		return id;
-	}
-
-	public void setId(OrderId id) {
-		this.id = id;
-	}
-
+	private String invoiceId;
 	public int getQuantity() {
 		return quantity;
 	}
@@ -27,11 +31,51 @@ public class Orders {
 		this.quantity = quantity;
 	}
 
-	public int getInvoiceId() {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Cart getCarts() {
+		return cart;
+	}
+
+	public void setCarts(Cart cart) {
+		this.cart = cart;
+	}
+
+	public Category getCategories() {
+		return category;
+	}
+
+	public void setCategories(Category category) {
+		this.category = category;
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public String getInvoiceId() {
 		return invoiceId;
 	}
 
-	public void setInvoiceId(int invoiceId) {
+	public void setInvoiceId(String invoiceId) {
 		this.invoiceId = invoiceId;
 	}
 

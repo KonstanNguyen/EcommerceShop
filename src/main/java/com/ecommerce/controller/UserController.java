@@ -1,5 +1,8 @@
 package com.ecommerce.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ecommerce.dto.request.RegisterUser;
+import com.ecommerce.entity.Cart;
 import com.ecommerce.entity.EcoUser;
+import com.ecommerce.entity.Orders;
+import com.ecommerce.service.CartService;
+import com.ecommerce.service.OrderService;
 import com.ecommerce.service.UserService;
 
 import jakarta.validation.Valid;
@@ -27,6 +34,10 @@ import jakarta.validation.Valid;
 public class UserController {
 	@Autowired
 	UserService userSevice;
+	@Autowired
+	CartService cartService;
+	@Autowired
+	OrderService orderService;
 
 	@RequestMapping("login")
 	public String login(HttpSession session) {
@@ -38,7 +49,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String checkLogin(HttpServletRequest request, HttpServletResponse response) {
+	public String checkLogin(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 
 		String username = request.getParameter("username");
 //		String password = request.getParameter("password");
@@ -61,7 +72,7 @@ public class UserController {
 			return "redirect:/brands.htm";
 		}
 
-		String uri = (String) session.getAttribute("uriQuery");
+		String uri = (String)session.getAttribute("uriQuery");
 		session.removeAttribute("uriQuery");
 
 		return "redirect:/" + uri;
@@ -111,4 +122,5 @@ public class UserController {
 
 		return "redirect:/brands.htm";
 	}
+	
 }

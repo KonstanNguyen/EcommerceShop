@@ -12,7 +12,7 @@ public class CartServiceImpl implements CartService{
 	
 	@Autowired
 	CartDAO dao;
-	public Cart find(int id) {
-		return dao.find(id);
+	public Cart findCartByUserId(int userId) {
+		return dao.findCartByUserId(userId);
 	}
 }
