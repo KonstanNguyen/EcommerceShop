@@ -16,6 +16,7 @@
 			http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	
 	<!-- Spring MVC Annotation -->
+	<context:property-placeholder location="classpath:company.properties"  ignore-unresolvable="true"/>
 	<context:annotation-config />
 	<mvc:annotation-driven/>
 	

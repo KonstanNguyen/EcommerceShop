@@ -2187,3 +2187,16 @@ textarea.input {
     margin-top: 10px;
   }
 }
+
+/*=========================================================
+	14 -> Additional CSS
+===========================================================*/
+
+.textOverFlow {
+	overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+          line-clamp: 2; 
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}

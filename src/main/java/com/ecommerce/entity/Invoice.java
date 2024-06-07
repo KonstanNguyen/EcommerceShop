@@ -6,53 +6,74 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Invoice {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private String id;
 	private String taxCode;
 	private Date date;
-	@ManyToOne
-	@JoinColumn(name="employeeId")
-	private Employee employee;
-	@ManyToOne
-	@JoinColumn(name="customerId")
-	private Customer customer;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	private String name;
+	private String email;
+	private String phone;
+	private String address;
+
+
 	public String getTaxCode() {
 		return taxCode;
 	}
+
 	public void setTaxCode(String taxCode) {
 		this.taxCode = taxCode;
 	}
+
 	public Date getDate() {
 		return date;
 	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
-	
-	public Employee getEmployee() {
-		return employee;
+
+	public String getName() {
+		return name;
 	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public Customer getCustomer() {
-		return customer;
+
+	public String getEmail() {
+		return email;
 	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
 }

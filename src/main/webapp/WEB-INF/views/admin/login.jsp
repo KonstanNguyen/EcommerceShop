@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="vi">
 <head>
+	<base href="${ pageContext.servletContext.contextPath }/">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Đăng nhập</title>
@@ -16,7 +17,7 @@
 			<h1 class="login__title">ĐĂNG NHẬP</h1>
 			<p class="login__describe">Chào mừng bạn đến với cửa hàng</p>
 
-			<form action="<c:url value='j_spring_security_login' />"
+			<form action="./user/login.htm"
 				id="form-login" class="form-login" method="POST">
 				<span class="username__text--error"></span>
 				<div class="form-login__group">
@@ -24,7 +25,7 @@
 						<i class="bi bi-person"></i>
 					</div>
 					<input name="username" class="form-login__username" type="text"
-						placeholder="Tài khoản" value="${username}">
+						placeholder="Tài khoản" <%-- value="${username}" --%>>
 				</div>
 
 <%-- 				<span style="display: block" class="password__text--error">${message}</span> --%>
@@ -38,8 +39,8 @@
 				</div>
 
 				<button class="btn_login" type="submit">Đăng nhập</button>
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
+<%-- 				<input type="hidden" name="${_csrf.parameterName}" --%>
+<%-- 					value="${_csrf.token}" /> --%>
 			</form>
 		</div>
 	</main>
