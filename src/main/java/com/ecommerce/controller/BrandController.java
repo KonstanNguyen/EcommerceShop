@@ -76,7 +76,7 @@ public class BrandController {
 
 		String referer = request.getHeader("referer");
 		EcoUser user = (EcoUser) session.getAttribute("user");
-		if (session.getAttribute("user") == null) {
+		if (user == null) {
 			return "pages/login";
 		}
 		Cart cart = cartService.findCartByUserId(user.getId());
@@ -118,7 +118,7 @@ public class BrandController {
 	public List<Orders> getOrder(HttpSession session) {
 		// THêm vào giỏ hàng
 		EcoUser user = (EcoUser) session.getAttribute("user");
-		if (session.getAttribute("user") == null) {
+		if (user == null) {
 			return null;
 		}
 		Cart cart = cartService.findCartByUserId(user.getId());
@@ -129,7 +129,7 @@ public class BrandController {
 	public int getTotalItem(HttpSession session) {
 		// THêm vào giỏ hàng
 		EcoUser user = (EcoUser) session.getAttribute("user");
-		if (session.getAttribute("user") == null) {
+		if (user == null) {
 			return 0;
 		}
 		Cart cart = cartService.findCartByUserId(user.getId());
@@ -140,7 +140,7 @@ public class BrandController {
 	public BigInteger getTotal(HttpSession session) {
 		BigInteger total = BigInteger.ZERO;
 		EcoUser user = (EcoUser) session.getAttribute("user");
-		if (session.getAttribute("user") == null) {
+		if (user == null) {
 			return null;
 		}
 		Cart cart = cartService.findCartByUserId(user.getId());

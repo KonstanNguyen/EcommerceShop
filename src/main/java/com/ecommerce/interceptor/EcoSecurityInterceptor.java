@@ -10,7 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.ecommerce.entity.EcoUser;
 import com.ecommerce.service.UserService;
 
-public class AuthInterceptors extends HandlerInterceptorAdapter {
+public class EcoSecurityInterceptor extends HandlerInterceptorAdapter {
 	
 	@Autowired
 	UserService userService;
@@ -20,12 +20,18 @@ public class AuthInterceptors extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession();
 		
-		EcoUser user = (EcoUser) session.getAttribute("user");
+		
+		Object userObj = session.getAttribute("user");
+		if (userObj != null && ((String)userObj).equals("admin")) {
+			return true;
+		}
+		
+		EcoUser user = (EcoUser)userObj;
 		if (user == null) {
 			HttpSession session2 = request.getSession();
 			String[] arr = request.getRequestURI().split("/", 3);
 			String uri = arr[arr.length-1];
-			System.out.println(session2.getAttribute("uriQuery"));
+			
 			session2.setAttribute("uriQuery", uri + (request.getQueryString() != null? "?" + request.getQueryString():""));
 			response.sendRedirect(request.getContextPath()+"/user/login.htm");
 			return false;

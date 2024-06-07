@@ -41,7 +41,13 @@ public class UserController {
 
 	@RequestMapping("login")
 	public String login(HttpSession session) {
-		if (session.getAttribute("user") != null) {
+		
+		Object user = session.getAttribute("user");
+		if (user != null && ((String)user).equals("admin")) {
+			return "redirect:/admin.htm";
+		}
+		
+		if (user != null) {
 			return "redirect:/brands.htm";
 		}
 
@@ -49,25 +55,24 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String checkLogin(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+	public String checkLogin(HttpServletRequest request, HttpServletResponse response) {
 
 		String username = request.getParameter("username");
 //		String password = request.getParameter("password");
+		HttpSession session = request.getSession();
+		
+		
+		if (username != null && username.equals("admin")) {
+			session.setAttribute("user", "admin");
+			return "redirect:/admin.htm";
+		}
 
 		EcoUser user = userSevice.findByUsername(username);
-
 		if (user == null) {
 			return "redirect:/user/login.htm";
 		}
 
-		Cookie cookie = new Cookie("uid", user.getUsername().strip());
-		cookie.setPath("/EcommerceShop");
-		cookie.setMaxAge(60 * 60 * 24);
-		response.addCookie(cookie);
-
-		HttpSession session = request.getSession();
 		session.setAttribute("user", user);
-
 		if (session.getAttribute("uriQuery") == null) {
 			return "redirect:/brands.htm";
 		}
