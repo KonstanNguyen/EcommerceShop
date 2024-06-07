@@ -27,45 +27,49 @@
 						<div id="tab1" class="tab-pane active">
 							<div class="products-slick" data-nav="#slick-nav-1">
 								<c:forEach var="category" items="${categoriesNewProduct}">
-									<div class="product">
-										<div class="product-img">
-											<img src="${category.image.url}" alt="">
-										</div>
-										<div class="product-body">
-											<h3 class="product-name textOverFlow">
-												<a href="./product.htm?id=${category.id}"
-													title="${category.title}">${category.title}</a>
-											</h3>
-											<h4 class="product-price">
-												<span>${category.promotionPrice}</span>
-												<del class="product-old-price">${category.price}</del>
-											</h4>
-											<div class="product-rating">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i>
+									<form action="./brands.htm" method="post">
+
+										<input type="hidden" name="categoryid" value="${category.id}">
+										<div class="product">
+											<div class="product-img">
+												<img src="${category.image.url}" alt="">
 											</div>
-											<div class="product-btns">
-												<button class="add-to-wishlist">
-													<i class="fa fa-heart-o"></i><span class="tooltipp">add
-														to wishlist</span>
-												</button>
-												<button class="add-to-compare">
-													<i class="fa fa-exchange"></i><span class="tooltipp">add
-														to compare</span>
-												</button>
-												<button class="quick-view">
-													<i class="fa fa-eye"></i><span class="tooltipp">quick
-														view</span>
+											<div class="product-body">
+												<h3 class="product-name textOverFlow">
+													<a href="./product.htm?id=${category.id}"
+														title="${category.title}">${category.title}</a>
+												</h3>
+												<h4 class="product-price">
+													<span>${category.promotionPrice}</span>
+													<del class="product-old-price">${category.price}</del>
+												</h4>
+												<div class="product-rating">
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i>
+												</div>
+												<div class="product-btns">
+													<button class="add-to-wishlist">
+														<i class="fa fa-heart-o"></i><span class="tooltipp">add
+															to wishlist</span>
+													</button>
+													<button class="add-to-compare">
+														<i class="fa fa-exchange"></i><span class="tooltipp">add
+															to compare</span>
+													</button>
+													<button class="quick-view">
+														<i class="fa fa-eye"></i><span class="tooltipp">quick
+															view</span>
+													</button>
+												</div>
+											</div>
+											<div class="add-to-cart">
+												<button class="add-to-cart-btn">
+													<i class="fa fa-shopping-cart"></i> add to cart
 												</button>
 											</div>
 										</div>
-										<div class="add-to-cart">
-											<button class="add-to-cart-btn">
-												<i class="fa fa-shopping-cart"></i> add to cart
-											</button>
-										</div>
-									</div>
+									</form>
 								</c:forEach>
 								<div id="slick-nav-1" class="products-slick-nav"></div>
 

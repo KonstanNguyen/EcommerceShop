@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ecommerce.entity.Category;
-import com.ecommerce.entity.Need;
 import com.ecommerce.service.CategoryService;
 
 @Controller
@@ -20,7 +19,6 @@ public class CategoryController {
 	@Autowired
 	CategoryService service;
 
-	
 	@RequestMapping("index")
 	public String index(ModelMap model) {
 		List<Category> categories = service.fetchAllProduct();

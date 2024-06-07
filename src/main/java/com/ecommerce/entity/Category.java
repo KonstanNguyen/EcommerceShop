@@ -58,7 +58,7 @@ public class Category {
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private Set<Need> needs;
 
-	@OneToMany(mappedBy = "id.category", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
 	private Collection<Orders> orders;
 
 	public int getId() {

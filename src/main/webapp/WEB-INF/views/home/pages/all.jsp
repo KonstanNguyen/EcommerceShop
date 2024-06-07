@@ -52,7 +52,7 @@ WARNING: Respond.js doesn't work if you view the page via file://
 
 <body>
 	<!-- HEADER -->
-	<%@ include file="../elements/header.jsp" %>
+	<%@ include file="../elements/header.jsp"%>
 	<!-- /HEADER -->
 
 	<!-- NAVIGATION -->
@@ -274,50 +274,53 @@ WARNING: Respond.js doesn't work if you view the page via file://
 						<!-- product -->
 						<div class="col-md-12">
 							<c:forEach var="category" items="${ categories }">
-								<div class="col-md-4 col-xs-6">
-
-									<div class="product">
-										<div class="product-img">
-											<img src="./assets/img/product01.png" alt="">
-											<div class="product-label">
-												<span class="sale">-30%</span> <span class="new">NEW</span>
+								<form method="post" action="./brands/all.htm">
+									<div class="col-md-4 col-xs-6">
+										<input type="hidden" name="categoryid" value="${category.id}">
+										<div class="product">
+											<div class="product-img">
+												<img src="./assets/img/product01.png" alt="">
+												<div class="product-label">
+													<span class="sale">-30%</span> <span class="new">NEW</span>
+												</div>
 											</div>
-										</div>
-										<div class="product-body">
-											<p class="product-category">${category.brand.name}</p>
-											<h3 class="product-name textOverFlow" style="height: 30.78px;">
-												<a href="#">${category.title}</a>
-											</h3>
-											<h4 class="product-price">${category.promotionPrice}
-												<del class="product-old-price">${category.price}</del>
-											</h4>
-											<div class="product-rating">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i>
+											<div class="product-body">
+												<p class="product-category">${category.brand.name}</p>
+												<h3 class="product-name textOverFlow"
+													style="height: 30.78px;">
+													<a href="./product.htm?id=${category.id}">${category.title}</a>
+												</h3>
+												<h4 class="product-price">${category.promotionPrice}
+													<del class="product-old-price">${category.price}</del>
+												</h4>
+												<div class="product-rating">
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i>
+												</div>
+												<div class="product-btns">
+													<button class="add-to-wishlist">
+														<i class="fa fa-heart-o"></i><span class="tooltipp">add
+															to wishlist</span>
+													</button>
+													<button class="add-to-compare">
+														<i class="fa fa-exchange"></i><span class="tooltipp">add
+															to compare</span>
+													</button>
+													<button class="quick-view">
+														<i class="fa fa-eye"></i><span class="tooltipp">quick
+															view</span>
+													</button>
+												</div>
 											</div>
-											<div class="product-btns">
-												<button class="add-to-wishlist">
-													<i class="fa fa-heart-o"></i><span class="tooltipp">add
-														to wishlist</span>
-												</button>
-												<button class="add-to-compare">
-													<i class="fa fa-exchange"></i><span class="tooltipp">add
-														to compare</span>
-												</button>
-												<button class="quick-view">
-													<i class="fa fa-eye"></i><span class="tooltipp">quick
-														view</span>
+											<div class="add-to-cart">
+												<button class="add-to-cart-btn" type="submit">
+													<i class="fa fa-shopping-cart"></i> add to cart
 												</button>
 											</div>
-										</div>
-										<div class="add-to-cart">
-											<button class="add-to-cart-btn">
-												<i class="fa fa-shopping-cart"></i> add to cart
-											</button>
 										</div>
 									</div>
-								</div>
+								</form>
 							</c:forEach>
 						</div>
 						<!-- /product -->
@@ -723,7 +726,7 @@ WARNING: Respond.js doesn't work if you view the page via file://
 	<!-- /NEWSLETTER -->
 
 	<!-- FOOTER -->
-	<%@ include file="../../elements/footer.jsp" %>
+	<%@ include file="../../elements/footer.jsp"%>
 
 	<!-- jQuery Plugins -->
 	<%@ include file="../../elements/jQuery-plugin.jsp"%>
