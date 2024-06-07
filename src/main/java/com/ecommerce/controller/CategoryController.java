@@ -15,7 +15,7 @@ import com.ecommerce.entity.Need;
 import com.ecommerce.service.CategoryService;
 
 @Controller
-@RequestMapping("categories")
+@RequestMapping(value = {"categories", "admin/categories"})
 public class CategoryController {
 	@Autowired
 	CategoryService service;

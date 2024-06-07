@@ -17,7 +17,7 @@ public class ProductController {
 
     @Autowired
     CategoryService categoryService;
-    @RequestMapping
+    @RequestMapping()
     public String index(@RequestParam("id") int ID, ModelMap model) {
         Category category = categoryService.findByID(ID);
         model.addAttribute("category", category);
