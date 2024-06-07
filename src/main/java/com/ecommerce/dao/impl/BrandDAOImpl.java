@@ -15,15 +15,15 @@ import com.ecommerce.entity.Brand;
 
 @Transactional
 @Repository
+@SuppressWarnings("unchecked")
 public class BrandDAOImpl implements BrandDAO{
 	@Autowired
 	SessionFactory factory;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Brand> fetchAll() {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Brand";
+		String hql = "FROM " + Brand.class.getName();
 		Query query = session.createQuery(hql);
 		return query.list();
 	}
@@ -31,7 +31,7 @@ public class BrandDAOImpl implements BrandDAO{
 	@Override
 	public Brand findByID(int id) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Brand WHERE id = :brandId";
+		String hql = "FROM " + Brand.class.getName() +" WHERE id = :brandId";
 		Query query = session.createQuery(hql);
 		query.setParameter("brandId", id);
 		return (Brand)query.uniqueResult();

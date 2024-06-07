@@ -6,15 +6,23 @@
 	<div id="top-header">
 		<div class="container">
 			<ul class="header-links pull-left">
-				<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-				<li><a href="#"><i class="fa fa-envelope-o"></i>
-						email@email.com</a></li>
-				<li><a href="#"><i class="fa fa-map-marker"></i> 1734
-						Stonecoal Road</a></li>
+				<li><a href="#"><i class="fa fa-phone"></i>${ company.phone }</a></li>
+				<li><a href="#"><i class="fa fa-envelope-o"></i> ${ company.email }</a></li>
+				<li><a href="#"><i class="fa fa-map-marker"></i> ${ company.address }</a></li>
 			</ul>
 			<ul class="header-links pull-right">
 				<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-				<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+				<c:choose>
+					<c:when test="${ sessionScope.user != null }">
+						<li><a href="#"><i class="fa fa-user-o"></i> ${ sessionScope.user.name }
+						</a></li>
+						<li><a href="./user/logout.htm">Logout </a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="./user/login.htm"><i class="fa fa-user-o"></i>
+								Login </a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</div>
@@ -29,7 +37,7 @@
 				<!-- LOGO -->
 				<div class="col-md-3">
 					<div class="header-logo">
-						<a href="#" class="logo"> <img src="./assets/img/logo.png"
+						<a href="#" class="logo"> <img src="${ company.logo.url }"
 							alt="">
 						</a>
 					</div>
@@ -40,12 +48,6 @@
 				<div class="col-md-6">
 					<div class="header-search">
 						<form>
-							<!-- 							<select class="input-select"> -->
-							<!-- 								<option value="0">Brand</option> -->
-							<%-- 								<c:forEach var="brand" items="${ brands }" end="2"> --%>
-							<%-- 									<option value="${ brand.id }">${ brand.name }</option> --%>
-							<%-- 								</c:forEach> --%>
-							<!-- 							</select>  -->
 							<input class="input input-select" placeholder="Search here">
 							<button class="search-btn">Search</button>
 						</form>
@@ -60,7 +62,7 @@
 						<div>
 							<a href="#"> <i class="fa fa-heart-o"></i> <span>Your
 									Wishlist</span>
-								<div class="qty">2</div>
+								<div class="qty">0</div>
 							</a>
 						</div>
 						<!-- /Wishlist -->
@@ -70,11 +72,29 @@
 							<a class="dropdown-toggle" data-toggle="dropdown"
 								aria-expanded="true"> <i class="fa fa-shopping-cart"></i> <span>Your
 									Cart</span>
-								<div class="qty">3</div>
+								<div class="qty">${totalItem>0?totalItem:0}</div>
 							</a>
 							<div class="cart-dropdown">
 								<div class="cart-list">
-									<div class="product-widget">
+									<c:forEach var="order" items="${ orders }">
+										<div class="product-widget">
+											<div class="product-img">
+												<img src="<%-- ${order.category.image.url } --%>./assets/img/product01.png" alt="">
+											</div>
+											<div class="product-body">
+												<h3 class="product-name">
+													<a href="#">${ order.getCategories().title }</a>
+												</h3>
+												<h4 class="product-price">
+													<span class="qty">${order.quantity}x</span>${order.getCategories().promotionPrice}
+												</h4>
+											</div>
+											<button formmethod="post" formaction="./delete.htm?id=${order.id }" class="delete" >
+												<i class="fa fa-close"></i>
+											</button>
+										</div>
+									</c:forEach>
+									<!-- <div class="product-widget">
 										<div class="product-img">
 											<img src="./assets/img/product01.png" alt="">
 										</div>
@@ -90,7 +110,6 @@
 											<i class="fa fa-close"></i>
 										</button>
 									</div>
-
 									<div class="product-widget">
 										<div class="product-img">
 											<img src="./assets/img/product02.png" alt="">
@@ -107,33 +126,33 @@
 											<i class="fa fa-close"></i>
 										</button>
 									</div>
+								</div> -->
 								</div>
 								<div class="cart-summary">
-									<small>3 Item(s) selected</small>
-									<h5>SUBTOTAL: $2940.00</h5>
+									<small>${orderCount} Item(s) selected</small>
+									<h5>SUBTOTAL: ${total>0?total:0 }</h5>
 								</div>
 								<div class="cart-btns">
 									<a href="./cart.htm">View Cart</a> <a href="#">Checkout <i
 										class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
-						</div>
-						<!-- /Cart -->
+							<!-- /Cart -->
 
-						<!-- Menu Toogle -->
-						<div class="menu-toggle">
-							<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
-							</a>
+							<!-- Menu Toggle -->
+							<div class="menu-toggle">
+								<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
+								</a>
+							</div>
+							<!-- /Menu Toggle -->
 						</div>
-						<!-- /Menu Toogle -->
 					</div>
+					<!-- /ACCOUNT -->
 				</div>
-				<!-- /ACCOUNT -->
+				<!-- row -->
 			</div>
-			<!-- row -->
+			<!-- container -->
 		</div>
-		<!-- container -->
-	</div>
-	<!-- /MAIN HEADER -->
+		<!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->

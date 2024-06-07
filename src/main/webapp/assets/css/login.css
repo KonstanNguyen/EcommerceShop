@@ -99,7 +99,7 @@ main {
 }
 
 .btn_login {
-  color: #fff;
+  color: red;
   background-color: var(--primary-color);
   border: 1px solid;
   font-size: 18px;
