@@ -47,33 +47,31 @@
 				<div class="col-md-7">
 					<!-- Billing Details -->
 					${ message }
-					<form method="post" action="user/checkout.htm" class="billing-details">
+					<form:form action="user/checkout.htm" cssClass="billing-details" modelAttribute="ecoInvoice">
 						<div class="section-title">
 							<h3 class="title">Billing address</h3>
 						</div>
-						<input name="id" value="${ ecoInvoice.id }" hidden="true" />
 						<div class="form-group">
-							<input name="taxCode" value="${ ecoInvoice.taxCode }" class="input" placeholder="TAX Code" />
-						</div>
-						<input name="date" value="${ ecoInvoice.date }" hidden="true"/>
-						<div class="form-group">
-							<input name="name" value="${ ecoInvoice.name }" class="input" placeholder="Name" />
+							<form:input path="taxCode" cssClass="input" placeholder="Tax Code"/>
 						</div>
 						<div class="form-group">
-							<input name="email" value="${ ecoInvoice.email }" class="input" type="email"
+							<form:input path="name" cssClass="input" placeholder="Name" />
+						</div>
+						<div class="form-group">
+							<form:input path="email" cssClass="input" type="email"
 								placeholder="Email" />
 						</div>
 						<div class="form-group">
-							<input name="phone" value="${ ecoInvoice.phone }" class="input" type="tel"
+							<form:input path="phone" cssClass="input" type="tel"
 								placeholder="Telephone" />
 						</div>
 						<div class="form-group">
-							<input name="address" value="${ ecoInvoice.address }" class="input" placeholder="Address" />
+							<form:input path="address" cssClass="input" placeholder="Address" />
 						</div>
 						<div>
 							<button class="primary-btn order-submit">Insert</button>
 						</div>
-					</form>
+					</form:form>
 					<!-- /Billing Details -->
 
 					<!-- Shiping Details -->

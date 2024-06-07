@@ -10,7 +10,6 @@ import javax.persistence.Id;
 @Entity
 public class Invoice {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String taxCode;
 	private Date date;

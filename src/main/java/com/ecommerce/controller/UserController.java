@@ -141,17 +141,10 @@ public class UserController {
 		return "home/pages/checkout";
 	}
 
-	@RequestMapping(value = "checkout", method = { RequestMethod.POST })
-	public String index(HttpServletRequest request) {
-		Invoice invoice = (Invoice)request.getAttribute("ecoInvoice");
-		
-		/*
-		 * Session session = factory.openSession(); Transaction t =
-		 * session.beginTransaction(); try { session.save(invoice); t.commit();
-		 * model.addAttribute("message", "Thêm mới thành công!"); } catch (Exception e)
-		 * { t.rollback(); model.addAttribute("message", "Thêm mới thất bại!"); }
-		 * finally { session.close(); }
-		 */
+	@RequestMapping(value = "checkout", method = RequestMethod.POST )
+	public String index(HttpServletRequest request, @ModelAttribute("ecoInvoice") Invoice invoice) {
+		invoice.setId(11);
+		invoice.setDate(Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		if (invoiceService.insertInvoice(invoice) == true) {
 			request.setAttribute("message", "Them thanh cong");
 		} else {
