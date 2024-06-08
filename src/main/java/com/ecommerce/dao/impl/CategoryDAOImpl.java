@@ -8,14 +8,18 @@ import javax.transaction.Transactional;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ecommerce.dao.CategoryDAO;
 import com.ecommerce.dto.response.CategoryNewProduct;
 import com.ecommerce.dto.response.CategoryTopSelling;
+import com.ecommerce.entity.Brand;
 import com.ecommerce.entity.Category;
+import com.ecommerce.entity.Image;
 import com.ecommerce.entity.Need;
+import com.ecommerce.entity.Orders;
 
 @SuppressWarnings("unchecked")
 @Transactional
@@ -97,6 +101,62 @@ public class CategoryDAOImpl implements CategoryDAO {
 			return categoryDTO;
 		}).collect(Collectors.toList());
 		return CategoryNewProducts;
+	}
+	
+	@Override
+    public void addCategory(Category category) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			session.save(category);
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+    }
+
+    @Override
+    public void updateCategory(Category category) {
+    	Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			session.update(category);
+			System.out.println("Update");
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+	}
+    
+    
+
+    @Override
+    public void deleteCategory(Category category) {
+    	Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			
+				session.delete(category);
+				t.commit();
+			
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+    }
+
+	@Override
+	public Category findByName(String name) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM " + Category.class.getName() +" WHERE title = :name";
+		Query query = session.createQuery(hql);
+		query.setParameter("name", name);
+		return (Category)query.uniqueResult();
 	}
 
 }

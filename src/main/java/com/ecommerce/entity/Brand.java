@@ -16,7 +16,20 @@ public class Brand {
 	private String name;
 	@OneToMany(mappedBy = "brand", fetch = FetchType.EAGER)
 	private Collection<Category> categories;
-	
+		
+	public Brand() {}
+		
+	public Brand(String name) {
+		super();
+		this.name = name;
+	}
+
+	public Brand(int id, String name, Collection<Category> categories) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.categories = categories;
+	}
 	public int getid() {
 		return id;
 	}

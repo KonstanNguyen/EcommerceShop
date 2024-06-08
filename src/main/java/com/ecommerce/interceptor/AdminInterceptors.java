@@ -31,10 +31,10 @@ public class AdminInterceptors extends HandlerInterceptorAdapter {
 			return false;
 		}
 		
-		if (user.isAdmin()) {
-			response.sendRedirect(request.getContextPath()+"/user/login.htm");
-			return false;
-		}
+//		if (user.isAdmin()) {
+//			response.sendRedirect(request.getContextPath()+"/user/login.htm");
+//			return false;
+//		}
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user);

@@ -24,7 +24,7 @@ public class Cart {
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private EcoUser user;
-	private String status;
+	private Boolean status;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date createTime;
@@ -48,11 +48,11 @@ public class Cart {
 		this.user = user;
 	}
 
-	public String getStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 

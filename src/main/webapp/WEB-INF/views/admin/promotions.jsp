@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
      
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +47,7 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Product</th>
+                                                <th>Percent</th>
                                                 <th>Start Time</th>
                                                 <th>End Time</th>
                                                 <th>Create Time</th>
@@ -52,26 +55,34 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Product 1</td>
-                                                <td>2024-01-01 00:00:00</td>
-                                                <td>2024-01-31 23:59:59</td>
-                                                <td>2023-12-01 12:00:00</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
-                                                    <button class="btn btn-danger" onclick="deleteDiscountedProduct(1)">Delete</button>
-                                                </td>
-                                            </tr>
+                                        	<c:forEach var="p" items="${promotions}">
+	                                            <tr>
+	                                                <td>${p.id}</td>
+	                                                <td>Product 1</td>
+	                                                <td>${p.dealPercent}</td>
+	                                                <td>${p.startTime}</td>
+	                                                <td>${p.endTime}</td>
+	                                                <td>${p.getCreatedTime()}</td>
+<!-- 	                                                <td> -->
+<%-- 	                                                    <button class="btn btn-primary" onclick="editDiscountedProduct(${p.id}, 'Product 1', '${p.dealPercent}', '${p.startTime}', '${p.endTime}', '${p.createTime}')">Edit</button> --%>
+<%-- 	                                                    <button class="btn btn-danger" onclick="deleteDiscountedProduct(${p.id})">Delete</button> --%>
+<!-- 	                                                </td> -->
+	                                           			<td>
+		                                                	<button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '12', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
+		                                                    <button class="btn btn-danger" onclick="deleteDiscountedProduct(1)">Delete</button>
+		                                                </td>
+	                                            </tr>
+                                            </c:forEach>
                                             
                                             <tr>
                                                 <td>2</td>
                                                 <td>Product 1</td>
+                                                <td>12%</td>
                                                 <td>2024-01-01 00:00:00</td>
                                                 <td>2024-01-31 23:59:59</td>
                                                 <td>2023-12-01 12:00:00</td>
                                                 <td>
-                                                    <button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
+                                                	<button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '12', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
                                                     <button class="btn btn-danger" onclick="deleteDiscountedProduct(1)">Delete</button>
                                                 </td>
                                             </tr>
@@ -79,11 +90,12 @@
                                             <tr>
                                                 <td>3</td>
                                                 <td>Product 1</td>
+                                                <td>12%</td>
                                                 <td>2024-01-01 00:00:00</td>
                                                 <td>2024-01-31 23:59:59</td>
                                                 <td>2023-12-01 12:00:00</td>
                                                 <td>
-                                                    <button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
+                                                	<button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '12', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
                                                     <button class="btn btn-danger" onclick="deleteDiscountedProduct(1)">Delete</button>
                                                 </td>
                                             </tr>
@@ -91,11 +103,12 @@
                                             <tr>
                                                 <td>4</td>
                                                 <td>Product 1</td>
+                                                <td>12%</td>
                                                 <td>2024-01-01 00:00:00</td>
                                                 <td>2024-01-31 23:59:59</td>
                                                 <td>2023-12-01 12:00:00</td>
                                                 <td>
-                                                    <button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
+                                                	<button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '12', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
                                                     <button class="btn btn-danger" onclick="deleteDiscountedProduct(1)">Delete</button>
                                                 </td>
                                             </tr>
@@ -103,11 +116,12 @@
                                             <tr>
                                                 <td>5</td>
                                                 <td>Product 1</td>
+                                                <td>12%</td>
                                                 <td>2024-01-01 00:00:00</td>
                                                 <td>2024-01-31 23:59:59</td>
                                                 <td>2023-12-01 12:00:00</td>
                                                 <td>
-                                                    <button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
+                                                	<button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '12', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
                                                     <button class="btn btn-danger" onclick="deleteDiscountedProduct(1)">Delete</button>
                                                 </td>
                                             </tr>
@@ -153,6 +167,10 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="percent">Percent</label>
+                            <input type="text" class="form-control" id="percent" name="percent" required>
+                        </div>
+                        <div class="form-group">
                             <label for="startTime">Start Time</label>
                             <input type="datetime-local" class="form-control" id="startTime" name="startTime" required>
                         </div>
@@ -193,6 +211,10 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="editProductPercent">Percent</label>
+                            <input type="text" class="form-control" id="percent" name="percent" required>
+                        </div>
+                        <div class="form-group">
                             <label for="editStartTime">Start Time</label>
                             <input type="datetime-local" class="form-control" id="editStartTime" name="startTime" required>
                         </div>
@@ -216,9 +238,10 @@
             $('#addDiscountedProductModal').modal('show');
         }
 
-        function editDiscountedProduct(id, productName, startTime, endTime, createTime) {
+        function editDiscountedProduct(id, productName, percent, startTime, endTime, createTime) {
             $('#editDiscountedProductId').val(id);
             $('#editProductName').val(productName);
+            $('#editProductPercent').val(percent);
             $('#editStartTime').val(startTime);
             $('#editEndTime').val(endTime);
             $('#editCreateTime').val(createTime);

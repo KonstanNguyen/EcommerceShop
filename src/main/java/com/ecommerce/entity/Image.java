@@ -11,6 +11,26 @@ public class Image {
 	@ManyToOne
 	@JoinColumn(name="category_Id")
 	private Category category;
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Image [id=" + id + ", url=" + url + ", category=" + category + "]";
+	}
+
+	public Image() {}
+	
+	public Image(String url) {
+		super();
+		this.url = url;
+	}
+	
+	public Image(String url, Category category) {
+		super();
+		this.url = url;
+		this.category = category;
+	}
 
 	public int getId() {
 		return this.id;
