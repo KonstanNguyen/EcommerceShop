@@ -19,11 +19,13 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/brands.htm" />
+			<mvc:exclude-mapping path="/brands/all.htm" />
 			<mvc:exclude-mapping path="/user/login.htm" />
 			<mvc:exclude-mapping path="/user/register.htm" />
+			<mvc:exclude-mapping path="/user/activate.htm" />
+			<mvc:exclude-mapping path="/product.htm" />
 			<mvc:exclude-mapping
 				path="/user/forgot-password.htm" />
-			<mvc:exclude-mapping path="/user/activate.htm" />
 			<bean class="com.ecommerce.interceptor.EcoSecurityInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

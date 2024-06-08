@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,11 +30,38 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
+	public boolean save(EcoUser user) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		
+		try {
+			session.save(user);
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+		return true;
+	}
+	
+	@Override
 	public EcoUser findByUsername(String username) {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM " + EcoUser.class.getName() + " WHERE username = :username";
 		Query query = session.createQuery(hql);
 		query.setParameter("username", username);
+		return (EcoUser)query.uniqueResult();
+	}
+	
+	@Override
+	public EcoUser findByUsernameAndPassword(String username, String password) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM " + EcoUser.class.getName() + " WHERE username = :username AND password = :password";
+		Query query = session.createQuery(hql);
+		query.setParameter("username", username);
+		query.setParameter("password", password);
 		return (EcoUser)query.uniqueResult();
 	}
 }

@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!-- HEADER -->
 <header>
@@ -16,7 +17,7 @@
 					<c:when test="${ sessionScope.user != null }">
 						<li><a href="#"><i class="fa fa-user-o"></i> ${ sessionScope.user.name }
 						</a></li>
-						<li><a href="./user/logout.htm">Logout </a></li>
+						<li><a href="./user/logout.htm"> Logout </a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="./user/login.htm"><i class="fa fa-user-o"></i>
@@ -79,7 +80,9 @@
 									<c:forEach var="order" items="${ orders }">
 										<div class="product-widget">
 											<div class="product-img">
-												<img src="<%-- ${order.category.image.url } --%>./assets/img/product01.png" alt="">
+												<img
+													src="<%-- ${order.category.image.url } --%>./assets/img/product01.png"
+													alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-name">
@@ -89,7 +92,8 @@
 													<span class="qty">${order.quantity}x</span>${order.getCategories().promotionPrice}
 												</h4>
 											</div>
-											<button formmethod="post" formaction="./delete.htm?id=${order.id }" class="delete" >
+											<button formmethod="post"
+												formaction="./delete.htm?id=${order.id }" class="delete">
 												<i class="fa fa-close"></i>
 											</button>
 										</div>

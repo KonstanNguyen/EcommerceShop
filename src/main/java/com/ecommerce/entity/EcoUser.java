@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,6 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class EcoUser {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String CMND;
 	private String name;
@@ -111,6 +114,28 @@ public class EcoUser {
 
 	public void setCarts(Collection<Cart> carts) {
 		this.carts = carts;
+	}
+
+	public EcoUser(String name, String email, String username, String password) {
+		this.name = name;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+	}
+
+	public EcoUser() {
+	}
+
+	public EcoUser(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "EcoUser [id=" + id + ", CMND=" + CMND + ", name=" + name + ", email=" + email + ", phone=" + phone
+				+ ", address=" + address + ", dateOfBirth=" + dateOfBirth + ", username=" + username + ", password="
+				+ password + ", carts=" + carts + "]";
 	}
 
 }

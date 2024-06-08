@@ -21,12 +21,11 @@ public class EcoSecurityInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		
 		
-		Object userObj = session.getAttribute("user");
-		if (userObj != null && ((String)userObj).equals("admin")) {
+		EcoUser user = (EcoUser)session.getAttribute("user");
+		if (user != null && user.getUsername().equals("admin")) {
 			return true;
 		}
 		
-		EcoUser user = (EcoUser)userObj;
 		if (user == null) {
 			HttpSession session2 = request.getSession();
 			String[] arr = request.getRequestURI().split("/", 3);
