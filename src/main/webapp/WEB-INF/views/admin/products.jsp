@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
      
 <!DOCTYPE html>
@@ -13,6 +15,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Admin Dashboard - Products</title>
     
+    <base href="${ pageContext.servletContext.contextPath }/"/>
     <%@ include file="../admin/layout/link.jsp" %>
     
 </head>
@@ -41,8 +44,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Product List</h4>
-                                <button class="btn btn-success mb-3" onclick="openAddProductPopup()">Add New Product</button>
-                                <div class="table-responsive">
+								<button class="btn btn-success mb-3"
+									onclick="openAddProductPopup()">Add New Product</button>
+								<div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
@@ -51,11 +55,6 @@
                                                 <th>Product Name</th>
                                                 <th>Brand</th>
                                                 <th>CPU</th>
-                                                <th>RAM</th>
-                                                <th>Hardware</th>
-                                                <th>Card</th>
-                                                <th>Screen</th>
-                                                <th>OS</th>
                                                 <th>Hot</th>
                                                 <th>Price (VND)</th>
                                                 <th>Promotion Price (VND)</th>
@@ -69,29 +68,24 @@
                                         	<c:forEach var="product" items="${products}">
                                         		<tr>
                                                     <td>${product.id}</td>
-                                                    <td><img src="${pageContext.request.contextPath}/assets/img/product01.png" width="50px"></td>
+                                                    <td><img src="${product.getImages().stream().findFirst().get().getUrl()}" width="50px"></td>
                                                     <td>${product.title}</td>
-                                                    <td>Apple</td>
+                                                    <td>${product.getBrand().getName()}</td>
                                                     <td>${product.CPU}</td>
-                                                    <td>${product.RAM}</td>
-                                                    <td>${product.HARDWARE}</td>
-                                                    <td>${product.CARD}</td>
-                                                    <td>${product.SCREEN}</td>
-                                                    <td>${product.OS}</td>
                                                     <td>${product.hot}</td>
                                                     <td>${product.price} VND</td>
                                                     <td>${product.promotionPrice} VND</td>
                                                     <td>${product.warrantyTime}</td>
                                                     <td>${product.description}</td>
                                                     <td>${product.status}</td>
-<%--                                                     <td>
-                                                        <button class="btn btn-primary" onclick="editProduct(${product.id}, '${product.title}', '${product.brand}', '${product.CPU}', '${product.RAM}', '${product.HARDWARE}', '${product.CARD}', '${product.SCREEN}', '${product.OS}', '${product.hot}', ${product.price}, ${product.promotionPrice}, ${product.warrantyTime}, '${product.description}', '${product.status}', ['${product.image}'])">Edit</button>
-                                                        <button class="btn btn-danger" onclick="deleteProduct(${product.id})">Delete</button>
-                                                    </td> --%>
                                                     <td>
+                                                        <button class="btn btn-primary" onclick="editProduct(${product.id}, '${fn:replace(fn:replace(product.title, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.getBrand().getName(), "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.CPU, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.RAM, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.HARDWARE, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.CARD, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.SCREEN, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.OS, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.hot, "'", "\\'"), "\"", "&quot;")}', ${product.price}, ${product.promotionPrice}, ${product.warrantyTime}, '${fn:replace(fn:replace(product.description, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.status, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.starts, "'", "\\'"), "\"", "&quot;")}')">Edit</button>
+                                                        <button class="btn btn-danger" onclick="deleteProduct(${product.id})">Delete</button>
+                                                    </td>
+<!--                                                     <td>
 	                                                    <button class="btn btn-primary" onclick="editProduct(1, 'Product 1', 'Apple', 'Intel i7', '16GB', '512GB SSD', 'NVIDIA GTX 1650', '15.6\'\' Retina', 'MacOS', 'true', 50000000, 45000000, 24, 'High-end laptop', 'In Stock', ['product01.png'])">Edit</button>
 	                                                    <button class="btn btn-danger" onclick="deleteProduct(1)">Delete</button>
-                                                	</td>
+                                                	</td> -->
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -125,7 +119,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="addProductForm" enctype="multipart/form-data">
+                    <form id="addProductForm" action="${pageContext.request.contextPath}/admin/products/add.htm" method="post">
                         <!-- Add form fields for product details -->
                         <div class="form-group">
                             <label for="productName">Product Name</label>
@@ -134,10 +128,9 @@
                         <div class="form-group">
                             <label for="brand">Brand</label>
                             <select class="form-control" id="brand" name="brand" required>
-                                <option value="Apple">Apple</option>
-                                <option value="Samsung">Samsung</option>
-                                <option value="Dell">Dell</option>
-                                <option value="HP">HP</option>
+                            	<c:forEach var="brand" items="${brands}">
+                                	<option value="${brand.getName()}">${brand.getName()}</option>
+                                </c:forEach>
                                 <!-- Add more brands as needed -->
                             </select>
                         </div>
@@ -191,10 +184,20 @@
                         <div class="form-group">
                             <label for="status">Status</label>
                             <select class="form-control" id="status" name="status" required>
-                                <option value="In Stock">In Stock</option>
-                                <option value="Out of Stock">Out of Stock</option>
+                                <option value="AVAILABLE">AVAILABLE</option>
+                                <option value="DELETED">DELETED</option>
                             </select>
                         </div>
+                        <div class="form-group">
+	                        <label for="rating">Rating</label>
+	                        <select class="form-control" id="rating" name="rating" required>
+	                            <option value="1.0">1 Star</option>
+	                            <option value="2.0">2 Stars</option>
+	                            <option value="3.0">3 Stars</option>
+	                            <option value="4.0">4 Stars</option>
+	                            <option value="5.0">5 Stars</option>
+	                        </select>
+                    	</div>
                         <div class="form-group">
                             <label for="image">Image</label>
                             <input type="file" class="form-control-file" id="image" name="image" multiple required>
@@ -217,7 +220,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="editProductForm" enctype="multipart/form-data">
+                    <form id="editProductForm" enctype="multipart/form-data" action="" method="post">
                         <!-- Add hidden field for product ID -->
                         <input type="hidden" id="editProductId" name="productId">
                         <!-- Add form fields for product details similar to add form -->
@@ -228,10 +231,9 @@
                         <div class="form-group">
                             <label for="editBrand">Brand</label>
                             <select class="form-control" id="editBrand" name="brand" required>
-                                <option value="Apple">Apple</option>
-                                <option value="Samsung">Samsung</option>
-                                <option value="Dell">Dell</option>
-                                <option value="HP">HP</option>
+                                <c:forEach var="brand" items="${brands}">
+                                	<option value="${brand.getName()}">${brand.getName()}</option>
+                                </c:forEach>
                                 <!-- Add more brands as needed -->
                             </select>
                         </div>
@@ -285,10 +287,20 @@
                         <div class="form-group">
                             <label for="editStatus">Status</label>
                             <select class="form-control" id="editStatus" name="status" required>
-                                <option value="In Stock">In Stock</option>
-                                <option value="Out of Stock">Out of Stock</option>
+                                <option value="AVAILABLE">AVAILABLE</option>
+                                <option value="DELETED">DELETED</option>
                             </select>
                         </div>
+                        <div class="form-group">
+	                        <label for="editRating">Rating</label>
+	                        <select class="form-control" id="editRating" name="rating" required>
+	                            <option value="1.0">1 Star</option>
+	                            <option value="2.0">2 Stars</option>
+	                            <option value="3.0">3 Stars</option>
+	                            <option value="4.0">4 Stars</option>
+	                            <option value="5.0">5 Stars</option>
+	                        </select>
+                    	</div>
                         <div class="form-group">
                             <label for="editImage">Image</label>
                             <input type="file" class="form-control-file" id="editImage" name="image" multiple>
@@ -305,7 +317,7 @@
             $('#addProductModal').modal('show');
         }
 
-        function editProduct(id, name, brand, cpu, ram, hardware, card, screen, os, hot, price, promotionPrice, warrantyTime, description, status, images) {
+        function editProduct(id, name, brand, cpu, ram, hardware, card, screen, os, hot, price, promotionPrice, warrantyTime, description, status, rating) {
             $('#editProductId').val(id);
             $('#editProductName').val(name);
             $('#editBrand').val(brand);
@@ -321,14 +333,15 @@
             $('#editWarrantyTime').val(warrantyTime);
             $('#editDescription').val(description);
             $('#editStatus').val(status);
-            // Handle images if needed, e.g., displaying them somewhere
+            $('#editRating').val(rating);
             $('#editProductModal').modal('show');
+            
+            document.getElementById('editProductForm').action = '${pageContext.request.contextPath}/admin/products/edit/' + id+'.htm';
         }
-
+        
         function deleteProduct(id) {
             if (confirm('Are you sure you want to delete this product?')) {
-                // Perform delete action
-                console.log('Product ' + id + ' deleted');
+                window.location.href = '${pageContext.request.contextPath}/admin/products/delete/' + id + ".htm";
             }
         }
     </script>

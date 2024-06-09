@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
      
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +30,9 @@
         ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
+	            <c:if test="${not empty param.error}">
+	                <div class="alert alert-danger">${param.error}</div>
+	            </c:if>
                 <div class="row page-titles">
                     <div class="col p-0">
                         <h4>Brands</h4>
@@ -49,30 +55,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Apple</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="editBrand(1, 'Apple')">Edit</button>
-                                                    <button class="btn btn-danger" onclick="deleteBrand(1)">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Samsung</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="editBrand(2, 'Samsung')">Edit</button>
-                                                    <button class="btn btn-danger" onclick="deleteBrand(2)">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sony</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="editBrand(3, 'Sony')">Edit</button>
-                                                    <button class="btn btn-danger" onclick="deleteBrand(3)">Delete</button>
-                                                </td>
-                                            </tr>
+                                        	<c:forEach var="brand" items="${brands}">
+	                                            <tr>
+	                                                <td>${brand.id}</td>
+	                                                <td>${brand.name}</td>
+	                                                <td>
+	                                                    <button class="btn btn-primary" onclick="editBrand(${brand.id}, '${brand.name}')">Edit</button>
+	                                                    <button class="btn btn-danger" onclick="deleteBrand(${brand.id})">Delete</button>
+	                                                </td>
+	                                            </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -104,7 +96,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="addBrandForm">
+                    <form id="addBrandForm" action="${pageContext.request.contextPath}/admin/brands/add.htm" method="post">
                         <div class="form-group">
                             <label for="brandName">Brand Name</label>
                             <input type="text" class="form-control" id="brandName" name="brandName" required>
@@ -127,7 +119,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="editBrandForm">
+                    <form id="editBrandForm" action="" method="post">
                         <input type="hidden" id="editBrandId" name="brandId">
                         <div class="form-group">
                             <label for="editBrandName">Brand Name</label>
@@ -149,12 +141,12 @@
             $('#editBrandId').val(id);
             $('#editBrandName').val(name);
             $('#editBrandModal').modal('show');
+            document.getElementById('editBrandForm').action = '${pageContext.request.contextPath}/admin/brands/edit/' + id + '.htm';
         }
 
         function deleteBrand(id) {
             if (confirm('Are you sure you want to delete this brand?')) {
-                // Perform delete action
-                console.log('Brand ' + id + ' deleted');
+                window.location.href = '${pageContext.request.contextPath}/admin/brands/delete/' + id + ".htm";
             }
         }
     </script>

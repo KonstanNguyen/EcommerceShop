@@ -1,38 +1,104 @@
 package com.ecommerce.controller;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import com.ecommerce.consts.CategoryStatus;
+import com.ecommerce.entity.Brand;
 import com.ecommerce.entity.Category;
+import com.ecommerce.entity.Image;
+import com.ecommerce.service.BrandService;
 import com.ecommerce.service.CategoryService;
-import com.ecommerce.service.ProductService;
+import com.ecommerce.service.ImageService;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Controller
-@RequestMapping("/something")
+@RequestMapping("/admin/products")
 public class AdminProductController {
-	
 
-	/*
-	 * @RequestMapping("/add") public String addProduct(@ModelAttribute Category
-	 * product) { productService.addProduct(product); return
-	 * "redirect:/admin/products"; }
-	 * 
-	 * @RequestMapping("/update") public String updateProduct(@ModelAttribute
-	 * Category product) { productService.updateProduct(product); return
-	 * "redirect:/admin/products"; }
-	 * 
-	 * @RequestMapping("/delete/{id}") public String
-	 * deleteProduct(@PathVariable("id") int id) { productService.deleteProduct(id);
-	 * return "redirect:/admin/products"; }
-	 * 
-	 * @RequestMapping("/edit/{id}") public String editProduct(@PathVariable("id")
-	 * int id, Model model) { Category product = productService.getProductById(id);
-	 * model.addAttribute("product", product); return "admin/edit_product"; }
-	 */
+    @Autowired
+    CategoryService categoryService;
+    
+    @Autowired
+    BrandService brandService;
+    
+    @Autowired
+    ImageService imageService;
+    
+
+    @RequestMapping("/add")
+    public String addCategory(HttpServletRequest request) {
+    	String name = request.getParameter("productName");
+    	String brand = request.getParameter("brand");
+    	String cpu = request.getParameter("cpu");
+    	String ram = request.getParameter("ram");
+    	String hardware = request.getParameter("hardware");
+    	String card = request.getParameter("card");
+    	String screen = request.getParameter("screen");
+    	String os = request.getParameter("os");
+    	boolean hot = Boolean.valueOf(request.getParameter("hot"));
+    	BigInteger price = new BigInteger (request.getParameter("price"));
+    	BigInteger promotionPrice = new BigInteger(request.getParameter("promotionPrice"));
+    	int warrantyTime = Integer.parseInt(request.getParameter("warrantyTime"));
+    	String description = request.getParameter("description");
+    	CategoryStatus status = CategoryStatus.valueOf(request.getParameter("status"));
+    	float rating = Float.valueOf(request.getParameter("rating"));
+    	
+    	Category c = new Category(name, cpu, ram, hardware, card, screen, os, hot, price, promotionPrice, warrantyTime, description, status, rating);
+    	Brand b = brandService.findByName(brand);
+    	c.setBrand(b);
+    	categoryService.addCategory(c);
+
+    	
+    	Category new_c = categoryService.findByName(name);
+    	System.out.println("Category: " + new_c.toString());
+    	Image img = new Image("./assets/img/product01.png", new_c);
+    	
+    	imageService.addImage(img);
+    	System.out.println("Image: " + img.toString());
+    	
+        return "redirect:/admin/products.htm";
+    }
+
+    @RequestMapping(value = "/edit/{id}", headers=("content-type=multipart/*"))
+    public String updateCategory(@PathVariable("id") int categoryId, HttpServletRequest request) {
+        Category c = categoryService.findByID(categoryId);
+        c.setTitle(request.getParameter("productName"));
+        Brand b = brandService.findByName(request.getParameter("brand"));
+        c.setBrand(b);
+        c.setCPU(request.getParameter("cpu"));
+        c.setRAM(request.getParameter("ram"));
+        c.setCARD(request.getParameter("card"));
+        c.setHARDWARE(request.getParameter("hardware"));
+        c.setSCREEN(request.getParameter("screen"));
+        c.setOS(request.getParameter("os"));
+        c.setHot(Boolean.valueOf(request.getParameter("hot")));
+        c.setPrice(new BigInteger (request.getParameter("price")));
+        c.setPromotionPrice(new BigInteger (request.getParameter("promotionPrice")));
+        c.setWarrantyTime(Integer.parseInt(request.getParameter("warrantyTime")));
+        c.setDescription(request.getParameter("description"));
+        c.setStatus(CategoryStatus.valueOf(request.getParameter("status")));
+        c.setStarts(Float.valueOf(request.getParameter("rating")));
+        
+//        System.out.println("Category: " + c.toString());
+        
+        categoryService.updateCategory(c);
+        System.out.println("Sau khi update");
+        return "redirect:/admin/products.htm";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String deleteCategory(@PathVariable("id") int categoryId) {
+    	Category c = categoryService.findByID(categoryId);
+        c.setStatus(CategoryStatus.valueOf("DELETED"));
+        categoryService.updateCategory(c);
+        return "redirect:/admin/products.htm";
+    }
 }

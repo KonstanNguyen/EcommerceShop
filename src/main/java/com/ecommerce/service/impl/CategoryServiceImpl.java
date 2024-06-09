@@ -9,6 +9,7 @@ import com.ecommerce.dao.CategoryDAO;
 import com.ecommerce.dto.response.CategoryNewProduct;
 import com.ecommerce.dto.response.CategoryTopSelling;
 import com.ecommerce.entity.Category;
+import com.ecommerce.entity.Image;
 import com.ecommerce.entity.Need;
 import com.ecommerce.service.CategoryService;
 
@@ -50,6 +51,30 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<CategoryNewProduct> getCategoryNewProduct() {
 		// TODO Auto-generated method stub
 		return dao.getCategoryNewProduct();
+	}
+
+	@Override
+	public void addCategory(Category category) {
+		// TODO Auto-generated method stub
+		dao.addCategory(category);
+		
+	}
+
+	@Override
+	public void updateCategory(Category category) {
+		// TODO Auto-generated method stub
+		dao.updateCategory(category);
+	}
+
+	@Override
+	public void deleteCategory(Category category) {
+		// TODO Auto-generated method stub
+		dao.deleteCategory(category);
+	}
+
+	@Override
+	public Category findByName(String name) {
+		return dao.findByName(name);
 	}
 	
 }

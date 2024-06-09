@@ -25,4 +25,28 @@ public class BrandServiceImpl implements BrandService {
 		return dao.findByID(id);
 	}
 
+	@Override
+	public void addBrand(Brand brand) {
+		// TODO Auto-generated method stub
+		dao.addBrand(brand);
+	}
+
+	@Override
+	public void updateBrand(Brand brand) {
+		// TODO Auto-generated method stub
+		dao.updateBrand(brand);
+	}
+
+	@Override
+	public void deleteBrand(Brand brand) {
+		// TODO Auto-generated method stub
+		dao.deleteBrand(brand);
+	}
+
+	@Override
+	public Brand findByName(String name) {
+		// TODO Auto-generated method stub
+		return dao.findByName(name);
+	}
+
 }
