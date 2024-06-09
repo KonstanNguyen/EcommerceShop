@@ -42,6 +42,7 @@ public class TestUploadFile {
 				String photoPath = context.getContextPath() + "/src/main/webapp/files/" + photo.getOriginalFilename();
 				photo.transferTo(new File(photoPath));
 				System.out.println(photoPath);
+				System.out.println(System.getProperty("user.dir"));
 				
 				String cvPath = context.getContextPath() + "/src/main/webapp/files/" + cv.getOriginalFilename();
 				cv.transferTo(new File(cvPath));

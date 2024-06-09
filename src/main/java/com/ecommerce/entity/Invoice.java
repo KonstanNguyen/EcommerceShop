@@ -1,10 +1,13 @@
 package com.ecommerce.entity;
 
 import java.math.BigInteger;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Invoice {
@@ -18,6 +21,8 @@ public class Invoice {
 	private String address;
 	private BigInteger total_amount;
 
+	@OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER)
+	private Collection<Orders> orders; 
 
 	public String getTaxCode() {
 		return taxCode;
@@ -81,6 +86,22 @@ public class Invoice {
 
 	public void setTotalAmount(BigInteger total_amount) {
 		this.total_amount = total_amount;
+	}
+
+	public BigInteger getTotal_amount() {
+		return total_amount;
+	}
+
+	public void setTotal_amount(BigInteger total_amount) {
+		this.total_amount = total_amount;
+	}
+
+	public Collection<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Collection<Orders> orders) {
+		this.orders = orders;
 	}
 
 

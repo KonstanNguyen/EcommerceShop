@@ -78,13 +78,11 @@ public class PromotionDAOImpl implements PromotionDAO {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			if (promotion.getId() != 0) {
-				session.delete(promotion);
-				t.commit();
-			}
+			session.delete(promotion);
+			t.commit();
 		} catch (Exception e) {
 			t.rollback();
-			throw new DetectedException("Failed to delete brand with id: " + brand.getid(), e);
+			throw new DetectedException("Failed to delete brand with id: " + promotion.getId(), e);
 		} finally {
 			session.close();
 		}

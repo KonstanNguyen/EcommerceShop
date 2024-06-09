@@ -28,24 +28,105 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
-            <div class="container-fluid">
-                <div class="row page-titles">
-                    <div class="col p-0">
-                        <h4>Discounted Products</h4>
-                    </div>
-                </div>
+<!--         <div class="content-body"> -->
+<!--             <div class="container-fluid"> -->
+<!--                 <div class="row page-titles"> -->
+<!--                     <div class="col p-0"> -->
+<!--                         <h4>Discounted Products</h4> -->
+<!--                     </div> -->
+<!--                 </div> -->
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Discounted Product List</h4>
-                                <button class="btn btn-success mb-3" onclick="openAddDiscountedProductPopup()">Add New Product Discount</button>
+<!--                 <div class="row"> -->
+<!--                     <div class="col-lg-12"> -->
+<!--                         <div class="card"> -->
+<!--                             <div class="card-body"> -->
+<!--                                 <h4 class="card-title">Discounted Product List</h4> -->
+<!--                                 <button class="btn btn-success mb-3" onclick="openAddDiscountedProductPopup()">Add New Product Discount</button> -->
+<!--                                 <button class="btn btn-success mb-3" onclick="openAddDiscountedPopup()">Add New Discount</button> -->
+<!--                                 <button class="btn btn-primary mb-3" onclick="openPromotionListPopup()">Discount</button> -->
+<!--                                 <div class="table-responsive"> -->
+<!--                                     <table class="table table-striped"> -->
+<!--                                         <thead> -->
+<!--                                             <tr> -->
+<!--                                                 <th>ID</th> -->
+<!--                                                 <th>Product</th> -->
+<!--                                                 <th>Percent</th> -->
+<!--                                                 <th>Start Time</th> -->
+<!--                                                 <th>End Time</th> -->
+<!--                                                 <th>Create Time</th> -->
+<!--                                                 <th>Status</th> -->
+<!--                                                 <th>Actions</th> -->
+<!--                                             </tr> -->
+<!--                                         </thead> -->
+<!--                                         <tbody> -->
+<%--                                         	<c:forEach var="p" items="${promotions}"> --%>
+<%--                                         		<c:set var="categoryCount" value="${fn:length(p.categories)}" /> --%>
+<%-- 	                                            <c:forEach var="category" items="${p.categories}" varStatus="status"> --%>
+<!-- 		                                            <tr> -->
+		                                            
+<%-- 		                                                <td>${p.id}</td> --%>
+		                                                
+<%-- 			                                            <td>${category.title}</td> --%>
+<%-- 			                                            <td>${p.dealPercent}</td> --%>
+<%-- 			                                            <td>${p.startTime}</td> --%>
+<%-- 			                                            <td>${p.endTime}</td> --%>
+<%-- 			                                            <td>${p.getCreatedTime()}</td> --%>
+<!-- 			                                            <td> -->
+<%-- 				                                           	<c:choose> --%>
+<%-- 												                <c:when test="${p.status == true}"> --%>
+<!-- 												                    Đang áp dụng -->
+<%-- 												                </c:when> --%>
+<%-- 												                <c:otherwise> --%>
+<!-- 												                    Không áp dụng -->
+<%-- 												                </c:otherwise> --%>
+<%-- 												            </c:choose> --%>
+<!-- 			                                           	</td> -->
+<!-- 			                                       		<td> -->
+<%-- 				                                           <c:choose> --%>
+<%-- 										                        <c:when test="${categoryCount < 2}"> --%>
+<%-- 										                            <button class="btn btn-primary" onclick="editDiscountedProduct(${p.id}, ${p.dealPercent}, '${p.startTime}', '${p.endTime}', '${p.status}')">Edit</button> --%>
+<%-- 										                            <button class="btn btn-danger" onclick="offDiscount(${p.id})">Delete</button> --%>
+<%-- 										                        </c:when> --%>
+<%-- 										                        <c:otherwise> --%>
+<%-- 										                        	<c:if test="${status.first}"> --%>
+<%-- 										                            	<button class="btn btn-primary" onclick="editDiscountedProduct(${p.id}, ${p.dealPercent}, '${p.startTime}', '${p.endTime}', '${p.status}')">Edit</button> --%>
+<%-- 										                            	<button class="btn btn-danger" onclick="offDiscount(${p.id})">Delete</button> --%>
+<%-- 										                        	</c:if> --%>
+<%-- 										                        </c:otherwise> --%>
+<%-- 										                    </c:choose> --%>
+<!-- 				                                        </td> -->
+<!-- 		                                            </tr> -->
+<%-- 		                                        </c:forEach> --%>
+<%--                                             </c:forEach> --%>
+                                            
+<!--                                         </tbody> -->
+<!--                                     </table> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+
+<!--             </div> -->
+<!--         </div> -->
+        
+        
+        <div class="content-body">
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">Discounted Product List</h4>
+								<button class="btn btn-success mb-3" onclick="openAddDiscountedProductPopup()">Add New Product Discount</button>
                                 <button class="btn btn-success mb-3" onclick="openAddDiscountedPopup()">Add New Discount</button>
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
+                                <button class="btn btn-primary mb-3" onclick="openPromotionListPopup()">Discount</button>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="example" class="display" style="min-width: 845px">
+										<thead>
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Product</th>
@@ -84,12 +165,12 @@
 				                                           <c:choose>
 										                        <c:when test="${categoryCount < 2}">
 										                            <button class="btn btn-primary" onclick="editDiscountedProduct(${p.id}, ${p.dealPercent}, '${p.startTime}', '${p.endTime}', '${p.status}')">Edit</button>
-										                            <button class="btn btn-danger" onclick="deleteDiscountedProduct(${p.id})">Delete</button>
+										                            <button class="btn btn-danger" onclick="offDiscount(${p.id})">Delete</button>
 										                        </c:when>
 										                        <c:otherwise>
 										                        	<c:if test="${status.first}">
 										                            	<button class="btn btn-primary" onclick="editDiscountedProduct(${p.id}, ${p.dealPercent}, '${p.startTime}', '${p.endTime}', '${p.status}')">Edit</button>
-										                            	<button class="btn btn-danger" onclick="deleteDiscountedProduct(${p.id})">Delete</button>
+										                            	<button class="btn btn-danger" onclick="offDiscount(${p.id})">Delete</button>
 										                        	</c:if>
 										                        </c:otherwise>
 										                    </c:choose>
@@ -99,16 +180,29 @@
                                             </c:forEach>
                                             
                                         </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+										<tfoot>
+											<tr>
+												<th>ID</th>
+                                                <th>Product</th>
+                                                <th>Percent</th>
+                                                <th>Start Time</th>
+                                                <th>End Time</th>
+                                                <th>Create Time</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
 
-            </div>
-        </div>
-        <!--**********************************
+				</div>
+			</div>
+		</div>
+		
+		<!--**********************************
             Content body end
         ***********************************-->
         
@@ -166,7 +260,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="addDiscountedForm" action="${pageContext.request.contextPath}/admin/promotions/add.htm" method="post">
+                    <form id="addDiscountedForm" action="${pageContext.request.contextPath}/admin/promotions/addPromotion.htm" method="post">
                         <div class="form-group">
                             <label for="percent">Percent</label>
                             <input type="number" class="form-control" id="percent" name="percent" required>
@@ -179,6 +273,13 @@
                             <label for="endTime">End Time</label>
                             <input type="datetime-local" class="form-control" id="endTime" name="endTime" required>
                         </div>
+                        <div class="form-group">
+						    <label for="status">Status</label>
+						    <select class="form-control" id="status" name="status" required>
+						        <option value="true">Đang áp dụng</option>
+						        <option value="false">Không áp dụng</option>
+						    </select>
+						</div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                 </div>
@@ -225,6 +326,30 @@
         </div>
     </div>
 
+    <!-- Promotion List Modal -->
+    <div class="modal fade" id="promotionListModal" tabindex="-1" role="dialog" aria-labelledby="promotionListModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="promotionListModalLabel">Promotion List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <c:forEach var="pro" items="${promotions}">
+                            <li class="list-group-item">
+                                ID: ${pro.id} - Created Time: ${pro.createdTime}
+                                <button class="btn btn-danger btn-sm float-right" onclick="deleteDiscount(${pro.id})">Delete</button>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         function openAddDiscountedProductPopup() {
             $('#addDiscountedProductModal').modal('show');
@@ -245,9 +370,19 @@
             document.getElementById('editDiscountedProductForm').action = '${pageContext.request.contextPath}/admin/promotions/edit/' + id+'.htm';
         }
 
-        function deleteDiscountedProduct(id) {
+        function offDiscount(id) {
             if (confirm('Are you sure you want to delete this discount?')) {
-            	window.location.href = '${pageContext.request.contextPath}/admin/promotions/delete/' + id + ".htm";
+            	window.location.href = '${pageContext.request.contextPath}/admin/promotions/offPromotion/' + id + ".htm";
+            }
+        }
+
+        function openPromotionListPopup() {
+            $('#promotionListModal').modal('show');
+        }
+
+        function deleteDiscount(id) {
+            if (confirm('Are you sure you want to delete this promotion?')) {
+                window.location.href = '${pageContext.request.contextPath}/admin/promotions/delete/' + id + ".htm";
             }
         }
     </script>

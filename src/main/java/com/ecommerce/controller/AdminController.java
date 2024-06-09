@@ -1,27 +1,45 @@
 package com.ecommerce.controller;
 
 import java.util.List;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ecommerce.entity.Brand;
+import com.ecommerce.entity.Cart;
 import com.ecommerce.entity.Category;
+import com.ecommerce.entity.EcoUser;
+import com.ecommerce.entity.Invoice;
+import com.ecommerce.entity.Orders;
 import com.ecommerce.entity.Promotion;
 import com.ecommerce.service.BrandService;
+import com.ecommerce.service.CartService;
 import com.ecommerce.service.CategoryService;
+import com.ecommerce.service.InvoiceService;
 import com.ecommerce.service.PromotionService;
+import com.ecommerce.service.UserService;
+import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 @Controller
 @RequestMapping("admin")
 public class AdminController {
 	
 	@Autowired
+	UserService user;
+	
+	@Autowired
 	CategoryService category;
+	
+	@Autowired
+	CartService cartService;
 	
 	@Autowired
 	BrandService brand;
@@ -29,19 +47,43 @@ public class AdminController {
 	@Autowired
 	PromotionService promotion;
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView index() {
-		ModelAndView v = new ModelAndView("admin/home");
-		return v;
+	@Autowired
+	InvoiceService invoice;
+	
+	@RequestMapping()
+	public String index(Model model) {
+		List<EcoUser> userList = user.fetchAll();
+		List<Invoice> invoiceList = invoice.fetchAll();
+		model.addAttribute("users", userList);
+		model.addAttribute("invoices", invoiceList);
+		BigInteger totalAmount = BigInteger.ZERO;	
+		
+		for (Invoice i : invoiceList) {
+			totalAmount = totalAmount.add(i.getTotalAmount());
+		}
+		
+		model.addAttribute("total_amount", totalAmount);
+		
+		return "admin/home";
 	}
 	
 	@RequestMapping(value = "/orders")
-	public String orderList() {
+	public String orderList(Model model) {
+		List<EcoUser> userList = user.fetchAll();
+		List<Invoice> invoiceList = invoice.fetchAll();
+		model.addAttribute("users", userList);
+		model.addAttribute("invoices", invoiceList);
 		return "admin/orders";
 	}
 	
-	@RequestMapping(value = "/orderDetails")
-	public String getOrderDetails() {
+	@RequestMapping(value = "/orderDetails", method= {RequestMethod.GET, RequestMethod.POST})
+	public String getOrderDetails(Model model, @RequestParam("name") String name, @RequestParam("id") int cartId) {
+		EcoUser u = user.findByName(name);
+		Cart c = cartService.findById(cartId);
+		List<Orders> orders = c.getOrders().stream().distinct().toList();
+		model.addAttribute("orders", orders);
+		model.addAttribute("user", u);
+		model.addAttribute("cart", c);
 		return "admin/orderDetails";
 	}
 	

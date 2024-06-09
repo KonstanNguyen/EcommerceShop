@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Admin Dashboard </title>
+    <title>Admin Dashboard</title>
     
     <%@ include file="../admin/layout/link.jsp" %>
 
@@ -33,54 +33,42 @@
 	            <!-- row -->
 	            <div class="container-fluid">
 	                <div class="row">
-	                    <div class="col-lg-3 col-sm-6">
-	                        <div class="card">
-	                            <div class="stat-widget-two card-body">
-	                                <div class="stat-content">
-	                                    <div class="stat-text">Thu nhập hôm nay</div>
-	                                    <div class="stat-digit"> <i class="fa fa-usd"></i>850,000</div>
-	                                </div>
-	                                <div class="progress">
-	                                    <div class="progress-bar progress-bar-success w-85" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="col-lg-3 col-sm-6">
+	                 
+	                    <div class="col-lg-4 col-sm-6">
 	                        <div class="card">
 	                            <div class="stat-widget-two card-body">
 	                                <div class="stat-content">
 	                                    <div class="stat-text">Tổng thu nhập</div>
-	                                    <div class="stat-digit"> <i class="fa fa-usd"></i>7,800,000</div>
+	                                    <div class="stat-digit"> <i class="fa fa-usd"></i>${total_amount}</div>
 	                                </div>
 	                                <div class="progress">
-	                                    <div class="progress-bar progress-bar-primary w-75" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+	                                    <div class="progress-bar progress-bar-success w-100" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
 	                                </div>
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <div class="col-lg-3 col-sm-6">
+	                    <div class="col-lg-4 col-sm-6">
 	                        <div class="card">
 	                            <div class="stat-widget-two card-body">
 	                                <div class="stat-content">
 	                                    <div class="stat-text">Tổng hóa đơn</div>
-	                                    <div class="stat-digit"> <i class="fa fa-usd"></i>500</div>
+	                                    <div class="stat-digit"> <i class="fa fa-usd"></i>${invoices.size()}</div>
 	                                </div>
 	                                <div class="progress">
-	                                    <div class="progress-bar progress-bar-warning w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+	                                    <div class="progress-bar progress-bar-warning w-100" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 	                                </div>
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <div class="col-lg-3 col-sm-6">
+	                    <div class="col-lg-4 col-sm-6">
 	                        <div class="card">
 	                            <div class="stat-widget-two card-body">
 	                                <div class="stat-content">
 	                                    <div class="stat-text">Người dùng</div>
-	                                    <div class="stat-digit"> <i class="fa fa-usd"></i>650</div>
+	                                    <div class="stat-digit"> <i class="fa fa-usd"></i>${users.size()}</div>
 	                                </div>
 	                                <div class="progress">
-	                                    <div class="progress-bar progress-bar-danger w-10" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+	                                    <div class="progress-bar progress-bar-danger w-100" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 	                                </div>
 	                            </div>
 	                        </div>

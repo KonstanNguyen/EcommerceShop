@@ -1,10 +1,12 @@
 package com.ecommerce.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import com.ecommerce.consts.CategoryStatus;
@@ -15,9 +17,13 @@ import com.ecommerce.service.BrandService;
 import com.ecommerce.service.CategoryService;
 import com.ecommerce.service.ImageService;
 
+import java.io.File;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/admin/products")
@@ -32,9 +38,11 @@ public class AdminProductController {
     @Autowired
     ImageService imageService;
     
+    @Autowired
+    ServletContext context;
 
-    @RequestMapping("/add")
-    public String addCategory(HttpServletRequest request) {
+    @RequestMapping(value = "/add", headers=("content-type=multipart/*"), method = { RequestMethod.POST, RequestMethod.GET })
+    public String addCategory(ModelMap model, HttpServletRequest request, @RequestParam("image") MultipartFile[] images) {
     	String name = request.getParameter("productName");
     	String brand = request.getParameter("brand");
     	String cpu = request.getParameter("cpu");
@@ -56,18 +64,43 @@ public class AdminProductController {
     	c.setBrand(b);
     	categoryService.addCategory(c);
 
-    	
     	Category new_c = categoryService.findByName(name);
-    	System.out.println("Category: " + new_c.toString());
-    	Image img = new Image("./assets/img/product01.png", new_c);
     	
-    	imageService.addImage(img);
-    	System.out.println("Image: " + img.toString());
+    	for (MultipartFile image : images) {
+    		if (image.isEmpty()) {
+    			model.addAttribute("message", "Vui lòng chọn file!");
+    			return "uploadStatus";
+    		}
+    		
+    		try {
+    			String realPath = context.getRealPath("/assets/img/");
+    			System.out.println("Path: " + realPath);
+    			File directory = new File(realPath);
+    			
+    			if (!directory.exists()) {
+    				directory.mkdirs();
+    			}
+    			
+    			String filePath = realPath + File.separator + image.getOriginalFilename();
+    			File destinationFile = new File(filePath);
+    			image.transferTo(destinationFile);
+    			
+    			Image img = new Image("./assets/img/" + image.getOriginalFilename(), new_c);
+    			imageService.addImage(img);
+    			
+    			model.addAttribute("message", "Tải file thành công!");
+    		} catch (Exception e) {
+    			model.addAttribute("message", "Lỗi lưu file!");
+    			e.printStackTrace();
+    		}
+    	}
+    	
     	
         return "redirect:/admin/products.htm";
+//    	return "";
     }
 
-    @RequestMapping(value = "/edit/{id}", headers=("content-type=multipart/*"))
+    @RequestMapping(value = "/edit/{id}", headers=("content-type=multipart/*"), method = { RequestMethod.POST, RequestMethod.GET })
     public String updateCategory(@PathVariable("id") int categoryId, HttpServletRequest request) {
         Category c = categoryService.findByID(categoryId);
         c.setTitle(request.getParameter("productName"));
@@ -88,6 +121,8 @@ public class AdminProductController {
         c.setStarts(Float.valueOf(request.getParameter("rating")));
         
 //        System.out.println("Category: " + c.toString());
+        
+        request.setAttribute("images", c.getImages().stream().collect(Collectors.toList()));
         
         categoryService.updateCategory(c);
         System.out.println("Sau khi update");

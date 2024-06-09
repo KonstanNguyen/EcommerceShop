@@ -64,4 +64,13 @@ public class UserDAOImpl implements UserDAO {
 		query.setParameter("password", password);
 		return (EcoUser)query.uniqueResult();
 	}
+
+	@Override
+	public EcoUser findByName(String name) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM " + EcoUser.class.getName() + " WHERE name = :name";
+		Query query = session.createQuery(hql);
+		query.setParameter("name", name);
+		return (EcoUser)query.uniqueResult();
+	}
 }

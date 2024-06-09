@@ -87,5 +87,11 @@ public class Cart {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-
+	
+	public Orders getFirstOrder() {
+        if (orders != null && !orders.isEmpty()) {
+            return orders.iterator().next();
+        }
+        return null;
+    }
 }

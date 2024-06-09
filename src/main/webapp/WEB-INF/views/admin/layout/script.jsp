@@ -26,3 +26,7 @@
 <script src="${pageContext.request.contextPath}/assets/vendor/jqvmap/js/jquery.vmap.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/jqvmap/js/jquery.vmap.usa.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/jquery.counterup/jquery.counterup.min.js"></script>
+
+<!-- Datatable -->
+<script src="${pageContext.request.contextPath}/assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/plugins-init/datatables.init.js"></script>

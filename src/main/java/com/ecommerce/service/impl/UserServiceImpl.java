@@ -36,4 +36,9 @@ public class UserServiceImpl implements UserService {
 		return dao.findByUsernameAndPassword(username, password);
 	}
 
+	@Override
+	public EcoUser findByName(String name) {
+		return dao.findByName(name);
+	}
+
 }

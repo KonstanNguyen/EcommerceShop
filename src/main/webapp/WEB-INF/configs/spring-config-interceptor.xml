@@ -24,6 +24,8 @@
 			<mvc:exclude-mapping path="/user/register.htm" />
 			<mvc:exclude-mapping path="/user/activate.htm" />
 			<mvc:exclude-mapping path="/product.htm" />
+			<mvc:exclude-mapping path="/admin.htm" />
+			<mvc:exclude-mapping path="/admin/**" />
 			<mvc:exclude-mapping
 				path="/user/forgot-password.htm" />
 			<bean class="com.ecommerce.interceptor.EcoSecurityInterceptor" />

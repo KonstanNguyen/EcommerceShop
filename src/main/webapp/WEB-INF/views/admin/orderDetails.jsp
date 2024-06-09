@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
  
 <!DOCTYPE html>
 <html lang="en">
@@ -42,10 +42,9 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Order ID: 12345</h4>
-                                <p>Customer: Nguyễn Văn A</p>
-                                <p>Order Date: 2024-05-27</p>
-                                <p>Total Amount: 8,500,000 VND</p>
+                                <h4 class="card-title">Order ID: ${cart.id}</h4>
+                                <p>Customer: ${user.name}</p>
+                                <p>Order Date: ${cart.createTime}</p>
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
@@ -56,16 +55,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Điện thoại Samsung Galaxy S21</td>
-                                                <td>1</td>
-                                                <td>20,000,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tai nghe Bluetooth Sony</td>
-                                                <td>2</td>
-                                                <td>3,500,000 VND</td>
-                                            </tr>
+                                        	<c:forEach var="order" items="${orders}">
+	                                            <tr>
+	                                                <td>${order.category.title}</td>
+	                                                <td>${order.quantity}</td>
+	                                                <td>${order.category.promotionPrice}</td>
+	                                            </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

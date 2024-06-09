@@ -22,7 +22,10 @@ public class Orders {
 	@JoinColumn(name = "category_id")
 	private Category category;
 	private int quantity;
-	private String invoiceId;
+	@ManyToOne
+	@JoinColumn(name = "invoiceId")
+	private Invoice invoice;
+	
 	public int getQuantity() {
 		return quantity;
 	}
@@ -70,13 +73,14 @@ public class Orders {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-
-	public String getInvoiceId() {
-		return invoiceId;
+	
+	public Invoice getInvoice() {
+		return invoice;
 	}
 
-	public void setInvoiceId(String invoiceId) {
-		this.invoiceId = invoiceId;
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
 	}
+	
 
 }

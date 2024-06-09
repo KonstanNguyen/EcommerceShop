@@ -8,5 +8,6 @@ public interface UserDAO {
 	public List<EcoUser> fetchAll();
 	public boolean save(EcoUser user);
 	public EcoUser findByUsername(String username);
+	public EcoUser findByName(String name);
 	public EcoUser findByUsernameAndPassword(String username, String password);
 }

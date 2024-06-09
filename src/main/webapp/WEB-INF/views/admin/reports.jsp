@@ -100,11 +100,10 @@
     <%@ include file="../admin/layout/script.jsp" %>
 
     <script type="text/javascript">
-        // Sample data for demonstration purposes
         const sampleData = {
             revenueByProduct: {
                 labels: ["Product 1", "Product 2", "Product 3"],
-                data: [12000, 15000, 8000]
+                data: [12000, 15000, 13000]
             },
             revenueOverTime: {
                 labels: ["2024-01-01", "2024-02-01", "2024-03-01"],

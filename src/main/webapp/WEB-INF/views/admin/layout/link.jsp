@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/owl/css/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/jqvmap/css/jqvmap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/admin/style.css">
+    <link href="${pageContext.request.contextPath}/assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css">
     

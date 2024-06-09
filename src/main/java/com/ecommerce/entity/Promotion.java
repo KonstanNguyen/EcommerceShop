@@ -40,6 +40,15 @@ public class Promotion {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "Categories_Promotions", joinColumns = @JoinColumn(name = "promotionId"), inverseJoinColumns = @JoinColumn(name = "categoryId"))
 	private Collection<Category> categories;
+	
+	public Promotion() {}
+	
+	public Promotion(short dealPercent, int quantity, Boolean status) {
+		super();
+		this.dealPercent = dealPercent;
+		this.quantity = quantity;
+		this.status = status;
+	}
 
 	public int getId() {
 		return id;
