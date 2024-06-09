@@ -75,7 +75,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Override
 	public List<CategoryTopSelling> getTopSelling() {
 		List<Category> categories = fetchAll();
-		List<CategoryTopSelling> topSellings = categories.stream().filter(t->t.isHot()).map(category -> {
+		List<CategoryTopSelling> topSellings = categories.stream().filter(t -> t.isHot()).map(category -> {
 			CategoryTopSelling topSelling = new CategoryTopSelling();
 			topSelling.setId(category.getId());
 			topSelling.setTitle(category.getTitle());
@@ -86,7 +86,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 			return topSelling;
 		}).collect(Collectors.toList());
 		return topSellings;
-	} 
+	}
 
 	@Override
 	public List<CategoryNewProduct> getCategoryNewProduct() {
@@ -102,9 +102,9 @@ public class CategoryDAOImpl implements CategoryDAO {
 		}).collect(Collectors.toList());
 		return CategoryNewProducts;
 	}
-	
+
 	@Override
-    public void addCategory(Category category) {
+	public void addCategory(Category category) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -115,11 +115,11 @@ public class CategoryDAOImpl implements CategoryDAO {
 		} finally {
 			session.close();
 		}
-    }
+	}
 
-    @Override
-    public void updateCategory(Category category) {
-    	Session session = factory.openSession();
+	@Override
+	public void updateCategory(Category category) {
+		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
 			session.update(category);
@@ -131,37 +131,45 @@ public class CategoryDAOImpl implements CategoryDAO {
 			session.close();
 		}
 	}
-    
-    
 
-    @Override
-    public void deleteCategory(Category category) {
-    	Session session = factory.openSession();
+	@Override
+	public void deleteCategory(Category category) {
+		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			
-				session.delete(category);
-				t.commit();
-			
+
+			session.delete(category);
+			t.commit();
+
 		} catch (Exception e) {
 			t.rollback();
 		} finally {
 			session.close();
 		}
-    }
+	}
+
+	public List<Category> findCategoryByBrandId(int brandId) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM " + Category.class.getName() + " WHERE brand.id = :brandId";
+		Query query = session.createQuery(hql);
+		query.setParameter("brandId", brandId);
+		return query.list();
+	}
 
 	@Override
 	public Category findByName(String name) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM " + Category.class.getName() +" WHERE title = :name";
+		String hql = "FROM " + Category.class.getName() + " WHERE title = :name";
 		Query query = session.createQuery(hql);
 		query.setParameter("name", name);
-		return (Category)query.uniqueResult();
+		return (Category) query.uniqueResult();
 	}
 
+	@Override
 	public List<Category> searchCategory(String name) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM " + Category.class.getName() + " WHERE CONCAT(title, ' ', RAM, ' ', OS,' ', CPU,' ',HARDWARE,' ',SCREEN) LIKE :name";
+		String hql = "FROM " + Category.class.getName()
+				+ " WHERE CONCAT(title, ' ', RAM, ' ', OS,' ', CPU,' ',HARDWARE,' ',SCREEN) LIKE :name";
 		Query query = session.createQuery(hql);
 		query.setParameter("name", "%" + name + "%");
 		return query.list();

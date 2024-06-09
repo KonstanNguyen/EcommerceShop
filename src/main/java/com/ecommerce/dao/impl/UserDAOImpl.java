@@ -45,7 +45,22 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return true;
 	}
-	
+	@Override
+	public boolean update(EcoUser user) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+
+		try {
+			session.update(user);
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+		return true;
+	}
 	@Override
 	public EcoUser findByUsername(String username) {
 		Session session = factory.getCurrentSession();

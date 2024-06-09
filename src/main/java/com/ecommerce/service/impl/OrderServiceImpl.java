@@ -38,4 +38,8 @@ public class OrderServiceImpl implements OrderService {
 	public void saveOrder(Orders order) {
 		dao.saveOrder(order);
 	}
+	@Override
+	public void updateQuantity(int orderID, int quantity) {
+		dao.updateQuantity(orderID, quantity);
+	}
 }

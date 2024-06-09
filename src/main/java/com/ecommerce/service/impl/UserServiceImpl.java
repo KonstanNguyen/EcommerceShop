@@ -24,7 +24,10 @@ public class UserServiceImpl implements UserService {
 	public boolean save(EcoUser user) {
 		return dao.save(user);
 	}
-	
+	@Override
+	public boolean update(EcoUser user) {
+		return dao.update(user);
+	}
 	@Override
 	public EcoUser findByUsername(String username) {
 		EcoUser user = dao.findByUsername(username);

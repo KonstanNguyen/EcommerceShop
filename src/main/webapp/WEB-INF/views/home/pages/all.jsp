@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,8 +89,6 @@ WARNING: Respond.js doesn't work if you view the page via file://
 					<ul class="breadcrumb-tree">
 						<li><a href="#">Home</a></li>
 						<li><a href="#">All Categories</a></li>
-						<li><a href="#">Accessories</a></li>
-						<li class="active">Headphones (227,490 Results)</li>
 					</ul>
 				</div>
 			</div>
@@ -118,12 +118,22 @@ WARNING: Respond.js doesn't work if you view the page via file://
 								</div>
 							</c:forEach> --%>
 
-							<div class="input-checkbox">
-								<input type="checkbox" id="brand-1"> <label
-									for="brand-1"> <span></span> SAMSUNG <small>(578)</small>
-								</label>
-							</div>
-							<div class="input-checkbox">
+							<form id="brandForm"
+								action="./brands/all/filterProductsByBrand.htm" method="get">
+								<c:forEach var="brand" items="${brands}">
+									<div class="input-checkbox">
+										<input type="checkbox" class="brand-checkbox"
+											id="brand-${brand.id}" name="brandIds" value="${brand.id}"
+											<c:if test="${not empty selectedBrandIds and fn:contains(selectedBrandIds, brand.id)}">checked</c:if>>
+										<label for="brand-${brand.id}"> <span></span>
+											${brand.name}
+										</label>
+									</div>
+								</c:forEach>
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</form>
+
+							<!-- <div class="input-checkbox">
 								<input type="checkbox" id="brand-2"> <label
 									for="brand-2"> <span></span> LG <small>(125)</small>
 								</label>
@@ -147,7 +157,7 @@ WARNING: Respond.js doesn't work if you view the page via file://
 								<input type="checkbox" id="brand-6"> <label
 									for="brand-6"> <span></span> SONY <small>(755)</small>
 								</label>
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<!-- /aside Widget -->
@@ -279,7 +289,7 @@ WARNING: Respond.js doesn't work if you view the page via file://
 										<input type="hidden" name="categoryid" value="${category.id}">
 										<div class="product">
 											<div class="product-img">
-												<img src="./assets/img/product01.png" alt="">
+												<img src="${category.images[0].url }" alt="">
 												<div class="product-label">
 													<span class="sale">-30%</span> <span class="new">NEW</span>
 												</div>

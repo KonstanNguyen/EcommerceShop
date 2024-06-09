@@ -82,4 +82,19 @@ public class OrderDAOImpl implements OrderDAO {
 			session.close();
 		}
 	}
+	@Override
+	public void updateQuantity(int orderID, int quantity) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			Orders order = findByID(orderID);
+			order.setQuantity(quantity);
+			session.update(order);
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+		} finally {
+			session.close();
+		}
+	}
 }

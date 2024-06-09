@@ -27,8 +27,8 @@ public class EcoUser {
 	private String email;
 	private String phone;
 	private String address;
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd-MM-yyyy hh:mm:ss")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateOfBirth;
 	private String username;
 	private String password;

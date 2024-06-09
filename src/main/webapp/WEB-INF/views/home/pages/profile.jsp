@@ -22,11 +22,16 @@
 		<div class="row">
 			<div class="col-md-8">
 				<h2>User Profile</h2>
-				<form action="updateProfile.htm" method="post">
+				<form action="./user/profile.htm" method="post">
 					<div class="form-group">
 						<label for="username">Username</label> <input type="text"
 							class="form-control" id="username" name="username"
 							value="${user.username}" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="name">name</label> <input type="text"
+							class="form-control" id="name" name="name" value="${user.name}">
 					</div>
 					<div class="form-group">
 						<label for="email">Email address</label> <input type="email"
@@ -43,14 +48,44 @@
 							class="form-control" id="address" name="address"
 							value="${user.address}">
 					</div>
-					<button type="submit" class="btn btn-primary">Update
-						Profile</button>
+					<div class="form-group">
+						<label for="cmnd">CMND</label> <input type="text"
+							class="form-control" id="CMND" name="CMND" value="${user.CMND}">
+					</div>
+
+					<div class="form-group">
+						<label for="dateOfBirth">Date of Birth</label> <input type="date"
+							class="form-control" id="dateOfBirth" name="dateOfBirth"
+							value="${user.dateOfBirth}">
+					</div>
+					<div class="update-value" style="color:red">
+						<%
+						String message = request.getParameter("message");
+						if (message != null && message.equals("success")) {
+						%>
+						Cập nhật thành công
+						<%
+						} else if (message != null && message.equals("error")) {
+						%>
+						Cập nhật thất bại
+						<%
+						}
+						%>
+					</div>
+					<div class="button-container">
+						<button type="submit" class="btn btn-primary btn-lg">Update
+							Profile</button>
+						<a href="./brands.htm" class="btn btn-secondary btn-lg" style="margin-top:20px">Back
+							to Home</a>
+							<a href="./changePassword.htm" class="btn btn-secondary btn-lg" style="margin-top:20px">Change Password</a>
+					</div>
 				</form>
 			</div>
-            <div class="col-md-4">
-                <h3><a href="./showOrders.htm">Order History</a></h3>
-            </div>
-        </div>
+			<div class="col-md-4">
+				<h3>
+					<a href="./showOrders.htm">Order History</a>
+				</h3>
+			</div>
 		</div>
 	</div>
 </body>

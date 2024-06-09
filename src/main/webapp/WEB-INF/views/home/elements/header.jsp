@@ -15,7 +15,7 @@
 				<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
 				<c:choose>
 					<c:when test="${ sessionScope.user != null }">
-						<li><a href="#"><i class="fa fa-user-o"></i> ${ sessionScope.user.name }
+						<li><a href="./user/profile.htm"><i class="fa fa-user-o"></i> ${ sessionScope.user.name }
 						</a></li>
 						<li><a href="./user/logout.htm"> Logout </a></li>
 					</c:when>
@@ -82,7 +82,7 @@
 										<div class="product-widget">
 											<div class="product-img">
 												<img
-													src="<%-- ${order.category.image.url } --%>./assets/img/product01.png"
+													src="${order.category.images[0].url }"
 													alt="">
 											</div>
 											<div class="product-body">

@@ -1,5 +1,7 @@
 package com.ecommerce.controller;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,10 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ecommerce.entity.Cart;
 import com.ecommerce.entity.EcoUser;
 import com.ecommerce.service.CartService;
 import com.ecommerce.service.OrderService;
 import com.ecommerce.service.UserService;
+
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 
 @Controller
 @RequestMapping("user")
@@ -51,12 +57,22 @@ public class UserController {
 			session.setAttribute("user", user);
 			return "redirect:/admin.htm";
 		}
-
-		user = userSevice.findByUsernameAndPassword(username,password);
+		/*
+		 * String pass=argon2.verify(user.getPassword(), password.toCharArray()); user =
+		 * userSevice.findByUsernameAndPassword(username, ); if (user == null) {
+		 * request.setAttribute("message", "Tài khoản hoặc mật khẩu không chính xác!");
+		 * return "pages/login"; }
+		 */
+		user = userSevice.findByUsername(username);
 		if (user == null) {
-			request.setAttribute("message", "Tài khoản hoặc mật khẩu không chính xác!");
+			request.setAttribute("message", "Tài khoản không chính xác!");
 			return "pages/login";
 		}
+		Argon2 argon2 = Argon2Factory.create();
+	    if (!argon2.verify(user.getPassword(), password)) {
+	        request.setAttribute("message", "Tài khoản hoặc mật khẩu không chính xác!");
+	        return "pages/login";
+	    }
 
 		session.setAttribute("user", user);
 		String uri = (String) session.getAttribute("uriQuery");
@@ -80,22 +96,28 @@ public class UserController {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("confirmPassword");
-		System.out.println(username);
-		
+
 		EcoUser user = userSevice.findByUsername(username);
 		if (user != null || username.equals("admin")) {
 			request.setAttribute("message", "Tài khoản đã tồn tại!");
-			System.out.println(user.getName());
-			return "pages/registration";			
+			return "pages/registration";
 		}
-		
+
 		if (!password.equals(confirmPassword)) {
 			request.setAttribute("message", "Mật khẩu không trùng nhau!");
 			return "pages/registration";
 		}
-		EcoUser newUser = new EcoUser(name, email, username, password);
-		if(userSevice.save(newUser)) {
-			request.setAttribute("message", "Đăng ký thành công");			
+		Argon2 argon2 = Argon2Factory.create();
+		String hashPassword = argon2.hash(2, 65536, 1, password);
+		System.out.println(hashPassword);
+		EcoUser newUser = new EcoUser(name, email, username, hashPassword);
+		if (userSevice.save(newUser)) {
+			request.setAttribute("message", "Đăng ký thành công");
+			Cart cart = new Cart();
+			cart.setUser(newUser);
+			cart.setStatus(false);
+			cart.setCreateTime(Date.valueOf(java.time.LocalDate.now()));
+			cartService.saveCart(cart);
 		} else {
 			request.setAttribute("message", "Đăng ký thất bại");
 		}
@@ -103,7 +125,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "logout")
-	public String  logout(HttpServletRequest request, HttpServletResponse response) {
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") != null) {
 			session.removeAttribute("user");
@@ -111,9 +133,63 @@ public class UserController {
 		}
 		return "redirect:/brands.htm";
 	}
+
 	@RequestMapping(value = "profile", method = RequestMethod.GET)
 	public String profile(HttpServletRequest request) {
 		request.setAttribute("user", request.getSession().getAttribute("user"));
 		return "home/pages/profile";
+	}
+
+	@RequestMapping(value = "profile", method = RequestMethod.POST)
+	public String updateProfile(HttpServletRequest request) {
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String address = request.getParameter("address");
+		String phone = request.getParameter("phone");
+		String CMND = request.getParameter("CMND");
+		Date dateOfBirth = Date.valueOf(request.getParameter("dateOfBirth"));
+		System.out.println(name);
+		System.out.println(dateOfBirth);
+		EcoUser user = (EcoUser) request.getSession().getAttribute("user");
+
+		user.setName(name);
+		user.setEmail(email);
+		user.setAddress(address);
+		user.setPhone(phone);
+		user.setCMND(CMND);
+		user.setDateOfBirth(dateOfBirth);
+		if (userSevice.update(user)) {
+			return "redirect:/user/profile.htm?message=success";
+		} else {
+			return "redirect:/user/profile.htm?message=success";
+		}
+	}
+	@RequestMapping("/changePassword")
+	public String changePassword() {
+		return "pages/changepassword";
+	}
+	
+	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+	public String changePassword(HttpServletRequest request) {
+		String oldPassword = request.getParameter("currentPassword");
+		String newPassword = request.getParameter("newPassword");
+		String confirmPassword = request.getParameter("confirmPassword");
+		EcoUser user = (EcoUser) request.getSession().getAttribute("user");
+		Argon2 argon2 = Argon2Factory.create();
+		if (!argon2.verify(user.getPassword(), oldPassword)) {
+			request.setAttribute("message", "Mật khẩu cũ không chính xác!");
+			return "home/pages/profile";
+		}
+		if (!newPassword.equals(confirmPassword)) {
+			request.setAttribute("message", "Mật khẩu mới không trùng nhau!");
+			return "home/pages/profile";
+		}
+		String hashPassword = argon2.hash(2, 65536, 1, newPassword);
+		user.setPassword(hashPassword);
+		if (userSevice.update(user)) {
+			return "redirect:/user/profile.htm?message=success";
+		} else {
+			return "redirect:/user/profile.htm?message=failed";
+		}
 	}
 }

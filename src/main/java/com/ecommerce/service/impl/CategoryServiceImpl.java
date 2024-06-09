@@ -82,4 +82,9 @@ public class CategoryServiceImpl implements CategoryService {
 		return dao.searchCategory(name);
 	}
 	
+	@Override
+	public List<Category> findCategoryByBrandId(int brandId) {
+		return dao.findCategoryByBrandId(brandId);
+	}
+	
 }

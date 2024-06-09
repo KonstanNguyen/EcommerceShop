@@ -16,161 +16,103 @@
 
 </head>
 <body>
-	<div class="card">
-		<div class="row">
-			<div class="col-md-8 cart">
-				<div class="title">
-					<div class="row">
-						<div class="col">
-							<h4>
-								<b>Shopping Cart</b>
-							</h4>
+	<form action="./checkout.htm" method="POST">
+		<div class="card">
+			<div class="row">
+				<div class="col-md-8 cart">
+					<div class="title">
+						<div class="row">
+							<div class="col">
+								<h4>
+									<b>Shopping Cart</b>
+								</h4>
+							</div>
+							<div class="col align-self-center text-right text-muted">${totalItem}
+								items</div>
 						</div>
-						<div class="col align-self-center text-right text-muted">${totalItem}
-							items</div>
+					</div>
+					<c:forEach items="${orders }" var="order">
+						<input type="hidden" name="orderID" value="${order.id}">
+						<div class="row border-top border-bottom py-2">
+							<div class="row main align-items-center w-100">
+								<div class="col-2">
+									<!-- <img class="img-fluid" src="./assets/img/product01.png"> -->
+									<img class="img-fluid" src="${order.categories.images[0].url }">
+								</div>
+								<div class="col-4">
+									<div class="row text-muted">${order.categories.brand.name}</div>
+									<div class="row">${order.categories.title}</div>
+								</div>
+								<div class="col-3 d-flex align-items-center">
+									<button class="button-like decrement" type="button">-</button>
+									<input type="number" min="0" max="99" name="quantity" value="${order.quantity}" style="width: 44px; margin-top:25px">
+									<button class="button-like increment" type="button">+</button>
+								</div>
+								<div class="col-2 text-center">
+									<c:choose>
+										<c:when test="${order.categories.promotionPrice != null}">
+                        ${order.categories.promotionPrice}
+                    </c:when>
+										<c:otherwise>
+                        ${order.categories.price}
+                    </c:otherwise>
+									</c:choose>
+								</div>
+								<div
+									class="col-1 text-center d-flex justify-content-center align-items-center">
+									<a href="delete.htm?id=${order.id}"> <span class="close">Delete</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+					<div class="back-to-shop">
+						<a href="./brands.htm"><button class="btn-custom" type="button">
+								<span class="text-muted">&leftarrow; Back to shop</span>
+							</button></a>
 					</div>
 				</div>
-				<c:forEach items="${orders }" var="order">
-					<input type="hidden" name="orderID" value="${order.id }">
-					<div class="row border-top border-bottom">
-						<div class="row main align-items-center">
-							<div class="col-2">
-								<img class="img-fluid" src="./assets/img/product01.png">
-							</div>
-							<div class="col">
-								<div class="row text-muted">${order.categories.brand.name }</div>
-								<div class="row">${order.categories.title}</div>
-							</div>
-							<div class="col">
-								<button class="button-like decrement">-</button> <span
-									class="border value">${order.quantity}</span> <button
-									class="button-like increment">+</button>
-							</div>
-							<div class="col">
-								<c:choose>
-									<c:when test="${order.categories.promotionPrice != null}">
-                                      ${order.categories.promotionPrice }</c:when>
-									<c:otherwise>${order.categories.price }</c:otherwise>
-								</c:choose>
-<%-- 								<button class="delete-category" data-id="${order.id }">
-									<span class="close">Delete</span>
-								</button> --%>
-								<a href="delete.htm?id=${order.id }"> <span class="close">Delete</span></a>
-							</div>
-						</div>
+				<div class="col-md-4 summary">
+					<div>
+						<h5>
+							<b>Summary</b>
+						</h5>
 					</div>
-				</c:forEach>
-				<!-- 					<div class="row main align-items-center"> -->
-				<!-- <div class="col-2">
-							<img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg">
-						</div>
-						<div class="col">
-							<div class="row text-muted">Shirt</div>
-							<div class="row">Cotton T-shirt</div>
-						</div>
-						<div class="col">
-							<span class="button-like decrement">-</span> <span
-								class="border value">1</span> <span
-								class="button-like increment">+</span>
-						</div>
-						<div class="col">
-							&euro; 44.00 <span class="close">Delete</span>
-						</div>
+					<hr>
+					<div class="row"
+						style="border-top: 1px solid rgba(0, 0, 0, .1); padding: 2vh 0;">
+						<div class="col">TOTAL PRICE</div>
+						<div class="col text-right">${total }</div>
 					</div>
-					<div class="row border-top border-bottom">
-						<div class="row main align-items-center">
-							<div class="col-2">
-								<img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg">
-							</div>
-							<div class="col">
-								<div class="row text-muted">Shirt</div>
-								<div class="row">Cotton T-shirt</div>
-							</div>
-							<div class="col">
-								<span class="button-like decrement">-</span> <span
-									class="border value">1</span> <span
-									class="button-like increment">+</span>
-							</div>
-							<div class="col">
-								&euro; 44.00 <span class="close">Delete</span>
-							</div>
-						</div>
-					</div> -->
-				<div class="back-to-shop">
-					<a href="./brands.htm">&leftarrow;</a><span class="text-muted">Back
-						to shop</span>
+					<a href="./checkout.htm">
+						<button id="checkoutButton" class="btn" type="submit">CHECKOUT</button>
+					</a>
 				</div>
 			</div>
-			<div class="col-md-4 summary">
-				<div>
-					<h5>
-						<b>Summary</b>
-					</h5>
-				</div>
-				<hr>
-				<div class="row"
-					style="border-top: 1px solid rgba(0, 0, 0, .1); padding: 2vh 0;">
-					<div class="col">TOTAL PRICE</div>
-					<div class="col text-right">${total }</div>
-				</div>
-				<a href="./checkout.htm">
-					<button class="btn">CHECKOUT</button>
-				</a>
-			</div>
+
 		</div>
-
-	</div>
-
+	</form>
 	<script>
 	//Xử lý phần tăng giảm số lượng sản phẩm
-	 document.addEventListener('DOMContentLoaded', (event) => {
-         document.body.addEventListener('click', function(e) {
-             if (e.target.classList.contains('decrement') || e.target.classList.contains('increment')) {
-                 const valueElement = e.target.parentElement.querySelector('.value');
-                 let value = parseInt(valueElement.textContent, 10);
-
-                 if (e.target.classList.contains('decrement') && value > 1) {
-                     value--;
-                 } else if (e.target.classList.contains('increment')) {
-                     value++;
-                 }
-
-                 valueElement.textContent = value;
-             }
-         });
-     });
-	 //Xử lý phần xóa sản phẩm
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.delete-category').forEach(function(button) {
+document.querySelectorAll('.increment').forEach(button => {
         button.addEventListener('click', function() {
-            const orderId1 = this.getAttribute('data-id');
-            console.log(orderId1);
-            const rowToDelete = this.closest('.row.border-top.border-bottom');
-            // Tạo một yêu cầu AJAX
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', `./cart.htm?id=${orderId1}`, true);
-
-            // Xử lý phản hồi từ máy chủ
-            xhr.onload = function() {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    console.log(`Order with ID: ${orderId} deleted successfully.`);
-                    // Xóa hàng hóa từ DOM
-                    rowToDelete.remove();
-                } else {
-                    console.error('Failed to delete the product.');
-                }
-            };
-
-            // Xử lý lỗi
-            xhr.onerror = function() {
-                console.error('Request failed');
-            };
-
-            // Gửi yêu cầu
-            xhr.send();
+            // Lấy ô input số lượng tương ứng
+            const quantityInput = this.parentElement.querySelector('input[type="number"]');
+            // Tăng giá trị số lượng lên 1
+            quantityInput.value = parseInt(quantityInput.value) + 1;
         });
     });
-});
+
+    // Thêm sự kiện cho nút Giảm
+    document.querySelectorAll('.decrement').forEach(button => {
+        button.addEventListener('click', function() {
+            // Lấy ô input số lượng tương ứng
+            const quantityInput = this.parentElement.querySelector('input[type="number"]');
+            // Giảm giá trị số lượng đi 1, nhưng không thể nhỏ hơn 1
+            quantityInput.value = Math.max(parseInt(quantityInput.value) - 1, 1);
+        });
+    });
+	 //Xử lý phần xóa sản phẩm
 
 
 
