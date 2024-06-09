@@ -56,76 +56,24 @@
                                         </thead>
                                         <tbody>
                                         	<c:forEach var="p" items="${promotions}">
+	                                            <c:forEach var="category" items="${p.categories}">
 	                                            <tr>
+	                                            
 	                                                <td>${p.id}</td>
-	                                                <td>Product 1</td>
-	                                                <td>${p.dealPercent}</td>
-	                                                <td>${p.startTime}</td>
-	                                                <td>${p.endTime}</td>
-	                                                <td>${p.getCreatedTime()}</td>
-<!-- 	                                                <td> -->
-<%-- 	                                                    <button class="btn btn-primary" onclick="editDiscountedProduct(${p.id}, 'Product 1', '${p.dealPercent}', '${p.startTime}', '${p.endTime}', '${p.createTime}')">Edit</button> --%>
-<%-- 	                                                    <button class="btn btn-danger" onclick="deleteDiscountedProduct(${p.id})">Delete</button> --%>
-<!-- 	                                                </td> -->
-	                                           			<td>
-		                                                	<button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '12', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
-		                                                    <button class="btn btn-danger" onclick="deleteDiscountedProduct(1)">Delete</button>
-		                                                </td>
+	                                                
+		                                                <td>${category.title}</td>
+		                                                <td>${p.dealPercent}</td>
+		                                                <td>${p.startTime}</td>
+		                                                <td>${p.endTime}</td>
+		                                                <td>${p.getCreatedTime()}</td>
+		                                           		<td>
+			                                                <button class="btn btn-primary" onclick="editDiscountedProduct(${p.id}, '${category.title}', ${p.dealPercent}, '${p.startTime}', '${p.endTime}', '${p.getCreatedTime()}')">Edit</button>
+			                                                <button class="btn btn-danger" onclick="deleteDiscountedProduct(${p.id})">Delete</button>
+			                                            </td>
 	                                            </tr>
+		                                            </c:forEach>
                                             </c:forEach>
                                             
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Product 1</td>
-                                                <td>12%</td>
-                                                <td>2024-01-01 00:00:00</td>
-                                                <td>2024-01-31 23:59:59</td>
-                                                <td>2023-12-01 12:00:00</td>
-                                                <td>
-                                                	<button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '12', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
-                                                    <button class="btn btn-danger" onclick="deleteDiscountedProduct(1)">Delete</button>
-                                                </td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Product 1</td>
-                                                <td>12%</td>
-                                                <td>2024-01-01 00:00:00</td>
-                                                <td>2024-01-31 23:59:59</td>
-                                                <td>2023-12-01 12:00:00</td>
-                                                <td>
-                                                	<button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '12', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
-                                                    <button class="btn btn-danger" onclick="deleteDiscountedProduct(1)">Delete</button>
-                                                </td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Product 1</td>
-                                                <td>12%</td>
-                                                <td>2024-01-01 00:00:00</td>
-                                                <td>2024-01-31 23:59:59</td>
-                                                <td>2023-12-01 12:00:00</td>
-                                                <td>
-                                                	<button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '12', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
-                                                    <button class="btn btn-danger" onclick="deleteDiscountedProduct(1)">Delete</button>
-                                                </td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Product 1</td>
-                                                <td>12%</td>
-                                                <td>2024-01-01 00:00:00</td>
-                                                <td>2024-01-31 23:59:59</td>
-                                                <td>2023-12-01 12:00:00</td>
-                                                <td>
-                                                	<button class="btn btn-primary" onclick="editDiscountedProduct(1, 'Product 1', '12', '2024-01-01 00:00:00', '2024-01-31 23:59:59', '2023-12-01 12:00:00')">Edit</button>
-                                                    <button class="btn btn-danger" onclick="deleteDiscountedProduct(1)">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <!-- Add more sample discounted products as needed -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -168,7 +116,7 @@
                         </div>
                         <div class="form-group">
                             <label for="percent">Percent</label>
-                            <input type="text" class="form-control" id="percent" name="percent" required>
+                            <input type="number" class="form-control" id="percent" name="percent" required>
                         </div>
                         <div class="form-group">
                             <label for="startTime">Start Time</label>
@@ -204,15 +152,11 @@
                         <input type="hidden" id="editDiscountedProductId" name="discountedProductId">
                         <div class="form-group">
                             <label for="editProductName">Product</label>
-                            <select class="form-control" id="editProductName" name="productName" required>
-                                <option value="Product 1">Product 1</option>
-                                <option value="Product 2">Product 2</option>
-                                <!-- Add more products as needed -->
-                            </select>
+                            <input type="text" class="form-control" id="editProductName" name="productName" required>
                         </div>
                         <div class="form-group">
                             <label for="editProductPercent">Percent</label>
-                            <input type="text" class="form-control" id="percent" name="percent" required>
+                            <input type="number" class="form-control" id="editProductPercent" name="percent" required>
                         </div>
                         <div class="form-group">
                             <label for="editStartTime">Start Time</label>

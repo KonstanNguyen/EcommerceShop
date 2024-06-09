@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Promotion {
 	@DateTimeFormat(pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date createTime;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "Categories_Promotions", joinColumns = @JoinColumn(name = "promotionId"), inverseJoinColumns = @JoinColumn(name = "categoryId"))
 	private Collection<Category> categories;
 
@@ -95,5 +96,14 @@ public class Promotion {
 	public void setCreatedTime(Date createdTime) {
 		this.createTime = createdTime;
 	}
+
+	public Collection<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Collection<Category> categories) {
+		this.categories = categories;
+	}
+	
 
 }
