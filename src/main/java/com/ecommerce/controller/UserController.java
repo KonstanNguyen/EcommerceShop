@@ -122,5 +122,9 @@ public class UserController {
 
 		return "redirect:/brands.htm";
 	}
-	
+	@RequestMapping(value = "profile", method = RequestMethod.GET)
+	public String profile(HttpServletRequest request) {
+		request.setAttribute("user", request.getSession().getAttribute("user"));
+		return "home/pages/profile";
+	}
 }

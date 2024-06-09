@@ -52,4 +52,9 @@ public class CategoryServiceImpl implements CategoryService {
 		return dao.getCategoryNewProduct();
 	}
 	
+	@Override
+	public List<Category> searchCategory(String name) {
+		return dao.searchCategory(name);
+	}
+	
 }

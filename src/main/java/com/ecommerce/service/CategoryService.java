@@ -14,4 +14,5 @@ public interface CategoryService {
 	public List<Need> getAllNeed(int id);
 	public List<CategoryTopSelling> getTopSelling();
 	public List<CategoryNewProduct> getCategoryNewProduct();
+	public List<Category> searchCategory(String name);
 }

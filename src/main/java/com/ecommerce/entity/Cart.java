@@ -24,7 +24,7 @@ public class Cart {
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private EcoUser user;
-	private String status;
+	private boolean status=false;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date createTime;
@@ -48,13 +48,6 @@ public class Cart {
 		this.user = user;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 	public Date getCreateTime() {
 		return createTime;
@@ -70,6 +63,22 @@ public class Cart {
 
 	public void setOrders(Collection<Orders> orders) {
 		this.orders = orders;
+	}
+
+	public EcoUser getUser() {
+		return user;
+	}
+
+	public void setUser(EcoUser user) {
+		this.user = user;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 }

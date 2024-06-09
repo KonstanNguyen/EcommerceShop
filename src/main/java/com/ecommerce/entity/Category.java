@@ -58,6 +58,9 @@ public class Category {
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private Set<Need> needs;
 
+	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
+	private Collection<Promotion> promotion;
+	
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
 	private Collection<Orders> orders;
 
@@ -211,6 +214,14 @@ public class Category {
 
 	public void setOrders(Collection<Orders> orders) {
 		this.orders = orders;
+	}
+
+	public Collection<Promotion> getPromotion() {
+		return promotion;
+	}
+
+	public void setPromotion(Collection<Promotion> promotion) {
+		this.promotion = promotion;
 	}
 
 }
