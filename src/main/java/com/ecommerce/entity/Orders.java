@@ -1,7 +1,8 @@
 package com.ecommerce.entity;
 
-import java.math.BigInteger;
+import java.util.Date;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,14 +23,10 @@ public class Orders {
 	@JoinColumn(name = "category_id")
 	private Category category;
 	private int quantity;
-	private String invoiceId;
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+	
+	@ManyToOne
+	@JoinColumn(name = "invoiceId")
+	private Invoice invoice;
 
 	public int getId() {
 		return id;
@@ -39,6 +36,14 @@ public class Orders {
 		this.id = id;
 	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
 	public Cart getCarts() {
 		return cart;
 	}
@@ -46,7 +51,7 @@ public class Orders {
 	public void setCarts(Cart cart) {
 		this.cart = cart;
 	}
-
+	
 	public Category getCategories() {
 		return category;
 	}
@@ -54,7 +59,6 @@ public class Orders {
 	public void setCategories(Category category) {
 		this.category = category;
 	}
-
 	public Cart getCart() {
 		return cart;
 	}
@@ -71,12 +75,23 @@ public class Orders {
 		this.category = category;
 	}
 
-	public String getInvoiceId() {
-		return invoiceId;
+	public Invoice getInvoice() {
+		return invoice;
 	}
 
-	public void setInvoiceId(String invoiceId) {
-		this.invoiceId = invoiceId;
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
+	}
+	
+	public Short getTotalPromotion() {
+		Short totaldealPercent = 0;
+		if (getCategories().getPromotions() != null) {
+			Date now = new Date();
+			totaldealPercent = getCategories().getPromotions().stream().distinct()
+					.filter(p -> p.getStartTime().before(now) && p.getEndTime().after(now))
+					.map(p -> p.getDealPercent()).reduce((short) 0, (a, b) -> (short) (a + b));
+		}
+		return totaldealPercent;
 	}
 
 }

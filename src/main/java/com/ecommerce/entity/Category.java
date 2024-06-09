@@ -37,7 +37,7 @@ public class Category {
 	}
 	
 	public Category() {}
-
+	
 	public Category(String title, String cPU, String rAM, String hARDWARE, String cARD, String sCREEN,
 			String oS, boolean hot, BigInteger price, BigInteger promotionPrice, int warrantyTime, String description,
 			CategoryStatus status, float starts) {
@@ -57,9 +57,6 @@ public class Category {
 		this.status = status;
 		this.starts = starts;
 	}
-
-
-
 	private String HARDWARE;
 	private String CARD;
 	private String SCREEN;
@@ -79,17 +76,11 @@ public class Category {
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
 	private Collection<Image> images;
 
-//	@Column(nullable = true)
-//	private int createBy;
-//	@Column(nullable = true)
-//	private Date createTime;
-//	@Column(nullable = true)
-//	private int updateBy;
-//	@Column(nullable = true)
-//	private Date updateTime;
-
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private Set<Need> needs;
+	
+	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
+	private Set<Promotion> promotions;
 
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private Collection<Promotion> promotion;
@@ -248,6 +239,14 @@ public class Category {
 	public void setOrders(Collection<Orders> orders) {
 		this.orders = orders;
 	}
+	public Set<Promotion> getPromotions() {
+		return promotions;
+	}
+
+	public void setPromotions(Set<Promotion> promotions) {
+		this.promotions = promotions;
+	}
+	
 
 	public Collection<Promotion> getPromotion() {
 		return promotion;

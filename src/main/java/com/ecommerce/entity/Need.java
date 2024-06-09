@@ -18,27 +18,38 @@ public class Need {
 	private int id;
 	private String name;
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "Categories_Needs",
-			joinColumns = @JoinColumn(name = "needId"),
-			inverseJoinColumns = @JoinColumn(name = "categoryId"))
+	@JoinTable(name = "Categories_Needs", joinColumns = @JoinColumn(name = "needId"), inverseJoinColumns = @JoinColumn(name = "categoryId"))
 	private Collection<Category> categories;
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public Collection<Category> getCategories() {
 		return categories;
 	}
+
 	public void setCategories(Collection<Category> categories) {
 		this.categories = categories;
+	}
+
+	public Need() {
+	}
+
+	public Need(int id, String name) {
+		this.id = id;
+		this.name = name;
 	}
 }

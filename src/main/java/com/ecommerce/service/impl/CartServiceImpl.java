@@ -1,5 +1,7 @@
 package com.ecommerce.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +21,18 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public void saveCart(Cart cart) {
 		dao.saveCart(cart);
+	}
+	
+	@Override
+	public List<Cart> fetchAll(){
+		return dao.fetchAll();
+	}
+	
+	public Cart findCartUnpurchased(int id) {
+		return dao.findCartUnpurchased(id);
+	}
+	
+	public boolean updateCart(Cart cart) {
+		return dao.updateCart(cart);
 	}
 }
