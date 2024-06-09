@@ -11,4 +11,6 @@ public interface CartDAO {
 	public Cart findById(int cartId);
 	
 	public List<Object[]> getCartDetails();
+	public Cart findCartUnpurchased(int id); 
+	public boolean updateCart(Cart cart);
 }

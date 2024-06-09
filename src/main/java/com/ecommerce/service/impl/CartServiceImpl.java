@@ -30,4 +30,21 @@ public class CartServiceImpl implements CartService{
 	public Cart findById(int carId) {
 		return dao.findById(carId);
 	}
+	
+	@Override
+	public List<Cart> fetchAll(){
+		return dao.fetchAll();
+	}
+	
+	public Cart findCartUnpurchased(int id) {
+		return dao.findCartUnpurchased(id);
+	}
+	
+	public boolean updateCart(Cart cart) {
+		return dao.updateCart(cart);
+	}
+	@Override
+	public Cart find(int id) {
+		return findById(id);
+	}
 }

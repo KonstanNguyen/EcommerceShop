@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ecommerce.dao.OrderDAO;
-import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Orders;
 
 @Transactional
 @Repository
+@SuppressWarnings("unchecked")
 public class OrderDAOImpl implements OrderDAO {
 	@Autowired
 	SessionFactory factory;
@@ -72,7 +72,7 @@ public class OrderDAOImpl implements OrderDAO {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			if (order.getInvoiceId() == null) {
+			if (order.getInvoice() == null) {
 				session.delete(order);
 				t.commit();
 			}
