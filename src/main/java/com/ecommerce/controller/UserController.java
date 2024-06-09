@@ -3,6 +3,7 @@ package com.ecommerce.controller;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 
@@ -26,11 +27,15 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ecommerce.dto.request.RegisterUser;
+import com.ecommerce.entity.Cart;
 import com.ecommerce.entity.EcoUser;
 import com.ecommerce.entity.Invoice;
+import com.ecommerce.entity.Orders;
 import com.ecommerce.service.InvoiceService;
+import com.ecommerce.service.MailerService;
 import com.ecommerce.service.UserService;
 
 import jakarta.validation.Valid;
@@ -46,6 +51,9 @@ public class UserController {
 
 	@Autowired
 	SessionFactory factory;
+	
+	@Autowired
+	MailerService mailer;
 
 	@RequestMapping("login")
 	public String login(HttpSession session) {
@@ -130,26 +138,5 @@ public class UserController {
 
 		return "redirect:/brands.htm";
 	}
-
-	@RequestMapping("checkout")
-	public String index(ModelMap model) {
-		Random randomNumbers = new Random();
-		Invoice invoice = new Invoice(randomNumbers.nextInt(0, 9999), "123",
-				Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()), "Thuy", "tt@gmail.com", "0123456789",
-				"Nha cho dau");
-		model.addAttribute("ecoInvoice", invoice);
-		return "home/pages/checkout";
-	}
-
-	@RequestMapping(value = "checkout", method = RequestMethod.POST )
-	public String index(HttpServletRequest request, @ModelAttribute("ecoInvoice") Invoice invoice) {
-		invoice.setId(11);
-		invoice.setDate(Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-		if (invoiceService.insertInvoice(invoice) == true) {
-			request.setAttribute("message", "Them thanh cong");
-		} else {
-			request.setAttribute("message", "Them that bai");
-		}
-		return "home/pages/checkout";
-	}
+	
 }

@@ -29,7 +29,7 @@ public class EcoUser {
 	private Date dateOfBirth;
 	private String username;
 	private String password;
-	private boolean isAdmin;
+	/* private boolean isAdmin; */
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private Collection<Cart> carts;
@@ -106,13 +106,11 @@ public class EcoUser {
 		this.password = password;
 	}
 
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
+	/*
+	 * public boolean isAdmin() { return isAdmin; }
+	 * 
+	 * public void setAdmin(boolean isAdmin) { this.isAdmin = isAdmin; }
+	 */
 
 	public Collection<Cart> getCarts() {
 		return carts;

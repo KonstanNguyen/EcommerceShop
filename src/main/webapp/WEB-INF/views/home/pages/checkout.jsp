@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,18 +45,15 @@
 			<!-- row -->
 			<div class="row">
 
-				<div class="col-md-7">
+				<div class="col-md-4">
 					<!-- Billing Details -->
 					${ message }
-					<form:form action="user/checkout.htm" cssClass="billing-details" modelAttribute="ecoInvoice">
+					<form:form action="checkout.htm" cssClass="billing-details" modelAttribute="ecoInvoice">
 						<div class="section-title">
 							<h3 class="title">Billing address</h3>
 						</div>
 						<div class="form-group">
-							<form:input path="taxCode" cssClass="input" placeholder="Tax Code"/>
-						</div>
-						<div class="form-group">
-							<form:input path="name" cssClass="input" placeholder="Name" />
+							<form:input path="name" cssClass="input" type="text" placeholder="Name" />
 						</div>
 						<div class="form-group">
 							<form:input path="email" cssClass="input" type="email"
@@ -68,144 +66,65 @@
 						<div class="form-group">
 							<form:input path="address" cssClass="input" placeholder="Address" />
 						</div>
+						<div class="form-group">
+							<form:input path="taxCode" cssClass="input" placeholder="Tax Code"/>
+						</div>
 						<div>
-							<button class="primary-btn order-submit">Insert</button>
+							<button class="primary-btn order-submit">Place order</button>
 						</div>
 					</form:form>
 					<!-- /Billing Details -->
 
-					<!-- Shiping Details -->
-					<div class="shiping-details">
-						<div class="section-title">
-							<h3 class="title">Shiping address</h3>
-						</div>
-						<div class="input-checkbox">
-							<input type="checkbox" id="shiping-address"> <label
-								for="shiping-address"> <span></span> Ship to a diffrent
-								address?
-							</label>
-							<div class="caption">
-								<div class="form-group">
-									<input class="input" type="text" name="first-name"
-										placeholder="First Name">
-								</div>
-								<div class="form-group">
-									<input class="input" type="text" name="last-name"
-										placeholder="Last Name">
-								</div>
-								<div class="form-group">
-									<input class="input" type="email" name="email"
-										placeholder="Email">
-								</div>
-								<div class="form-group">
-									<input class="input" type="text" name="address"
-										placeholder="Address">
-								</div>
-								<div class="form-group">
-									<input class="input" type="text" name="city" placeholder="City">
-								</div>
-								<div class="form-group">
-									<input class="input" type="text" name="country"
-										placeholder="Country">
-								</div>
-								<div class="form-group">
-									<input class="input" type="text" name="zip-code"
-										placeholder="ZIP Code">
-								</div>
-								<div class="form-group">
-									<input class="input" type="tel" name="tel"
-										placeholder="Telephone">
-								</div>
-							</div>
-						</div>
-					</div>
 					<!-- /Shiping Details -->
 
 					<!-- Order notes -->
-					<div class="order-notes">
-						<textarea class="input" placeholder="Order Notes"></textarea>
-					</div>
+				
 					<!-- /Order notes -->
 				</div>
 
 				<!-- Order Details -->
-				<div class="col-md-5 order-details">
+				<div class="col-md-8 order-details">
 					<div class="section-title text-center">
 						<h3 class="title">Your Order</h3>
 					</div>
-					<div class="order-summary">
-						<div class="order-col">
-							<div>
+					<div class="row order-summary">
+						<div class="row">
+							<div class="col-md-8">
 								<strong>PRODUCT</strong>
 							</div>
-							<div>
+							<div class="col-md-2">
+								<strong>Promotion</strong>
+							</div>
+							<div class="col-md-2">
 								<strong>TOTAL</strong>
 							</div>
 						</div>
-						<div class="order-products">
-							<div class="order-col">
-								<div>1x Product Name Goes Here</div>
-								<div>$980.00</div>
-							</div>
-							<div class="order-col">
-								<div>2x Product Name Goes Here</div>
-								<div>$980.00</div>
-							</div>
+
+						<div class="row">
+							<c:forEach var="order" items="${cart.orders}">
+								<div class="col-md-8">${order.quantity }x
+									${order.category.title }</div>
+								<div class="col-md-2">${ order.totalPromotion }%</div>
+								<div class="col-md-2">${ order.quantity*order.category.promotionPrice *(100 - order.totalPromotion)/100 } </div>
+							</c:forEach>
 						</div>
-						<div class="order-col">
-							<div>Shiping</div>
-							<div>
+
+
+						<div class="row">
+							<div class="col-md-10">Shiping</div>
+							<div class="col-md-2">
 								<strong>FREE</strong>
 							</div>
 						</div>
-						<div class="order-col">
-							<div>
+						<div class="row">
+							<div class="col-md-10">
 								<strong>TOTAL</strong>
 							</div>
-							<div>
-								<strong class="order-total">$2940.00</strong>
+							<div class="col-md-2">
+								<strong class="order-total">${total }</strong>
 							</div>
 						</div>
 					</div>
-					<div class="payment-method">
-						<div class="input-radio">
-							<input type="radio" name="payment" id="payment-1"> <label
-								for="payment-1"> <span></span> Direct Bank Transfer
-							</label>
-							<div class="caption">
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna
-									aliqua.</p>
-							</div>
-						</div>
-						<div class="input-radio">
-							<input type="radio" name="payment" id="payment-2"> <label
-								for="payment-2"> <span></span> Cheque Payment
-							</label>
-							<div class="caption">
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna
-									aliqua.</p>
-							</div>
-						</div>
-						<div class="input-radio">
-							<input type="radio" name="payment" id="payment-3"> <label
-								for="payment-3"> <span></span> Paypal System
-							</label>
-							<div class="caption">
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna
-									aliqua.</p>
-							</div>
-						</div>
-					</div>
-					<div class="input-checkbox">
-						<input type="checkbox" id="terms"> <label for="terms">
-							<span></span> I've read and accept the <a href="#">terms &
-								conditions</a>
-						</label>
-					</div>
-					<a href="#" class="primary-btn order-submit">Place order</a>
 				</div>
 				<!-- /Order Details -->
 			</div>
@@ -227,7 +146,7 @@
 							Sign Up for the <strong>NEWSLETTER</strong>
 						</p>
 						<form>
-							<input class="input" type="email" placeholder="Enter Your Email">
+							<input class="input" type="email" placeholder="Enter Your Email" required>
 							<button class="newsletter-btn">
 								<i class="fa fa-envelope"></i> Subscribe
 							</button>

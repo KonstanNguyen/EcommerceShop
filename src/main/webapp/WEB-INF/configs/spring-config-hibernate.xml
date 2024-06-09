@@ -18,8 +18,8 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		p:url="jdbc:sqlserver://LAPTOP-KJ4L2LKH\MSSQLSERVER2014; Database=EcommerceShop"
-		p:username="sa" p:password="Ntn@2003">
+		p:url="jdbc:sqlserver://LAPTOP-FIRFL0GO\SQL2022; Database=EcommerceShop"
+		p:username="sa" p:password="2211">
 	</bean>
 	<!-- <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"

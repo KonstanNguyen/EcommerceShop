@@ -1,21 +1,38 @@
 package com.ecommerce.entity;
 
+import java.util.Date;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Orders {
 
-	@EmbeddedId
-	private OrderId id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	@ManyToOne
+	@JoinColumn(name = "cart_id")
+	private Cart cart;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
 	private int quantity;
-	private int invoiceId;
+	
+	@ManyToOne
+	@JoinColumn(name = "invoiceId")
+	private Invoice invoice;
 
-	public OrderId getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(OrderId id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -26,13 +43,55 @@ public class Orders {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-	public int getInvoiceId() {
-		return invoiceId;
+	
+	public Cart getCarts() {
+		return cart;
 	}
 
-	public void setInvoiceId(int invoiceId) {
-		this.invoiceId = invoiceId;
+	public void setCarts(Cart cart) {
+		this.cart = cart;
+	}
+	
+	public Category getCategories() {
+		return category;
+	}
+
+	public void setCategories(Category category) {
+		this.category = category;
+	}
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Invoice getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
+	}
+	
+	public Short getTotalPromotion() {
+		Short totaldealPercent = 0;
+		if (getCategories().getPromotions() != null) {
+			Date now = new Date();
+			totaldealPercent = getCategories().getPromotions().stream().distinct()
+					.filter(p -> p.getStartTime().before(now) && p.getEndTime().after(now))
+					.map(p -> p.getDealPercent()).reduce((short) 0, (a, b) -> (short) (a + b));
+		}
+		return totaldealPercent;
 	}
 
 }

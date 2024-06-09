@@ -27,6 +27,36 @@ public class Category {
 	private String title;
 	private String CPU;
 	private String RAM;
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", title=" + title + ", CPU=" + CPU + ", RAM=" + RAM + ", HARDWARE=" + HARDWARE
+				+ ", CARD=" + CARD + ", SCREEN=" + SCREEN + ", OS=" + OS + ", hot=" + hot + ", price=" + price
+				+ ", promotionPrice=" + promotionPrice + ", warrantyTime=" + warrantyTime + ", description="
+				+ description + ", brand=" + brand + ", status=" + status + ", starts=" + starts + ", images=" + images
+				+ ", needs=" + needs + ", orders=" + orders + "]";
+	}
+	
+	public Category() {}
+	
+	public Category(String title, String cPU, String rAM, String hARDWARE, String cARD, String sCREEN,
+			String oS, boolean hot, BigInteger price, BigInteger promotionPrice, int warrantyTime, String description,
+			CategoryStatus status, float starts) {
+		super();
+		this.title = title;
+		CPU = cPU;
+		RAM = rAM;
+		HARDWARE = hARDWARE;
+		CARD = cARD;
+		SCREEN = sCREEN;
+		OS = oS;
+		this.hot = hot;
+		this.price = price;
+		this.promotionPrice = promotionPrice;
+		this.warrantyTime = warrantyTime;
+		this.description = description;
+		this.status = status;
+		this.starts = starts;
+	}
 	private String HARDWARE;
 	private String CARD;
 	private String SCREEN;
@@ -46,19 +76,13 @@ public class Category {
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
 	private Collection<Image> images;
 
-//	@Column(nullable = true)
-//	private int createBy;
-//	@Column(nullable = true)
-//	private Date createTime;
-//	@Column(nullable = true)
-//	private int updateBy;
-//	@Column(nullable = true)
-//	private Date updateTime;
-
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
 	private Set<Need> needs;
+	
+	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
+	private Set<Promotion> promotions;
 
-	@OneToMany(mappedBy = "id.category", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
 	private Collection<Orders> orders;
 
 	public int getId() {
@@ -212,5 +236,13 @@ public class Category {
 	public void setOrders(Collection<Orders> orders) {
 		this.orders = orders;
 	}
+	public Set<Promotion> getPromotions() {
+		return promotions;
+	}
+
+	public void setPromotions(Set<Promotion> promotions) {
+		this.promotions = promotions;
+	}
+	
 
 }
