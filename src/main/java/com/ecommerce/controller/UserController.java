@@ -52,7 +52,7 @@ public class UserController {
 			return "redirect:/admin.htm";
 		}
 
-		user = userSevice.findByUsername(username);
+		user = userSevice.findByUsernameAndPassword(username,password);
 		if (user == null) {
 			request.setAttribute("message", "Tài khoản hoặc mật khẩu không chính xác!");
 			return "pages/login";
