@@ -1,7 +1,5 @@
 package com.ecommerce.controller;
 
-import java.math.BigInteger;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +40,6 @@ public class AdminBrandController {
 
     @RequestMapping("/delete/{id}")
     public String deleteBrand(@PathVariable("id") int brandId, Model model) {
-//    	Brand b = brandService.findByID(brandId);
-//    	System.out.println("Brand: " + b.getid() + " - " + b.getName());
-//    	brandService.deleteBrand(b);
-//        return "redirect:/admin/brands.htm";
         
         try {
             Brand b = brandService.findByID(brandId);
@@ -54,7 +48,6 @@ public class AdminBrandController {
         } catch (DetectedException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "redirect:/admin/brands.htm";
-            // You can add additional logic here, like redirecting to an error page or displaying an error message
         }
     }
 }

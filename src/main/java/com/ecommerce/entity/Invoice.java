@@ -1,10 +1,9 @@
 package com.ecommerce.entity;
 
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -17,6 +16,7 @@ public class Invoice {
 	private String email;
 	private String phone;
 	private String address;
+	private BigInteger total_amount;
 
 
 	public String getTaxCode() {
@@ -73,6 +73,14 @@ public class Invoice {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public BigInteger getTotalAmount() {
+		return total_amount;
+	}
+
+	public void setTotalAmount(BigInteger total_amount) {
+		this.total_amount = total_amount;
 	}
 
 

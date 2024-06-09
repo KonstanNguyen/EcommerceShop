@@ -32,7 +32,7 @@ public class Promotion {
 	private Date endTime;
 
 	private int quantity;
-	private String status;
+	private Boolean status;
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date createTime;
@@ -81,11 +81,11 @@ public class Promotion {
 		this.quantity = quatity;
 	}
 
-	public String getStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 

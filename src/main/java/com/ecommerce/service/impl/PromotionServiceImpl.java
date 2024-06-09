@@ -19,5 +19,29 @@ public class PromotionServiceImpl implements PromotionService {
 		// TODO Auto-generated method stub
 		return dao.fetchAll();
 	}
+
+	@Override
+	public Promotion findByID(int id) {
+		// TODO Auto-generated method stub
+		return dao.findByID(id);
+	}
+
+	@Override
+	public void addPromotion(Promotion promotion) {
+		// TODO Auto-generated method stub
+		dao.addPromotion(promotion);
+	}
+
+	@Override
+	public void updatePromotion(Promotion promotion) {
+		// TODO Auto-generated method stub
+		dao.updatePromotion(promotion);
+	}
+
+	@Override
+	public void deletePromotion(Promotion promotion) {
+		// TODO Auto-generated method stub
+		dao.deletePromotion(promotion);
+	}
 	
 }

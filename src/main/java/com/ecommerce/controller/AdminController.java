@@ -36,15 +36,13 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/orders")
-	public ModelAndView orderList() {
-		ModelAndView v = new ModelAndView("admin/orders");
-		return v;
+	public String orderList() {
+		return "admin/orders";
 	}
 	
 	@RequestMapping(value = "/orderDetails")
-	public ModelAndView getOrderDetails() {
-		ModelAndView v = new ModelAndView("admin/orderDetails");
-		return v;
+	public String getOrderDetails() {
+		return "admin/orderDetails";
 	}
 	
 	@RequestMapping(value = "/brands")
@@ -67,13 +65,14 @@ public class AdminController {
 	@RequestMapping(value = "/promotions")
 	public String promotionList(Model model) {
 		List<Promotion> promList = promotion.fetchAll();
+		List<Category> categoryList = category.fetchAllProduct();
 		model.addAttribute("promotions", promList);
+		model.addAttribute("categories", categoryList);
 		return "admin/promotions";
 	}
 	
 	@RequestMapping(value = "/reports")
-	public ModelAndView getReports() {
-		ModelAndView v = new ModelAndView("admin/reports");
-		return v;
+	public String getReports() {
+		return "admin/reports";
 	}
 }
