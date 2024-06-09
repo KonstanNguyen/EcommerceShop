@@ -31,35 +31,34 @@
 					</div>
 				</div>
 				<c:forEach items="${orders }" var="order">
-					<form method="post" action="/cart.htm?id=${order.id }">
-						<input type="hidden" name="orderID" value="${order.id }">
-						<div class="row border-top border-bottom">
-							<div class="row main align-items-center">
-								<div class="col-2">
-									<img class="img-fluid" src="./assets/img/product01.png">
-								</div>
-								<div class="col">
-									<div class="row text-muted">${order.categories.brand.name }</div>
-									<div class="row">${order.categories.title}</div>
-								</div>
-								<div class="col">
-									<span class="button-like decrement">-</span> <span
-										class="border value">${order.quantity}</span> <span
-										class="button-like increment">+</span>
-								</div>
-								<div class="col">
-									<c:choose>
-										<c:when test="${order.categories.promotionPrice != null}">
+					<input type="hidden" name="orderID" value="${order.id }">
+					<div class="row border-top border-bottom">
+						<div class="row main align-items-center">
+							<div class="col-2">
+								<img class="img-fluid" src="./assets/img/product01.png">
+							</div>
+							<div class="col">
+								<div class="row text-muted">${order.categories.brand.name }</div>
+								<div class="row">${order.categories.title}</div>
+							</div>
+							<div class="col">
+								<button class="button-like decrement">-</button> <span
+									class="border value">${order.quantity}</span> <button
+									class="button-like increment">+</button>
+							</div>
+							<div class="col">
+								<c:choose>
+									<c:when test="${order.categories.promotionPrice != null}">
                                       ${order.categories.promotionPrice }</c:when>
-										<c:otherwise>${order.categories.price }</c:otherwise>
-									</c:choose>
-									<button>
-										<span class="close">Delete</span>
-									</button>
-								</div>
+									<c:otherwise>${order.categories.price }</c:otherwise>
+								</c:choose>
+<%-- 								<button class="delete-category" data-id="${order.id }">
+									<span class="close">Delete</span>
+								</button> --%>
+								<a href="delete.htm?id=${order.id }"> <span class="close">Delete</span></a>
 							</div>
 						</div>
-					</form>
+					</div>
 				</c:forEach>
 				<!-- 					<div class="row main align-items-center"> -->
 				<!-- <div class="col-2">
@@ -141,20 +140,41 @@
          });
      });
 	 //Xử lý phần xóa sản phẩm
- 	document.addEventListener('DOMContentLoaded', function () {
-        // Tìm tất cả các nút "Delete"
-        var deleteButtons = document.querySelectorAll('.close');
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.delete-category').forEach(function(button) {
+        button.addEventListener('click', function() {
+            const orderId1 = this.getAttribute('data-id');
+            console.log(orderId1);
+            const rowToDelete = this.closest('.row.border-top.border-bottom');
+            // Tạo một yêu cầu AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', `./cart.htm?id=${orderId1}`, true);
 
-        deleteButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                // Tìm phần tử .row.parent gần nhất để xóa
-                var row = button.closest('.row');
-                if (row) {
-                    row.remove();
+            // Xử lý phản hồi từ máy chủ
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    console.log(`Order with ID: ${orderId} deleted successfully.`);
+                    // Xóa hàng hóa từ DOM
+                    rowToDelete.remove();
+                } else {
+                    console.error('Failed to delete the product.');
                 }
-            });
+            };
+
+            // Xử lý lỗi
+            xhr.onerror = function() {
+                console.error('Request failed');
+            };
+
+            // Gửi yêu cầu
+            xhr.send();
         });
     });
+});
+
+
+
     </script>
+
 </body>
 </html>

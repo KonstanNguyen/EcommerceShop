@@ -1,9 +1,12 @@
 package com.ecommerce.controller;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,7 +83,6 @@ public class BrandController {
 			return "pages/login";
 		}
 		Cart cart = cartService.findCartByUserId(user.getId());
-		System.out.println(cart.getId());
 		Orders order = new Orders();
 		order.setCarts(cart);
 		order.setCategories(categoryService.findByID(categoryid));
@@ -96,6 +98,16 @@ public class BrandController {
 		order.setQuantity(1);
 		orderService.saveOrder(order);
 		return "redirect:" + referer;
+	}
+
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public String searchbyCategory(@RequestParam("search") String value, ModelMap model) {
+		List<Category> categories = categoryService.fetchAllProduct();
+		List<Category> searchCategories = categories.stream()
+				.filter(t -> t.getTitle().toLowerCase().contains(value.toLowerCase())).collect(Collectors.toList());
+		searchCategories = categoryService.searchCategory(value);
+		model.addAttribute("categories", searchCategories);
+		return "home/pages/all";
 	}
 
 	@ModelAttribute("cateTopSellings")
@@ -116,13 +128,46 @@ public class BrandController {
 
 	@ModelAttribute("orders")
 	public List<Orders> getOrder(HttpSession session) {
-		// THêm vào giỏ hàng
+		// Lấy user từ session
 		EcoUser user = (EcoUser) session.getAttribute("user");
 		if (session.getAttribute("user") == null) {
 			return null;
 		}
+
+		// Tìm cart theo userId
 		Cart cart = cartService.findCartByUserId(user.getId());
-		return cart.getOrders().stream().distinct().collect(Collectors.toList());
+		if (cart == null) {
+			// Nếu không có cart hiện tại, tạo một cart mới
+			Cart newCart = new Cart();
+			newCart.setUser(user);
+			newCart.setStatus(false); // Giỏ hàng còn hoạt động
+			newCart.setCreateTime(java.sql.Date.valueOf(LocalDate.now()));
+			cartService.saveCart(newCart);
+
+			// Trả về đơn hàng của giỏ hàng mới
+			List<Orders> orders = orderService.getOrdersByCartId(newCart.getId());
+			return orders;
+		}
+
+		// In ra thông tin cart hiện tại
+		System.out.println("cart id: " + cart.getUser().getUsername());
+
+		// Nếu cart hiện tại đã hoàn thành (status = true), tạo một cart mới
+		if (cart.isStatus() == true) {
+			Cart newCart = new Cart();
+			newCart.setUser(user);
+			newCart.setStatus(false); // Giỏ hàng còn hoạt động
+			newCart.setCreateTime(java.sql.Date.valueOf(LocalDate.now()));
+			cartService.saveCart(newCart);
+
+			// Trả về đơn hàng của giỏ hàng mới
+			List<Orders> orders = orderService.getOrdersByCartId(newCart.getId());
+			return orders;
+		}
+
+		// Trả về đơn hàng của giỏ hàng hiện tại (status = false)
+		List<Orders> orders = orderService.getOrdersByCartId(cart.getId());
+		return orders;
 	}
 
 	@ModelAttribute("totalItem")
@@ -133,25 +178,39 @@ public class BrandController {
 			return 0;
 		}
 		Cart cart = cartService.findCartByUserId(user.getId());
-		return cart.getOrders().stream().distinct().collect(Collectors.toList()).size();
+		List<Orders> orders = orderService.getOrdersByCartId(cart.getId());
+		return orders.size();
 	}
 
 	@ModelAttribute("total")
-	public BigInteger getTotal(HttpSession session) {
-		BigInteger total = BigInteger.ZERO;
+	public BigDecimal getTotal(HttpSession session) {
+		BigDecimal total = BigDecimal.ZERO;
 		EcoUser user = (EcoUser) session.getAttribute("user");
 		if (session.getAttribute("user") == null) {
 			return null;
 		}
 		Cart cart = cartService.findCartByUserId(user.getId());
+		List<Orders> orders = orderService.getOrdersByCartId(cart.getId());
 
-		List<Orders> orders = cart.getOrders().stream().distinct().collect(Collectors.toList());
 		for (Orders order : orders) {
+			Short totaldealPercent = 0;
+			if (order.getCategories().getPromotion() != null) {
+				Date now = new Date();
+				totaldealPercent = order.getCategories().getPromotion().stream().distinct()
+						.filter(p -> p.getStartTime().before(now) && p.getEndTime().after(now))
+						.map(p -> p.getDealPercent()).reduce((short) 0, (a, b) -> (short) (a + b));
+			}
+
+			BigDecimal percent = new BigDecimal(100 - totaldealPercent).divide(new BigDecimal(100));
 			if (order.getCategories().getPromotionPrice() != null) {
-				total = total.add(
-						order.getCategories().getPromotionPrice().multiply(new BigInteger(order.getQuantity() + "")));
+				System.out.println(percent);
+				total = total.add(new BigDecimal(
+						order.getCategories().getPromotionPrice().multiply(new BigInteger(order.getQuantity() + "")))
+						.multiply(percent));
 			} else {
-				total = total.add(order.getCategories().getPrice().multiply(new BigInteger(order.getQuantity() + "")));
+				total = total.add(new BigDecimal(
+						order.getCategories().getPrice().multiply(new BigInteger(order.getQuantity() + "")))
+						.multiply(percent));
 			}
 		}
 		return total;
@@ -165,4 +224,5 @@ public class BrandController {
 	 * = orderService.findByID(orderId); orderService.deleteOrder(order); return
 	 * "redirect:/product.htm"; }
 	 */
+
 }

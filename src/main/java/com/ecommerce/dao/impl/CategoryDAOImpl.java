@@ -159,4 +159,12 @@ public class CategoryDAOImpl implements CategoryDAO {
 		return (Category)query.uniqueResult();
 	}
 
+	public List<Category> searchCategory(String name) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM " + Category.class.getName() + " WHERE CONCAT(title, ' ', RAM, ' ', OS,' ', CPU,' ',HARDWARE,' ',SCREEN) LIKE :name";
+		Query query = session.createQuery(hql);
+		query.setParameter("name", "%" + name + "%");
+		return query.list();
+	}
+
 }

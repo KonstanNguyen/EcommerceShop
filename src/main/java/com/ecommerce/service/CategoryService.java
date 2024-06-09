@@ -21,4 +21,5 @@ public interface CategoryService {
 	public void addCategory(Category category);
     public void updateCategory(Category category);
     public void deleteCategory(Category category);
+	public List<Category> searchCategory(String name);
 }

@@ -25,7 +25,7 @@ public class AuthInterceptors extends HandlerInterceptorAdapter {
 			HttpSession session2 = request.getSession();
 			String[] arr = request.getRequestURI().split("/", 3);
 			String uri = arr[arr.length-1];
-			System.out.println(session2.getAttribute("uriQuery"));
+
 			session2.setAttribute("uriQuery", uri + (request.getQueryString() != null? "?" + request.getQueryString():""));
 			response.sendRedirect(request.getContextPath()+"/user/login.htm");
 			return false;

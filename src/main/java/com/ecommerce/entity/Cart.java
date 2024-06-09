@@ -72,4 +72,20 @@ public class Cart {
 		this.orders = orders;
 	}
 
+	public EcoUser getUser() {
+		return user;
+	}
+
+	public void setUser(EcoUser user) {
+		this.user = user;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 }

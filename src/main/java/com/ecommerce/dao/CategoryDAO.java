@@ -14,6 +14,7 @@ public interface CategoryDAO {
 	public List<String> fetchAllCPU();
 	public List<Need> getAllNeed(int id);
 	public List<Category> getAllByCPU(String cpu);
+	public List<Category> searchCategory(String name);
 	public List<CategoryTopSelling> getTopSelling();
 	public List<CategoryNewProduct> getCategoryNewProduct();
 	

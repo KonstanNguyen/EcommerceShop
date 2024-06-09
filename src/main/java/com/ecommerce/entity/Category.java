@@ -92,7 +92,7 @@ public class Category {
 	private Set<Need> needs;
 
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
-	private Set<Promotion> promotions;
+	private Collection<Promotion> promotion;
 	
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
 	private Collection<Orders> orders;
@@ -249,12 +249,12 @@ public class Category {
 		this.orders = orders;
 	}
 
-	public Set<Promotion> getPromotions() {
-		return promotions;
+	public Collection<Promotion> getPromotion() {
+		return promotion;
 	}
 
-	public void setPromotions(Set<Promotion> promotions) {
-		this.promotions = promotions;
+	public void setPromotion(Collection<Promotion> promotion) {
+		this.promotion = promotion;
 	}
 
 }

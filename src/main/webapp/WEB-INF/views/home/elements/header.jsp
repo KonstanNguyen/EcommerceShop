@@ -47,8 +47,8 @@
 				<!-- SEARCH BAR -->
 				<div class="col-md-6">
 					<div class="header-search">
-						<form>
-							<input class="input input-select" placeholder="Search here">
+						<form method="get" action="./brands/search.htm">
+							<input class="input input-select" placeholder="Search here" name="search" >
 							<button class="search-btn">Search</button>
 						</form>
 					</div>
@@ -71,27 +71,28 @@
 						<div class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown"
 								aria-expanded="true"> <i class="fa fa-shopping-cart"></i> <span>Your
-									Cart</span>
-								<div class="qty">${totalItem>0?totalItem:0}</div>
+									Cart</span> <c:if test="${ totalItem > 0}">
+									<div class="qty">${totalItem}</div>
+								</c:if>
 							</a>
 							<div class="cart-dropdown">
 								<div class="cart-list">
 									<c:forEach var="order" items="${ orders }">
 										<div class="product-widget">
 											<div class="product-img">
-												<img src="<%-- ${order.category.image.url } --%>./assets/img/product01.png" alt="">
+												<img
+													src="<%-- ${order.category.image.url } --%>./assets/img/product01.png"
+													alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-name">
-													<a href="#">${ order.getCategories().title }</a>
+													<a href="./product.htm?id=${order.getCategories().id}">${ order.getCategories().title }</a>
 												</h3>
 												<h4 class="product-price">
 													<span class="qty">${order.quantity}x</span>${order.getCategories().promotionPrice}
 												</h4>
 											</div>
-											<button formmethod="post" formaction="./delete.htm?id=${order.id }" class="delete" >
-												<i class="fa fa-close"></i>
-											</button>
+										
 										</div>
 									</c:forEach>
 									<!-- <div class="product-widget">
@@ -130,7 +131,7 @@
 								</div>
 								<div class="cart-summary">
 									<small>${orderCount} Item(s) selected</small>
-									<h5>SUBTOTAL: ${total>0?total:0 }</h5>
+									<h5>SUBTOTAL: ${ total }</h5>
 								</div>
 								<div class="cart-btns">
 									<a href="./cart.htm">View Cart</a> <a href="#">Checkout <i

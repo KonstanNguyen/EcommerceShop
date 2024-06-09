@@ -77,4 +77,9 @@ public class CategoryServiceImpl implements CategoryService {
 		return dao.findByName(name);
 	}
 	
+	@Override
+	public List<Category> searchCategory(String name) {
+		return dao.searchCategory(name);
+	}
+	
 }

@@ -97,6 +97,14 @@ public class Promotion {
 		this.createTime = createdTime;
 	}
 
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
 	public Collection<Category> getCategories() {
 		return categories;
 	}
@@ -104,6 +112,4 @@ public class Promotion {
 	public void setCategories(Collection<Category> categories) {
 		this.categories = categories;
 	}
-	
-
 }
