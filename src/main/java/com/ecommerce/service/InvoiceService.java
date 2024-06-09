@@ -6,4 +6,5 @@ import com.ecommerce.entity.Invoice;
 
 public interface InvoiceService {
 	public List<Invoice> fetchAll();
+	public boolean insertInvoice(Invoice invoice);
 }

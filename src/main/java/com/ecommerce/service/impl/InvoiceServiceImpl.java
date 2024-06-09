@@ -21,4 +21,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 		return dao.fetchAll();
 	}
 
+	public boolean insertInvoice(Invoice invoice) {
+		return dao.insertInvoice(invoice);
+	}
+	
 }
