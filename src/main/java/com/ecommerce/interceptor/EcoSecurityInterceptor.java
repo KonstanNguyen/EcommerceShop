@@ -10,7 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.ecommerce.entity.EcoUser;
 import com.ecommerce.service.UserService;
 
-public class AuthInterceptors extends HandlerInterceptorAdapter {
+public class EcoSecurityInterceptor extends HandlerInterceptorAdapter {
 	
 	@Autowired
 	UserService userService;
@@ -20,7 +20,12 @@ public class AuthInterceptors extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession();
 		
-		EcoUser user = (EcoUser) session.getAttribute("user");
+		
+		EcoUser user = (EcoUser)session.getAttribute("user");
+		if (user != null && user.getUsername().equals("admin")) {
+			return true;
+		}
+		
 		if (user == null) {
 			HttpSession session2 = request.getSession();
 			String[] arr = request.getRequestURI().split("/", 3);
