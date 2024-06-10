@@ -23,6 +23,8 @@ import com.ecommerce.service.CategoryService;
 import com.ecommerce.service.InvoiceService;
 import com.ecommerce.service.PromotionService;
 import com.ecommerce.service.UserService;
+
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -56,7 +58,7 @@ public class AdminController {
 		List<Invoice> invoiceList = invoice.fetchAll();
 		model.addAttribute("users", userList);
 		model.addAttribute("invoices", invoiceList);
-		BigInteger totalAmount = BigInteger.ZERO;	
+		BigDecimal totalAmount = BigDecimal.ZERO;	
 		
 		for (Invoice i : invoiceList) {
 			totalAmount = totalAmount.add(i.getTotalAmount());
