@@ -49,57 +49,73 @@
 							</div>
 							<div class="card-body">
 								<div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Image</th>
-                                                <th>Product Name</th>
-                                                <th>Brand</th>
-                                                <th>CPU</th>
-                                                <th>Hot</th>
-                                                <th>Price (VND)</th>
-                                                <th>Promotion Price (VND)</th>
-                                                <th>Warranty Time (months)</th>
-                                                <th>Description</th>
-                                                <th>Status</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        	<c:forEach var="product" items="${products}">
-                                        		<tr>
-                                                    <td>${product.id}</td>
-                                                    <td><img src="${product.getImages().stream().findFirst().get().getUrl()}" width="50px"></td>
-                                                    <td>${product.title}</td>
-                                                    <td>${product.getBrand().getName()}</td>
-                                                    <td>${product.CPU}</td>
-                                                    <td>${product.hot}</td>
-                                                    <td>${product.price} VND</td>
-                                                    <td>${product.promotionPrice} VND</td>
-                                                    <td>${product.warrantyTime}</td>
-                                                    <td>${product.description}</td>
-                                                    <td>${product.status}</td>
-                                                    <td>
-                                                        <button class="btn btn-primary" onclick="editProduct(${product.id}, '${fn:replace(fn:replace(product.title, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.getBrand().getName(), "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.CPU, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.RAM, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.HARDWARE, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.CARD, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.SCREEN, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.OS, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.hot, "'", "\\'"), "\"", "&quot;")}', ${product.price}, ${product.promotionPrice}, ${product.warrantyTime}, '${fn:replace(fn:replace(product.description, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.status, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.starts, "'", "\\'"), "\"", "&quot;")}')">Edit</button>
-                                                        <button class="btn btn-danger" onclick="deleteProduct(${product.id})">Delete</button>
-                                                    </td>
-<!--                                                     <td>
-	                                                    <button class="btn btn-primary" onclick="editProduct(1, 'Product 1', 'Apple', 'Intel i7', '16GB', '512GB SSD', 'NVIDIA GTX 1650', '15.6\'\' Retina', 'MacOS', 'true', 50000000, 45000000, 24, 'High-end laptop', 'In Stock', ['product01.png'])">Edit</button>
-	                                                    <button class="btn btn-danger" onclick="deleteProduct(1)">Delete</button>
-                                                	</td> -->
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                    <table id="example" class="display" style="min-width: 845px">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Image</th>
+												<th>Product Name</th>
+												<th>Brand</th>
+												<th>CPU</th>
+												<th>Hot</th>
+												<th>Price (VND)</th>
+												<th>Promotion Price (VND)</th>
+												<th>Warranty Time (months)</th>
+												<th>Description</th>
+												<th>Status</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="product" items="${products}">
+												<tr>
+													<td>${product.id}</td>
+													<td><img
+														src="${product.getImages().stream().findFirst().get().getUrl()}"
+														width="50px"></td>
+													<td>${product.title}</td>
+													<td>${product.getBrand().getName()}</td>
+													<td>${product.CPU}</td>
+													<td>${product.hot}</td>
+													<td>${product.price}VND</td>
+													<td>${product.promotionPrice}VND</td>
+													<td>${product.warrantyTime}</td>
+													<td>${product.description}</td>
+													<td>${product.status}</td>
+													<td>
+														<button class="btn btn-primary"
+															onclick="editProduct(${product.id}, '${fn:replace(fn:replace(product.title, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.getBrand().getName(), "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.CPU, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.RAM, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.HARDWARE, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.CARD, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.SCREEN, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.OS, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.hot, "'", "\\'"), "\"", "&quot;")}', ${product.price}, ${product.promotionPrice}, ${product.warrantyTime}, '${fn:replace(fn:replace(product.description, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.status, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.starts, "'", "\\'"), "\"", "&quot;")}')">Edit</button>
+														<button class="btn btn-danger"
+															onclick="deleteProduct(${product.id})">Delete</button>
+													</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>ID</th>
+												<th>Image</th>
+												<th>Product Name</th>
+												<th>Brand</th>
+												<th>CPU</th>
+												<th>Hot</th>
+												<th>Price (VND)</th>
+												<th>Promotion Price (VND)</th>
+												<th>Warranty Time (months)</th>
+												<th>Description</th>
+												<th>Status</th>
+												<th>Actions</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
 
-            </div>
-        </div>
+				</div>
+			</div>
+		</div>
         <!--**********************************
             Content body end
         ***********************************-->
@@ -121,7 +137,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="addProductForm" action="${pageContext.request.contextPath}/admin/products/add.htm" method="post">
+                    <form id="addProductForm" enctype="multipart/form-data" action="${pageContext.request.contextPath}/admin/products/add.htm" method="post">
                         <!-- Add form fields for product details -->
                         <div class="form-group">
                             <label for="productName">Product Name</label>

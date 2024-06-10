@@ -34,7 +34,7 @@
                             </li>
                             <li class="nav-item dropdown notification_dropdown">
                                 <div class="log-out">
-                                	<a href="${pageContext.request.contextPath}/user/login.htm">Log out</a>
+                                	<a href="${pageContext.request.contextPath}/">Log out</a>
                                 </div>
                             </li>
                         </ul>

@@ -74,7 +74,6 @@ public class AdminProductController {
     		
     		try {
     			String realPath = context.getRealPath("/assets/img/");
-    			System.out.println("Path: " + realPath);
     			File directory = new File(realPath);
     			
     			if (!directory.exists()) {

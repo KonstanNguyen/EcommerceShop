@@ -186,8 +186,8 @@
 									<div class="col-md-4 col-xs-6">
 										<input type="hidden" name="categoryid" value="${category.id}">
 										<div class="product">
-											<div class="product-img">
-												<img src="${category.images[0].url }" alt="">
+											<div class="product-img" style="height:230px;">
+												<img src="${category.images[0].url }" alt="" style="width:100%;">
 												<div class="product-label">
 													<span class="sale">-30%</span> <span class="new">NEW</span>
 												</div>

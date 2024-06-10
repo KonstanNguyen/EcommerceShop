@@ -1,39 +1,21 @@
 package com.ecommerce.controller;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.random.RandomGenerator;
-
-import javax.servlet.http.Cookie;
-import java.sql.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ecommerce.entity.Cart;
 import com.ecommerce.entity.EcoUser;
 import com.ecommerce.service.CartService;
 import com.ecommerce.service.OrderService;
 
-import com.ecommerce.dto.request.RegisterUser;
-import com.ecommerce.entity.Cart;
-import com.ecommerce.entity.Invoice;
-import com.ecommerce.entity.Orders;
 import com.ecommerce.service.InvoiceService;
 import com.ecommerce.service.MailerService;
 import com.ecommerce.service.UserService;
@@ -146,7 +128,7 @@ public class UserController {
 			Cart cart = new Cart();
 			cart.setUser(newUser);
 			cart.setStatus(false);
-			cart.setCreateTime(Date.valueOf(java.time.LocalDate.now()));
+			cart.setCreateTime(java.sql.Date.valueOf(java.time.LocalDate.now()));
 			cartService.saveCart(cart);
 		} else {
 			request.setAttribute("message", "Đăng ký thất bại");
@@ -177,7 +159,7 @@ public class UserController {
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
 		String CMND = request.getParameter("CMND");
-		Date dateOfBirth = Date.valueOf(request.getParameter("dateOfBirth"));
+		Date dateOfBirth = java.sql.Date.valueOf(request.getParameter("dateOfBirth"));
 		System.out.println(name);
 		System.out.println(dateOfBirth);
 		EcoUser user = (EcoUser) request.getSession().getAttribute("user");

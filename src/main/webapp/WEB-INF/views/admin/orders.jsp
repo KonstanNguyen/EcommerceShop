@@ -63,7 +63,7 @@
 														<td>${cart.getFirstOrder().invoice.totalAmount}</td>
 														<td>${cart.createTime}</td>
 														<td><a style="color:green; font-size: 16px; font-weight: bold"
-															href='./admin/orderDetails.htm?name=${user.name}&id=${cart.id}'>Details</a></td>
+															href='./admin/orderDetails.htm?username=${user.username}&id=${cart.id}'>Details</a></td>
 													</tr>
 												</c:forEach>
 											</c:forEach>

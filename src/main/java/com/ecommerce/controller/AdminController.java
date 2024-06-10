@@ -79,8 +79,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/orderDetails", method= {RequestMethod.GET, RequestMethod.POST})
-	public String getOrderDetails(Model model, @RequestParam("name") String name, @RequestParam("id") int cartId) {
-		EcoUser u = user.findByName(name);
+	public String getOrderDetails(Model model, @RequestParam("username") String name, @RequestParam("id") int cartId) {
+		EcoUser u = user.findByUsername(name);
 		Cart c = cartService.findById(cartId);
 		List<Orders> orders = c.getOrders().stream().distinct().toList();
 		model.addAttribute("orders", orders);
