@@ -84,7 +84,6 @@ public class PromotionDAOImpl implements PromotionDAO {
 			}
 		} catch (Exception e) {
 			t.rollback();
-			throw new DetectedException("Failed to delete brand with id: " + brand.getid(), e);
 		} finally {
 			session.close();
 		}
