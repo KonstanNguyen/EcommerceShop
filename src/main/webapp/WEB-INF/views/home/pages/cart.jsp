@@ -16,7 +16,7 @@
 
 </head>
 <body>
-	<form action="./checkout.htm" method="POST">
+	<form action="./cart.htm" method="POST">
 		<div class="card">
 			<div class="row">
 				<div class="col-md-8 cart">
