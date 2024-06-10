@@ -106,8 +106,7 @@ public class ProductController {
 			return orders;
 		}
 
-		// In ra thông tin cart hiện tại
-		System.out.println("cart id: " + cart.getUser().getUsername());
+
 
 		// Nếu cart hiện tại đã hoàn thành (status = true), tạo một cart mới
 		if (cart.isStatus() == true) {
@@ -161,7 +160,6 @@ public class ProductController {
 			
 			BigDecimal percent = new BigDecimal(100-totaldealPercent).divide(new BigDecimal(100));
 			if (order.getCategories().getPromotionPrice() != null) {
-				System.out.println(percent);
 				total = total.add(
 						new BigDecimal(order.getCategories().getPromotionPrice().multiply(new BigInteger(order.getQuantity() + ""))).multiply(percent));
 			} else {

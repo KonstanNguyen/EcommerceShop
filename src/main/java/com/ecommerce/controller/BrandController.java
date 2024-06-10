@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,7 +46,7 @@ public class BrandController {
 	Company company;
 
 	@Autowired
-	BrandService service;
+	BrandService brandService;
 
 	@Autowired
 	CategoryService categoryService;
@@ -58,7 +59,7 @@ public class BrandController {
 
 	@RequestMapping
 	public String index(ModelMap model) {
-		List<Brand> brands = service.fetchAll();
+		List<Brand> brands = brandService.fetchAll();
 		model.addAttribute("brands", brands);
 		List<CategoryNewProduct> categoriesNewProduct = categoryService.getCategoryNewProduct();
 		model.addAttribute("categoriesNewProduct", categoriesNewProduct);
@@ -69,6 +70,8 @@ public class BrandController {
 	@RequestMapping("all")
 	public String allProducts(ModelMap model) {
 		List<Category> categories = categoryService.fetchAllProduct();
+		List<Brand> brands = brandService.fetchAll();
+		model.addAttribute("brands", brands);
 		model.addAttribute("categories", categories);
 
 		return "home/pages/all";
@@ -107,6 +110,21 @@ public class BrandController {
 				.filter(t -> t.getTitle().toLowerCase().contains(value.toLowerCase())).collect(Collectors.toList());
 		searchCategories = categoryService.searchCategory(value);
 		model.addAttribute("categories", searchCategories);
+		return "home/pages/all";
+	}
+	@RequestMapping(value="all/filterProductsByBrand", method = RequestMethod.GET)
+	public String filterProduct(@RequestParam(value = "brandIds", required = false) List<Long> brandIds, ModelMap model) {
+        if (brandIds == null) {
+            brandIds = new ArrayList<>();
+        };
+        List<Category> categories = new ArrayList<>();
+		for (Long brandId : brandIds) {
+			categories.addAll(categoryService.findCategoryByBrandId(brandId.intValue()));
+		}
+		model.addAttribute("categories", categories);
+		model.addAttribute("brands", brandService.fetchAll());
+		model.addAttribute("selectedBrandIds", brandIds);
+		
 		return "home/pages/all";
 	}
 
@@ -149,8 +167,6 @@ public class BrandController {
 			return orders;
 		}
 
-		// In ra thông tin cart hiện tại
-		System.out.println("cart id: " + cart.getUser().getUsername());
 
 		// Nếu cart hiện tại đã hoàn thành (status = true), tạo một cart mới
 		if (cart.isStatus() == true) {
@@ -203,7 +219,6 @@ public class BrandController {
 
 			BigDecimal percent = new BigDecimal(100 - totaldealPercent).divide(new BigDecimal(100));
 			if (order.getCategories().getPromotionPrice() != null) {
-				System.out.println(percent);
 				total = total.add(new BigDecimal(
 						order.getCategories().getPromotionPrice().multiply(new BigInteger(order.getQuantity() + "")))
 						.multiply(percent));

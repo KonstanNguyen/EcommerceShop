@@ -3,6 +3,7 @@ package com.ecommerce.entity;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -225,7 +226,7 @@ public class Category {
 	}
 
 	public Collection<Image> getImages() {
-		return images;
+		return images.stream().distinct().collect(Collectors.toList());
 	}
 
 	public void setImages(Collection<Image> images) {

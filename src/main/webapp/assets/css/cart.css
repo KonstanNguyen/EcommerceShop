@@ -97,9 +97,6 @@ img {
 	width: 3.5rem;
 }
 
-.back-to-shop {
-	margin-top: 4.5rem;
-}
 
 h5 {
 	margin-top: 4vh;
@@ -124,8 +121,7 @@ select {
 
 input {
 	border: 1px solid rgba(0, 0, 0, 0.137);
-	padding: 1vh;
-	margin-bottom: 4vh;
+	padding: 1vh;;
 	outline: none;
 	width: 100%;
 	background-color: rgb(247, 247, 247);
@@ -173,4 +169,175 @@ a:hover {
 	background-repeat: no-repeat;
 	background-position-x: 95%;
 	background-position-y: center;
+}
+/* General styles for the buttons */
+/* General styles for the buttons */
+.button-like {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 5px 10px; /* Smaller padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Inline-block element */
+    font-size: 14px; /* Smaller font size */
+    margin: 2px; /* Smaller margin */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 3px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+/* Hover effects for buttons */
+.button-like:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+/* Styles for the decrement button */
+.decrement {
+    background-color: #f44336; /* Red background */
+}
+
+.decrement:hover {
+    background-color: #d32f2f; /* Darker red */
+}
+
+/* Styles for the increment button */
+.increment {
+    background-color: #4CAF50; /* Green background */
+}
+
+.increment:hover {
+    background-color: #388E3C; /* Darker green */
+}
+
+/* Styles for the span element */
+.border.value {
+    display: inline-block; /* Inline-block element */
+    padding: 5px 10px; /* Smaller padding */
+    margin: 0 5px; /* Margin between the buttons */
+    border: 2px solid #ddd; /* Light grey border */
+    border-radius: 3px; /* Rounded corners */
+    font-size: 14px; /* Smaller font size */
+    min-width: 30px; /* Minimum width to keep it consistent */
+    text-align: center; /* Centered text */
+}
+
+/* Flexbox container adjustments */
+.row.main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.row.main .col {
+    padding: 0 10px; /* Add padding to columns for spacing */
+}
+
+.py-2 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.close {
+    color: #f44336; /* Red color for the delete link */
+    cursor: pointer; /* Pointer/hand icon */
+    transition: color 0.3s; /* Smooth transition for color */
+}
+
+.close:hover {
+    color: #d32f2f; /* Darker red on hover */
+}
+
+/* Ensure the delete link is properly centered */
+.col-1.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Full height to center align vertically */
+}
+/* Add some margin between buttons */
+.btn + .btn {
+    margin-left: 10px;
+}
+
+/* Style for update message */
+.update-value {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: red; /* Change text color to red */
+    font-weight: bold; /* Optionally make the text bold */
+}
+/* Add some margin between buttons */
+.button-container {
+    display: flex;
+    gap: 10px; /* Adjust the space between buttons as needed */
+    margin-top: 10px; /* Adjust the top margin if needed */
+}
+.update-value {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn {
+    flex: 1;
+}
+.btn-secondary.btn-group-lg>.btn, .btn-lg{
+	margin-top: 20px;
+}
+.back-to-shop {
+    margin-top: 20px;
+}
+
+.back-to-shop .btn-custom {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745; /* Màu nền của nút - màu xanh lá */
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none; /* Xóa gạch chân của liên kết */
+    transition: background-color 0.3s ease;
+}
+
+.back-to-shop .btn-custom:hover {
+    background-color: #218838; /* Màu nền của nút khi hover - màu xanh da trời đậm hơn */
+}
+
+.back-to-shop a {
+    color: white;
+    text-decoration: none; /* Xóa gạch chân của liên kết */
+}
+
+.back-to-shop a:hover {
+    color: white;
+    text-decoration: none; /* Xóa gạch chân của liên kết khi hover */
+}
+.back-to-shop a span {
+	color: white !important;
+}
+.col-3.d-flex.align-items-center {
+    display: flex !important;
+    align-items: center !important; /* Canh các phần tử theo trục ngang */
+}
+
+.col-3.d-flex.align-items-center .button-like {
+    flex: 0 0 auto !important; /* Đặt chiều rộng của button là tự động, không co giãn */
+}
+
+.col-3.d-flex.align-items-center input[type="number"] {
+    flex: 1 1 auto !important; /* Đặt chiều rộng của input là tự động, không co giãn */
+    margin: 0 10px !important; /* Khoảng cách giữa nút và input */
+}
+form{
+	margin:auto;
 }

@@ -11,4 +11,5 @@ public interface OrderDAO {
 	public void saveOrder(Orders order);
 	public void updateOrder(Orders order);
 	public void deleteOrder(Orders order);
+	public void updateQuantity(int orderID,int quantity);
 }
