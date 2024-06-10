@@ -49,7 +49,8 @@
 				<div class="col-md-6">
 					<div class="header-search">
 						<form method="get" action="./brands/search.htm">
-							<input class="input input-select" placeholder="Search here" name="search" >
+							<input class="input input-select" placeholder="Search here"
+								name="search">
 							<button class="search-btn">Search</button>
 						</form>
 					</div>
@@ -78,60 +79,29 @@
 							</a>
 							<div class="cart-dropdown">
 								<div class="cart-list">
-									<c:forEach var="order" items="${ orders }">
-										<div class="product-widget">
-											<div class="product-img">
-												<img
-													src="<%-- ${order.category.image.url } --%>./assets/img/product01.png"
-													alt="">
+									<c:if test="${ orders != null }">
+										<c:forEach var="order" items="${ orders }">
+											<div class="product-widget">
+												<div class="product-img">
+													<img
+														src="<%-- ${order.category.image.url } --%>./assets/img/product01.png"
+														alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name">
+														<a href="./product.htm?id=${order.getCategories().id}">${ order.getCategories().title }</a>
+													</h3>
+													<h4 class="product-price">
+														<span class="qty">${order.quantity}x</span>${order.getCategories().promotionPrice}
+													</h4>
+												</div>
+												<button formmethod="post"
+													formaction="./delete.htm?id=${order.id }" class="delete">
+													<i class="fa fa-close"></i>
+												</button>
 											</div>
-											<div class="product-body">
-												<h3 class="product-name">
-													<a href="./product.htm?id=${order.getCategories().id}">${ order.getCategories().title }</a>
-												</h3>
-												<h4 class="product-price">
-													<span class="qty">${order.quantity}x</span>${order.getCategories().promotionPrice}
-												</h4>
-											</div>
-											<button formmethod="post"
-												formaction="./delete.htm?id=${order.id }" class="delete">
-												<i class="fa fa-close"></i>
-											</button>
-										</div>
-									</c:forEach>
-									<!-- <div class="product-widget">
-										<div class="product-img">
-											<img src="./assets/img/product01.png" alt="">
-										</div>
-										<div class="product-body">
-											<h3 class="product-name">
-												<a href="#">product name goes here</a>
-											</h3>
-											<h4 class="product-price">
-												<span class="qty">1x</span>$980.00
-											</h4>
-										</div>
-										<button class="delete">
-											<i class="fa fa-close"></i>
-										</button>
-									</div>
-									<div class="product-widget">
-										<div class="product-img">
-											<img src="./assets/img/product02.png" alt="">
-										</div>
-										<div class="product-body">
-											<h3 class="product-name">
-												<a href="#">product name goes here</a>
-											</h3>
-											<h4 class="product-price">
-												<span class="qty">3x</span>$980.00
-											</h4>
-										</div>
-										<button class="delete">
-											<i class="fa fa-close"></i>
-										</button>
-									</div>
-								</div> -->
+										</c:forEach>
+									</c:if>
 								</div>
 								<div class="cart-summary">
 									<small>${orderCount} Item(s) selected</small>

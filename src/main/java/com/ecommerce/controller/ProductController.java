@@ -58,7 +58,7 @@ public class ProductController {
 		String referer = request.getHeader("referer");
 		EcoUser user = (EcoUser) session.getAttribute("user");
 		if (session.getAttribute("user") == null) {
-			return "Error here ";
+			return "redirect:/user/login.htm";
 		}
 		Cart cart = cartService.findCartByUserId(user.getId());
 		model.addAttribute("category", categoryService.findByID(categoryId));

@@ -56,44 +56,26 @@ WARNING: Respond.js doesn't work if you view the page via file://
 	<!-- /HEADER -->
 
 	<!-- NAVIGATION -->
-	<nav id="navigation">
-		<!-- container -->
-		<div class="container">
-			<!-- responsive-nav -->
-			<div id="responsive-nav">
-				<!-- NAV -->
-				<ul class="main-nav nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Hot Deals</a></li>
-					<li><a href="#">New Product</a></li>
-					<li><a href="#">Tops Selling</a></li>
-					<li><a href="#">All</a></li>
-				</ul>
-				<!-- /NAV -->
-			</div>
-			<!-- /responsive-nav -->
-		</div>
-		<!-- /container -->
-	</nav>
+	<%@ include file="../elements/navigation.jsp"%>
 	<!-- /NAVIGATION -->
 
 	<!-- BREADCRUMB -->
-	<div id="breadcrumb" class="section">
-		<!-- container -->
-		<div class="container">
-			<!-- row -->
-			<div class="row">
-				<div class="col-md-12">
-					<ul class="breadcrumb-tree">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">All Categories</a></li>
-						<li><a href="#">Accessories</a></li>
-						<li class="active">Headphones (227,490 Results)</li>
-					</ul>
-				</div>
-			</div>
-			<!-- /row -->
-		</div>
+<!-- 	<div id="breadcrumb" class="section"> -->
+<!-- 		<!-- container --> -->
+<!-- 		<div class="container"> -->
+<!-- 			<!-- row --> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-md-12"> -->
+<!-- 					<ul class="breadcrumb-tree"> -->
+<!-- 						<li><a href="#">Home</a></li> -->
+<!-- 						<li><a href="#">All Categories</a></li> -->
+<!-- 						<li><a href="#">Accessories</a></li> -->
+<!-- 						<li class="active">Headphones (227,490 Results)</li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<!-- /row --> -->
+<!-- 		</div> -->
 		<!-- /container -->
 	</div>
 	<!-- /BREADCRUMB -->
@@ -220,24 +202,6 @@ WARNING: Respond.js doesn't work if you view the page via file://
 					<div class="aside">
 						<h3 class="aside-title">Top selling</h3>
 
-						<%-- <c:forEach var="category" items="${ cateTopSellings }" end="2">
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="${ category.image.url }" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">${ category.brandName }</p>
-									<h3 class="product-name">
-										<a href="./product.htm?id=${category.id}">${category.title}</a>
-									</h3>
-									<h4 class="product-price">
-										${ category.price }
-										<del class="product-old-price">${ category.promotionPrice }</del>
-									</h4>
-								</div>
-							</div>
-						</c:forEach> --%>
-						<%-- 						<%@ include file="../elements/section-top-selling/slide.jsp"%> --%>
 						<div class="products-widget-slick"
 							data-nav="#slick-nav-${ status.index+2 }">
 							<%@ include file="../elements/section-top-selling/slide.jsp"%>

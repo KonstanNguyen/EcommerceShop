@@ -5,7 +5,9 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,10 +33,12 @@ import com.ecommerce.entity.Cart;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.EcoUser;
 import com.ecommerce.entity.Orders;
+import com.ecommerce.entity.Promotion;
 import com.ecommerce.service.BrandService;
 import com.ecommerce.service.CartService;
 import com.ecommerce.service.CategoryService;
 import com.ecommerce.service.OrderService;
+import com.ecommerce.service.PromotionService;
 import com.ecommerce.service.UserService;
 
 @Controller
@@ -55,20 +60,45 @@ public class BrandController {
 	CartService cartService;
 	@Autowired
 	OrderService orderService;
-
+	@Autowired
+	PromotionService promotionService;
+	
 	@RequestMapping
 	public String index(ModelMap model) {
 		List<Brand> brands = service.fetchAll();
 		model.addAttribute("brands", brands);
+		
 		List<CategoryNewProduct> categoriesNewProduct = categoryService.getCategoryNewProduct();
 		model.addAttribute("categoriesNewProduct", categoriesNewProduct);
-
+		
+		Promotion promotion = promotionService.fetchAll().stream()
+				.sorted(Comparator.<Promotion, Short>comparing(pro->pro.getDealPercent(), Comparator.reverseOrder()))
+				.findFirst().get();
+		model.addAttribute("promotion", promotion);
+		
+		Date endTime = promotion.getEndTime();
+		LocalDateTime countDownDate = endTime.toInstant()
+			      .atZone(ZoneId.systemDefault())
+			      .toLocalDateTime();
+		String stringDate = countDownDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")).toString();
+		System.out.println(stringDate);
+		model.addAttribute("countDownDate", stringDate);
+		
 		return "home/pages/home";
+		
 	}
-
 	@RequestMapping("all")
 	public String allProducts(ModelMap model) {
 		List<Category> categories = categoryService.fetchAllProduct();
+		model.addAttribute("categories", categories);
+
+		return "home/pages/all";
+	}
+	
+	@RequestMapping("all/promotion/{id}")
+	public String allProductsHasPromotionId(ModelMap model, @PathVariable("id")int id) {
+		Promotion promotion = promotionService.findByID(id);
+		List<Category> categories = promotion.getCategories().stream().toList();
 		model.addAttribute("categories", categories);
 
 		return "home/pages/all";
@@ -115,12 +145,6 @@ public class BrandController {
 		return categoryService.getTopSelling();
 	}
 
-	@ModelAttribute("countDownDate")
-	public String getCountDownDate() {
-		LocalDateTime countDownDate = LocalDateTime.of(2020, Month.JANUARY, 5, 15, 37, 25, 0);
-		return countDownDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss")).toString();
-	}
-
 	@ModelAttribute("company")
 	public Company getCompany() {
 		return company;
@@ -143,6 +167,7 @@ public class BrandController {
 			newCart.setStatus(false); // Giỏ hàng còn hoạt động
 			newCart.setCreateTime(java.sql.Date.valueOf(LocalDate.now()));
 			cartService.saveCart(newCart);
+			cart = newCart;
 
 			// Trả về đơn hàng của giỏ hàng mới
 			List<Orders> orders = orderService.getOrdersByCartId(newCart.getId());
@@ -178,6 +203,10 @@ public class BrandController {
 			return 0;
 		}
 		Cart cart = cartService.findCartByUserId(user.getId());
+		if (cart == null) {
+			cart = new Cart(user, false, java.sql.Date.valueOf(LocalDate.now()));
+			cartService.saveCart(cart);
+		}
 		List<Orders> orders = orderService.getOrdersByCartId(cart.getId());
 		return orders.size();
 	}
@@ -187,9 +216,13 @@ public class BrandController {
 		BigDecimal total = BigDecimal.ZERO;
 		EcoUser user = (EcoUser) session.getAttribute("user");
 		if (user == null) {
-			return null;
+			return BigDecimal.ZERO;
 		}
 		Cart cart = cartService.findCartByUserId(user.getId());
+		if (cart == null) {
+			cart = new Cart(user, false, java.sql.Date.valueOf(LocalDate.now()));
+			cartService.saveCart(cart);
+		}
 		List<Orders> orders = orderService.getOrdersByCartId(cart.getId());
 
 		for (Orders order : orders) {

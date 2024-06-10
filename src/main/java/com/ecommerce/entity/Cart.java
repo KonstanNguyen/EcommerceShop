@@ -18,6 +18,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Cart {
+	public Cart(EcoUser user, Boolean status, Date createTime) {
+		super();
+		this.user = user;
+		this.status = status;
+		this.createTime = createTime;
+	}
+
+	public Cart() {
+		super();
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -87,11 +98,11 @@ public class Cart {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	
+
 	public Orders getFirstOrder() {
-        if (orders != null && !orders.isEmpty()) {
-            return orders.iterator().next();
-        }
-        return null;
-    }
+		if (orders != null && !orders.isEmpty()) {
+			return orders.iterator().next();
+		}
+		return null;
+	}
 }

@@ -38,8 +38,8 @@
 					<div id="EXPIRED"></div>
 						<div hidden="true" data-value="${ countDownDate }" class="countDownDate"></div>
 					<h2 class="text-uppercase">hot deal this week</h2>
-					<p>New Collection Up to 50% OFF</p>
-					<a class="primary-btn cta-btn" href="#">Shop now</a>
+					<p>New Collection Up to ${ promotion.dealPercent } OFF</p>
+					<a class="primary-btn cta-btn" href="./brands/all/promotion/${ promotion.id }.htm">Shop now</a>
 				</div>
 				<script src="<c:url value='./assets/js/hot-deal-countdown.js'/>"></script>
 			</div>
