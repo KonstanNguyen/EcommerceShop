@@ -31,391 +31,288 @@
 		<!--**********************************
             Content body start
         ***********************************-->
-		<div class="content-body">
-			<div class="container-fluid">
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col p-0">
+                        <h4>Products</h4>
+                    </div>
+                </div>
 
-				<div class="row">
-					<div class="col-12">
-						<div class="card">
-							<div class="card-header">
-								<h4 class="card-title">Product</h4>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Product List</h4>
 								<button class="btn btn-success mb-3"
 									onclick="openAddProductPopup()">Add New Product</button>
 							</div>
 							<div class="card-body">
 								<div class="table-responsive">
-									<table id="example" class="display" style="min-width: 845px">
-										<thead>
-											<tr>
-												<th>ID</th>
-												<th>Image</th>
-												<th>Product Name</th>
-												<th>Brand</th>
-												<th>CPU</th>
-												<th>Hot</th>
-												<th>Price (VND)</th>
-												<th>Promotion Price (VND)</th>
-												<th>Warranty Time (months)</th>
-												<th>Description</th>
-												<th>Status</th>
-												<th>Actions</th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach var="product" items="${products}">
-												<tr>
-													<td>${product.id}</td>
-													<td><img
-														src="${product.getImages().stream().findFirst().get().getUrl()}"
-														width="50px"></td>
-													<td>${product.title}</td>
-													<td>${product.getBrand().getName()}</td>
-													<td>${product.CPU}</td>
-													<td>${product.hot}</td>
-													<td>${product.price}VND</td>
-													<td>${product.promotionPrice}VND</td>
-													<td>${product.warrantyTime}</td>
-													<td>${product.description}</td>
-													<td>${product.status}</td>
-													<td>
-														<button class="btn btn-primary"
-															onclick="editProduct(${product.id}, '${fn:replace(fn:replace(product.title, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.getBrand().getName(), "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.CPU, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.RAM, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.HARDWARE, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.CARD, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.SCREEN, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.OS, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.hot, "'", "\\'"), "\"", "&quot;")}', ${product.price}, ${product.promotionPrice}, ${product.warrantyTime}, '${fn:replace(fn:replace(product.description, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.status, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.starts, "'", "\\'"), "\"", "&quot;")}')">Edit</button>
-														<button class="btn btn-danger"
-															onclick="deleteProduct(${product.id})">Delete</button>
-													</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-										<tfoot>
-											<tr>
-												<th>ID</th>
-												<th>Image</th>
-												<th>Product Name</th>
-												<th>Brand</th>
-												<th>CPU</th>
-												<th>Hot</th>
-												<th>Price (VND)</th>
-												<th>Promotion Price (VND)</th>
-												<th>Warranty Time (months)</th>
-												<th>Description</th>
-												<th>Status</th>
-												<th>Actions</th>
-											</tr>
-										</tfoot>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Image</th>
+                                                <th>Product Name</th>
+                                                <th>Brand</th>
+                                                <th>CPU</th>
+                                                <th>Hot</th>
+                                                <th>Price (VND)</th>
+                                                <th>Promotion Price (VND)</th>
+                                                <th>Warranty Time (months)</th>
+                                                <th>Description</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        	<c:forEach var="product" items="${products}">
+                                        		<tr>
+                                                    <td>${product.id}</td>
+                                                    <td><img src="${product.getImages().stream().findFirst().get().getUrl()}" width="50px"></td>
+                                                    <td>${product.title}</td>
+                                                    <td>${product.getBrand().getName()}</td>
+                                                    <td>${product.CPU}</td>
+                                                    <td>${product.hot}</td>
+                                                    <td>${product.price} VND</td>
+                                                    <td>${product.promotionPrice} VND</td>
+                                                    <td>${product.warrantyTime}</td>
+                                                    <td>${product.description}</td>
+                                                    <td>${product.status}</td>
+                                                    <td>
+                                                        <button class="btn btn-primary" onclick="editProduct(${product.id}, '${fn:replace(fn:replace(product.title, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.getBrand().getName(), "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.CPU, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.RAM, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.HARDWARE, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.CARD, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.SCREEN, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.OS, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.hot, "'", "\\'"), "\"", "&quot;")}', ${product.price}, ${product.promotionPrice}, ${product.warrantyTime}, '${fn:replace(fn:replace(product.description, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.status, "'", "\\'"), "\"", "&quot;")}', '${fn:replace(fn:replace(product.starts, "'", "\\'"), "\"", "&quot;")}')">Edit</button>
+                                                        <button class="btn btn-danger" onclick="deleteProduct(${product.id})">Delete</button>
+                                                    </td>
+<!--                                                     <td>
+	                                                    <button class="btn btn-primary" onclick="editProduct(1, 'Product 1', 'Apple', 'Intel i7', '16GB', '512GB SSD', 'NVIDIA GTX 1650', '15.6\'\' Retina', 'MacOS', 'true', 50000000, 45000000, 24, 'High-end laptop', 'In Stock', ['product01.png'])">Edit</button>
+	                                                    <button class="btn btn-danger" onclick="deleteProduct(1)">Delete</button>
+                                                	</td> -->
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-				</div>
-			</div>
-		</div>
-
-
-		<!--**********************************
+            </div>
+        </div>
+        <!--**********************************
             Content body end
         ***********************************-->
         
-
-		<%@ include file="../admin/layout/footer.jsp"%>
-
-	</div>
+        <%@ include file="../admin/layout/footer.jsp" %>
+        
+    </div>
 
 	<%@ include file="../admin/layout/script.jsp"%>
 
-	<!-- Add Product Modal -->
-	<div class="modal fade" id="addProductModal" tabindex="-1"
-		role="dialog" aria-labelledby="addProductModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="addProductModalLabel">Add New
-						Product</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form id="addProductForm" enctype="multipart/form-data"
-						action="${pageContext.request.contextPath}/admin/products/add.htm"
-						method="post">
-						<div class="form-group">
-							<label for="productName">Product Name</label> <input type="text"
-								class="form-control" id="productName" name="productName"
-								required>
-						</div>
-						<div class="form-group">
-							<label for="brand">Brand</label> <select class="form-control"
-								id="brand" name="brand" required>
-								<c:forEach var="brand" items="${brands}">
-									<option value="${brand.getName()}">${brand.getName()}</option>
-								</c:forEach>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="cpu">CPU</label> <input type="text"
-								class="form-control" id="cpu" name="cpu" required>
-						</div>
-						<div class="form-group">
-							<label for="ram">RAM</label> <input type="text"
-								class="form-control" id="ram" name="ram" required>
-						</div>
-						<div class="form-group">
-							<label for="hardware">Hardware</label> <input type="text"
-								class="form-control" id="hardware" name="hardware" required>
-						</div>
-						<div class="form-group">
-							<label for="card">Card</label> <input type="text"
-								class="form-control" id="card" name="card" required>
-						</div>
-						<div class="form-group">
-							<label for="screen">Screen</label> <input type="text"
-								class="form-control" id="screen" name="screen" required>
-						</div>
-						<div class="form-group">
-							<label for="os">OS</label> <input type="text"
-								class="form-control" id="os" name="os" required>
-						</div>
-						<div class="form-group">
-							<label for="hot">Hot</label> <select class="form-control"
-								id="hot" name="hot" required>
-								<option value="true">True</option>
-								<option value="false">False</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="price">Price (VND)</label> <input type="number"
-								class="form-control" id="price" name="price" required>
-						</div>
-						<div class="form-group">
-							<label for="promotionPrice">Promotion Price (VND)</label> <input
-								type="number" class="form-control" id="promotionPrice"
-								name="promotionPrice" required>
-						</div>
-						<div class="form-group">
-							<label for="warrantyTime">Warranty Time (months)</label> <input
-								type="number" class="form-control" id="warrantyTime"
-								name="warrantyTime" required>
-						</div>
-						<div class="form-group">
-							<label for="description">Description</label>
-							<textarea class="form-control" id="description"
-								name="description" rows="3" required></textarea>
-						</div>
-						<div class="form-group">
-							<label for="status">Status</label> <select class="form-control"
-								id="status" name="status" required>
-								<option value="AVAILABLE">AVAILABLE</option>
-								<option value="DELETED">DELETED</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="rating">Rating</label> <select class="form-control"
-								id="rating" name="rating" required>
-								<option value="1.0">1 Star</option>
-								<option value="2.0">2 Stars</option>
-								<option value="3.0">3 Stars</option>
-								<option value="4.0">4 Stars</option>
-								<option value="5.0">5 Stars</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="image">Image</label> <input type="file"
-								class="form-control-file" id="image" name="image" multiple
-								required>
-						</div>
-						<button type="submit" class="btn btn-primary">Save</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- Add Product Modal -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addProductForm" action="${pageContext.request.contextPath}/admin/products/add.htm" method="post">
+                        <!-- Add form fields for product details -->
+                        <div class="form-group">
+                            <label for="productName">Product Name</label>
+                            <input type="text" class="form-control" id="productName" name="productName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="brand">Brand</label>
+                            <select class="form-control" id="brand" name="brand" required>
+                            	<c:forEach var="brand" items="${brands}">
+                                	<option value="${brand.getName()}">${brand.getName()}</option>
+                                </c:forEach>
+                                <!-- Add more brands as needed -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cpu">CPU</label>
+                            <input type="text" class="form-control" id="cpu" name="cpu" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ram">RAM</label>
+                            <input type="text" class="form-control" id="ram" name="ram" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hardware">Hardware</label>
+                            <input type="text" class="form-control" id="hardware" name="hardware" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="card">Card</label>
+                            <input type="text" class="form-control" id="card" name="card" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="screen">Screen</label>
+                            <input type="text" class="form-control" id="screen" name="screen" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="os">OS</label>
+                            <input type="text" class="form-control" id="os" name="os" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hot">Hot</label>
+                            <select class="form-control" id="hot" name="hot" required>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price (VND)</label>
+                            <input type="number" class="form-control" id="price" name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="promotionPrice">Promotion Price (VND)</label>
+                            <input type="number" class="form-control" id="promotionPrice" name="promotionPrice" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="warrantyTime">Warranty Time (months)</label>
+                            <input type="number" class="form-control" id="warrantyTime" name="warrantyTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select class="form-control" id="status" name="status" required>
+                                <option value="AVAILABLE">AVAILABLE</option>
+                                <option value="DELETED">DELETED</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+	                        <label for="rating">Rating</label>
+	                        <select class="form-control" id="rating" name="rating" required>
+	                            <option value="1.0">1 Star</option>
+	                            <option value="2.0">2 Stars</option>
+	                            <option value="3.0">3 Stars</option>
+	                            <option value="4.0">4 Stars</option>
+	                            <option value="5.0">5 Stars</option>
+	                        </select>
+                    	</div>
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="file" class="form-control-file" id="image" name="image" multiple required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<!-- Edit Product Modal -->
-	<div class="modal fade" id="editProductModal" tabindex="-1"
-		role="dialog" aria-labelledby="editProductModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="editProductModalLabel">Edit
-						Product</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form id="editProductForm" enctype="multipart/form-data" action=""
-						method="post">
-						<!-- Add hidden field for product ID -->
-						<input type="hidden" id="editProductId" name="productId">
-						<!-- Add form fields for product details similar to add form -->
-						<div class="form-group">
-							<label for="editProductName">Product Name</label> <input
-								type="text" class="form-control" id="editProductName"
-								name="productName" required>
-						</div>
-						<div class="form-group">
-							<label for="editBrand">Brand</label> <select class="form-control"
-								id="editBrand" name="brand" required>
-								<c:forEach var="brand" items="${brands}">
-									<option value="${brand.getName()}">${brand.getName()}</option>
-								</c:forEach>
-								<!-- Add more brands as needed -->
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="editCpu">CPU</label> <input type="text"
-								class="form-control" id="editCpu" name="cpu" required>
-						</div>
-						<div class="form-group">
-							<label for="editRam">RAM</label> <input type="text"
-								class="form-control" id="editRam" name="ram" required>
-						</div>
-						<div class="form-group">
-							<label for="editHardware">Hardware</label> <input type="text"
-								class="form-control" id="editHardware" name="hardware" required>
-						</div>
-						<div class="form-group">
-							<label for="editCard">Card</label> <input type="text"
-								class="form-control" id="editCard" name="card" required>
-						</div>
-						<div class="form-group">
-							<label for="editScreen">Screen</label> <input type="text"
-								class="form-control" id="editScreen" name="screen" required>
-						</div>
-						<div class="form-group">
-							<label for="editOs">OS</label> <input type="text"
-								class="form-control" id="editOs" name="os" required>
-						</div>
-						<div class="form-group">
-							<label for="editHot">Hot</label> <select class="form-control"
-								id="editHot" name="hot" required>
-								<option value="true">True</option>
-								<option value="false">False</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="editPrice">Price (VND)</label> <input type="number"
-								class="form-control" id="editPrice" name="price" required>
-						</div>
-						<div class="form-group">
-							<label for="editPromotionPrice">Promotion Price (VND)</label> <input
-								type="number" class="form-control" id="editPromotionPrice"
-								name="promotionPrice" required>
-						</div>
-						<div class="form-group">
-							<label for="editWarrantyTime">Warranty Time (months)</label> <input
-								type="number" class="form-control" id="editWarrantyTime"
-								name="warrantyTime" required>
-						</div>
-						<div class="form-group">
-							<label for="editDescription">Description</label>
-							<textarea class="form-control" id="editDescription"
-								name="description" rows="3" required></textarea>
-						</div>
-						<div class="form-group">
-							<label for="editStatus">Status</label> <select
-								class="form-control" id="editStatus" name="status" required>
-								<option value="AVAILABLE">AVAILABLE</option>
-								<option value="DELETED">DELETED</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="editRating">Rating</label> <select
-								class="form-control" id="editRating" name="rating" required>
-								<option value="1.0">1 Star</option>
-								<option value="2.0">2 Stars</option>
-								<option value="3.0">3 Stars</option>
-								<option value="4.0">4 Stars</option>
-								<option value="5.0">5 Stars</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="editImage">Image</label> <input type="file"
-								class="form-control-file" id="editImage" name="image" multiple>
-						</div>
-						<!-- Display Product Images with delete button -->
-						<div class="form-group">
-							<label for="productImages">Current Images</label>
-							<div id="productImages" class="d-flex flex-wrap">
-								<!-- Images will be dynamically inserted here by JavaScript -->
-							</div>
-						</div>
-						<button type="submit" class="btn btn-primary">Save</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<script>
-// Assuming you have the product ID and the images array
-const productId = document.getElementById('editProductId').value;
-
-const productImages = [];
-
-//Lặp qua mảng imagesData và ánh xạ các phần tử sang định dạng của productImages
-${images}.forEach(image => {
-	console.log(image.url)
- // Tạo một đối tượng mới chứa id và url từ mỗi phần tử của images
- const productImage = {
-     id: image.id, // id của hình ảnh
-     url: image.url // url của hình ảnh
- };
-
- // Thêm đối tượng productImage vào mảng productImages
- productImages.push(productImage);
-});
-
-function displayProductImages() {
-    const imagesContainer = document.getElementById('productImages');
-    imagesContainer.innerHTML = ''; // Clear previous images
-
-    productImages.forEach(image => {
-        const imageDiv = document.createElement('div');
-        imageDiv.className = 'image-item position-relative m-2';
-
-        const img = document.createElement('img');
-        img.src = image.url;
-        img.className = 'img-thumbnail';
-        img.style.maxWidth = '150px';
-        img.style.maxHeight = '150px';
-
-        const deleteButton = document.createElement('button');
-        deleteButton.className = 'btn btn-danger btn-sm position-absolute';
-        deleteButton.style.top = '0';
-        deleteButton.style.right = '0';
-        deleteButton.innerHTML = '&times;';
-        deleteButton.onclick = () => deleteImage(image.id);
-
-        imageDiv.appendChild(img);
-        imageDiv.appendChild(deleteButton);
-        imagesContainer.appendChild(imageDiv);
-    });
-}
-
-function deleteImage(imageId) {
-    // Implement the delete functionality, e.g., make an AJAX call to the server
-    console.log('Delete image with ID:', imageId);
-    // Remove the image from the array for demonstration purposes
-    const index = productImages.findIndex(image => image.id === imageId);
-    if (index !== -1) {
-        productImages.splice(index, 1);
-        displayProductImages();
-    }
-}
-
-// Call displayProductImages when the modal is opened
-$('#editProductModal').on('show.bs.modal', function (event) {
-    displayProductImages();
-});
-</script>
-
+    <!-- Edit Product Modal -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProductForm" enctype="multipart/form-data" action="" method="post">
+                        <!-- Add hidden field for product ID -->
+                        <input type="hidden" id="editProductId" name="productId">
+                        <!-- Add form fields for product details similar to add form -->
+                        <div class="form-group">
+                            <label for="editProductName">Product Name</label>
+                            <input type="text" class="form-control" id="editProductName" name="productName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editBrand">Brand</label>
+                            <select class="form-control" id="editBrand" name="brand" required>
+                                <c:forEach var="brand" items="${brands}">
+                                	<option value="${brand.getName()}">${brand.getName()}</option>
+                                </c:forEach>
+                                <!-- Add more brands as needed -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCpu">CPU</label>
+                            <input type="text" class="form-control" id="editCpu" name="cpu" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editRam">RAM</label>
+                            <input type="text" class="form-control" id="editRam" name="ram" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editHardware">Hardware</label>
+                            <input type="text" class="form-control" id="editHardware" name="hardware" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCard">Card</label>
+                            <input type="text" class="form-control" id="editCard" name="card" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editScreen">Screen</label>
+                            <input type="text" class="form-control" id="editScreen" name="screen" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editOs">OS</label>
+                            <input type="text" class="form-control" id="editOs" name="os" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editHot">Hot</label>
+                            <select class="form-control" id="editHot" name="hot" required>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPrice">Price (VND)</label>
+                            <input type="number" class="form-control" id="editPrice" name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPromotionPrice">Promotion Price (VND)</label>
+                            <input type="number" class="form-control" id="editPromotionPrice" name="promotionPrice" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editWarrantyTime">Warranty Time (months)</label>
+                            <input type="number" class="form-control" id="editWarrantyTime" name="warrantyTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editDescription">Description</label>
+                            <textarea class="form-control" id="editDescription" name="description" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editStatus">Status</label>
+                            <select class="form-control" id="editStatus" name="status" required>
+                                <option value="AVAILABLE">AVAILABLE</option>
+                                <option value="DELETED">DELETED</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+	                        <label for="editRating">Rating</label>
+	                        <select class="form-control" id="editRating" name="rating" required>
+	                            <option value="1.0">1 Star</option>
+	                            <option value="2.0">2 Stars</option>
+	                            <option value="3.0">3 Stars</option>
+	                            <option value="4.0">4 Stars</option>
+	                            <option value="5.0">5 Stars</option>
+	                        </select>
+                    	</div>
+                        <div class="form-group">
+                            <label for="editImage">Image</label>
+                            <input type="file" class="form-control-file" id="editImage" name="image" multiple>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<script type="text/javascript">
         function openAddProductPopup() {
