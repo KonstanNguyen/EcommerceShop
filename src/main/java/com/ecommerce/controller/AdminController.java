@@ -91,6 +91,7 @@ public class AdminController {
 	public String brandList(Model model) {
 		List<Brand> brandList = brand.fetchAll();
 		model.addAttribute("brands", brandList);
+		model.addAttribute("brand", new Brand());
 		
 		return "admin/brands";
 	}

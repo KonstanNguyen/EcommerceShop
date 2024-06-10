@@ -1,31 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-   
+	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Admin Dashboard - Discounted Products</title>
-    
-    <%@ include file="../admin/layout/link.jsp" %>
-    
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Dashboard - Discounted Products</title>
+
+<%@ include file="../admin/layout/link.jsp"%>
+
 </head>
 
 <body>
-    <%@ include file="../admin/layout/preloader.jsp" %>
+	<%@ include file="../admin/layout/preloader.jsp"%>
 
-    <div id="main-wrapper">
-    
-        <%@ include file="../admin/layout/header.jsp" %>
-    
-        <%@ include file="../admin/layout/sidebar.jsp" %>
-        <!--**********************************
+	<div id="main-wrapper">
+
+		<%@ include file="../admin/layout/header.jsp"%>
+
+		<%@ include file="../admin/layout/sidebar.jsp"%>
+		<!--**********************************
             Content body start
         ***********************************-->
 <!--         <div class="content-body"> -->
@@ -156,7 +156,7 @@
 												                <c:when test="${p.status == true}">
 												                    Đang áp dụng
 												                </c:when>
-												                <c:otherwise>
+																<c:otherwise>
 												                    Không áp dụng
 												                </c:otherwise>
 												            </c:choose>
@@ -205,12 +205,8 @@
 		<!--**********************************
             Content body end
         ***********************************-->
-        
-        <%@ include file="../admin/layout/footer.jsp" %>
-        
-    </div>
 
-    <%@ include file="../admin/layout/script.jsp" %>
+		<%@ include file="../admin/layout/footer.jsp"%>
 
     <!-- Add Discounted Product Modal -->
     <div class="modal fade" id="addDiscountedProductModal" tabindex="-1" role="dialog" aria-labelledby="addDiscountedProductModalLabel" aria-hidden="true">
@@ -287,12 +283,52 @@
         </div>
     </div>
 
-    <!-- Edit Discounted Product Modal -->
-    <div class="modal fade" id="editDiscountedProductModal" tabindex="-1" role="dialog" aria-labelledby="editDiscountedProductModalLabel" aria-hidden="true">
+	<%@ include file="../admin/layout/script.jsp"%>
+
+	<!-- Add Discounted Product Modal -->
+	<div class="modal fade" id="addDiscountedProductModal" tabindex="-1"
+		role="dialog" aria-labelledby="addDiscountedProductModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addDiscountedProductModalLabel">Add
+						New Discount Product</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="addDiscountedProductForm"
+						action="${pageContext.request.contextPath}/admin/promotions/addProductPromotion.htm"
+						method="post">
+						<div class="form-group">
+							<label for="promotionId">Promotion</label> <select
+								class="form-control" id="promotionId" name="promotionId"
+								required>
+								<c:forEach var="pro" items="${promotions}">
+									<option value="${pro.id}">${pro.id}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="productName">Product</label> <select
+								class="form-control" id="productName" name="productName"
+								required>
+								<c:forEach var="c" items="${categories}">
+									<option value="${c.id}">${c.title}</option>
+								</c:forEach>
+								<!-- Add more products as needed -->
+							</select>
+						</div>
+
+    <!-- Promotion List Modal -->
+    <div class="modal fade" id="promotionListModal" tabindex="-1" role="dialog" aria-labelledby="promotionListModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editDiscountedProductModalLabel">Edit Discount</h5>
+                    <h5 class="modal-title" id="promotionListModalLabel">Promotion List</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -319,43 +355,47 @@
 						        <option value="false">Không áp dụng</option>
 						    </select>
 						</div>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <!-- Promotion List Modal -->
-    <div class="modal fade" id="promotionListModal" tabindex="-1" role="dialog" aria-labelledby="promotionListModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="promotionListModalLabel">Promotion List</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <ul class="list-group">
-                        <c:forEach var="pro" items="${promotions}">
-                            <li class="list-group-item">
-                                ID: ${pro.id} - Created Time: ${pro.createdTime}
-                                <button class="btn btn-danger btn-sm float-right" onclick="deleteDiscount(${pro.id})">Delete</button>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+	<script type="text/javascript">
+	$("addDiscountedProductForm").on("submit", function(event){
+		var editStartTime = $("#startTime").val();
+    var editEndTime = $("#endTime").val();
+        
+    var timeError = $('.time-error');
+		if(!validatePrice(price, promotionPrice)){
+			timeError.text("End time has to greater than start time!");
+			event.preventDefault();
+		}
+	});
+	
+		$("editDiscountedProductForm").on("submit", function(event){
+			var editStartTime = $("#editStartTime").val();
+	    var editEndTime = $("#editEndTime").val();
+	        
+	    var timeError = $('.time-error');
+			if(!validatePrice(price, promotionPrice)){
+				timeError.text("End time has to greater than start time!");
+				event.preventDefault();
+			}
+		});
+        
+		function validTime(startTime, endTime){
+			return endTime > startTime;
+		}
+	</script>
 
     <script type="text/javascript">
         function openAddDiscountedProductPopup() {
             $('#addDiscountedProductModal').modal('show');
         }
         
-        function openAddDiscountedPopup() {
+        function openAddDis	countedPopup() {
             $('#addDiscountedModal').modal('show');
         }
 
