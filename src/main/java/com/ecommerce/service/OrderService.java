@@ -14,4 +14,6 @@ public interface OrderService {
 	public void updateOrder(Orders order);
 
 	public void deleteOrder(Orders order);
+	
+	public void updateQuantity(int orderID,int quantity);
 }

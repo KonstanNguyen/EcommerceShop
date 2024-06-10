@@ -2,6 +2,7 @@ package com.ecommerce.dto.response;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Set;
 
 import com.ecommerce.entity.Image;
 import com.ecommerce.entity.Need;
@@ -23,7 +24,7 @@ public class CategoryDetailDTO {
 	private String brandName;
 	private String status;
 	private Byte starts;
-	private List<Image> images;
+	private Set<Image> images;
 	private List<Need> needs;
 
 	public int getId() {
@@ -154,11 +155,12 @@ public class CategoryDetailDTO {
 		this.starts = starts;
 	}
 
-	public List<Image> getImages() {
+	public Set<Image> getImages() {
+		
 		return images;
 	}
 
-	public void setImages(List<Image> images) {
+	public void setImages(Set<Image> images) {
 		this.images = images;
 	}
 

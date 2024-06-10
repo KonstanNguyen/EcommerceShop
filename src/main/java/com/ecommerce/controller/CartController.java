@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,20 @@ public class CartController {
 	    // Trả về đơn hàng của giỏ hàng hiện tại (status = false)
 	    List<Orders> orders = orderService.getOrdersByCartId(cart.getId());
 	    return orders;
+	}
+	@RequestMapping(value="cart",method = RequestMethod.POST)
+	public String checkOut(HttpServletRequest request) {
+	    String[] orderIDParams = request.getParameterValues("orderID");
+	    String[] quantityParams = request.getParameterValues("quantity");
+	    if (orderIDParams == null || quantityParams == null) {
+	    	return "redirect:/brands.htm";
+	    }
+		for (int i = 0; i < orderIDParams.length; i++) {
+			int orderID = Integer.parseInt(orderIDParams[i]);
+			int quantity = Integer.parseInt(quantityParams[i]);
+			orderService.updateQuantity(orderID, quantity);
+		}
+		return "redirect:/checkout.htm";
 	}
 
 	@ModelAttribute("totalItem")

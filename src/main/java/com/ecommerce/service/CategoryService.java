@@ -15,9 +15,8 @@ public interface CategoryService {
 	public List<Need> getAllNeed(int id);
 	public List<CategoryTopSelling> getTopSelling();
 	public List<CategoryNewProduct> getCategoryNewProduct();
-	
 	public Category findByName(String name);
-	
+	public List<Category> findCategoryByBrandId(int brandId);
 	public void addCategory(Category category);
     public void updateCategory(Category category);
     public void deleteCategory(Category category);
