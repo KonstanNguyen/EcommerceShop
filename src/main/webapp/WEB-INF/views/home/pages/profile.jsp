@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,64 +23,56 @@
 		<div class="row">
 			<div class="col-md-8">
 				<h2>User Profile</h2>
-				<form action="./user/profile.htm" method="post">
+				${ message }
+				<form:form action="./user/profile.htm" method="post" modelAttribute="user">
 					<div class="form-group">
-						<label for="username">Username</label> <input type="text"
-							class="form-control" id="username" name="username"
-							value="${user.username}" readonly>
+						<label for="username">Username</label>
+						<form:input path="username" readonly="true"
+							cssClass="form-control" />
+						<form:errors path="username" cssClass="error" />
 					</div>
 
 					<div class="form-group">
-						<label for="name">name</label> <input type="text"
-							class="form-control" id="name" name="name" value="${user.name}">
+						<label for="name">name</label>
+						<form:input path="name" cssClass="form-control" />
+						<form:errors path="name" cssClass="error" />
 					</div>
 					<div class="form-group">
-						<label for="email">Email address</label> <input type="email"
-							class="form-control" id="email" name="email"
-							value="${user.email}">
+						<label for="email">Email address</label>
+						<form:input path="email" cssClass="form-control" />
+						<form:errors path="email" cssClass="error" />
 					</div>
 					<div class="form-group">
-						<label for="phone">Phone Number</label> <input type="text"
-							class="form-control" id="phone" name="phone"
-							value="${user.phone}">
+						<label for="phone">Phone Number</label>
+						<form:input path="phone" cssClass="form-control" />
+						<form:errors path="phone" cssClass="error" />
 					</div>
 					<div class="form-group">
-						<label for="address">Address</label> <input type="text"
-							class="form-control" id="address" name="address"
-							value="${user.address}">
+						<label for="address">Address</label>
+						<form:input path="address" cssClass="form-control" />
+						<form:errors path="address" cssClass="error" />
 					</div>
 					<div class="form-group">
-						<label for="cmnd">CMND</label> <input type="text"
-							class="form-control" id="CMND" name="CMND" value="${user.CMND}">
+						<label for="cmnd">CMND</label>
+						<form:input path="CMND" cssClass="form-control" />
+						<form:errors path="CMND" cssClass="error" />
 					</div>
 
 					<div class="form-group">
-						<label for="dateOfBirth">Date of Birth</label> <input type="date"
-							class="form-control" id="dateOfBirth" name="dateOfBirth"
-							value="${user.dateOfBirth}">
+						<label for="dateOfBirth">Date of Birth</label>
+						<form:input  path="dateOfBirth" cssClass="form-control" />
+						<form:errors path="dateOfBirth" cssClass="error" />
 					</div>
-					<div class="update-value" style="color:red">
-						<%
-						String message = request.getParameter("message");
-						if (message != null && message.equals("success")) {
-						%>
-						Cập nhật thành công
-						<%
-						} else if (message != null && message.equals("error")) {
-						%>
-						Cập nhật thất bại
-						<%
-						}
-						%>
-					</div>
+
 					<div class="button-container">
 						<button type="submit" class="btn btn-primary btn-lg">Update
 							Profile</button>
-						<a href="./brands.htm" class="btn btn-secondary btn-lg" style="margin-top:20px">Back
-							to Home</a>
-							<a href="./changePassword.htm" class="btn btn-secondary btn-lg" style="margin-top:20px">Change Password</a>
+						<a href="./brands.htm" class="btn btn-secondary btn-lg"
+							style="margin-top: 20px">Back to Home</a> <a
+							href="./user/changePassword.htm" class="btn btn-secondary btn-lg"
+							style="margin-top: 20px">Change Password</a>
 					</div>
-				</form>
+				</form:form>
 			</div>
 			<div class="col-md-4">
 				<h3>

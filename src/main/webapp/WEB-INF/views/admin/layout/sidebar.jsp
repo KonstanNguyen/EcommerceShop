@@ -31,11 +31,6 @@
                     <img class="icon-sidebar" src="${pageContext.request.contextPath}/assets/img/admin/promo-code.png"/>
                     <span class="nav-text">Promotions</span></a>
                     </li>
-                    
-                    <li><a class="has-arrow" href="${pageContext.request.contextPath}/admin/reports.htm">
-                    <img class="icon-sidebar" src="${pageContext.request.contextPath}/assets/img/admin/report.png"/>
-                    <span class="nav-text">Reports</span></a>
-                    </li>
                 </ul>
             </div>
 

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ecommerce.bean.Company;
 import com.ecommerce.bean.Mailer;
 import com.ecommerce.dto.response.OrderDetailsDTO;
 import com.ecommerce.entity.Cart;
@@ -43,6 +44,8 @@ public class CheckoutController {
 	@Autowired
 	SessionFactory factory;
 
+	@Autowired
+	Company company;
 	@Autowired
 	CartService cartService;
 	@Autowired
@@ -129,6 +132,11 @@ public class CheckoutController {
 //		request.setAttribute("orders", orders);
 		return "home/pages/showOrders";
 	}
+	@ModelAttribute("company")
+	public Company getCompany() {
+		return company;
+	}
+
 
 	/*
 	 * @ModelAttribute("total") public BigDecimal getTotal(HttpSession session) {

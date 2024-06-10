@@ -57,6 +57,7 @@ public class CartDAOImpl implements CartDAO {
 		}
 	    return cart;
 	}
+	
 	@Override
 	public List<Object[]> getCartDetails() {
 		Session session = factory.getCurrentSession();
@@ -72,7 +73,7 @@ public class CartDAOImpl implements CartDAO {
 	@Override
 	public Cart findById(int cartId) {
 		Session session = factory.getCurrentSession();
-	    String hql = "FROM " + Cart.class.getName() + " WHERE id = :id";
+	    String hql = "FROM " + Cart.class.getName() + " WHERE id = :id and status=true";
 	    Query query = session.createQuery(hql);
 	    query.setParameter("id", cartId);
 	    Cart cart = (Cart) query.uniqueResult();

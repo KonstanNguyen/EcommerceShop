@@ -57,14 +57,17 @@
 										<tbody>
 											<c:forEach var="user" items="${users}">
 												<c:forEach var="cart" items="${user.carts}">
-													<tr>
-														<td>${cart.id}</td>
-														<td>${user.name}</td>
-														<td>${cart.getFirstOrder().invoice.totalAmount}</td>
-														<td>${cart.createTime}</td>
-														<td><a style="color:green; font-size: 16px; font-weight: bold"
-															href='./admin/orderDetails.htm?username=${user.username}&id=${cart.id}'>Details</a></td>
-													</tr>
+													<c:if test="${ cart.status==true}">
+														<tr>
+															<td>${cart.id}</td>
+															<td>${user.name}</td>
+															<td>${cart.getFirstOrder().invoice.totalAmount}</td>
+															<td>${cart.createTime}</td>
+															<td><a
+																style="color: green; font-size: 16px; font-weight: bold"
+																href='./admin/orderDetails.htm?username=${user.username}&id=${cart.id}'>Details</a></td>
+														</tr>
+													</c:if>
 												</c:forEach>
 											</c:forEach>
 										</tbody>
@@ -77,7 +80,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- End Content -->
 
 		<%@ include file="../admin/layout/footer.jsp"%>

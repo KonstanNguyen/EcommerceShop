@@ -31,8 +31,8 @@
 
 										<input type="hidden" name="categoryid" value="${category.id}">
 										<div class="product">
-											<div class="product-img">
-												<img src="${category.image.url}" alt="">
+											<div class="product-img" style="height:230px">
+												<img src="${category.image.url}" alt="" style="width:100%">
 											</div>
 											<div class="product-body">
 												<h3 class="product-name textOverFlow">

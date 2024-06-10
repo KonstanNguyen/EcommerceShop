@@ -58,6 +58,7 @@
                 </table>
             </div>
         </c:forEach>
+      	<a href="./brands.htm">Back to home</a>
 <%--         <c:forEach var="cart" items="${ orders.cart }"> --%>
 <!--         	<div class="order-item"> -->
 <!--                 <h5>Order #${cart.id}</h5> -->

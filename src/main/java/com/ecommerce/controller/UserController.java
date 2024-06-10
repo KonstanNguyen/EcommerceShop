@@ -8,6 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -153,29 +156,36 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "profile", method = RequestMethod.POST)
-	public String updateProfile(HttpServletRequest request) {
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String address = request.getParameter("address");
-		String phone = request.getParameter("phone");
-		String CMND = request.getParameter("CMND");
-		Date dateOfBirth = java.sql.Date.valueOf(request.getParameter("dateOfBirth"));
-		System.out.println(name);
-		System.out.println(dateOfBirth);
-		EcoUser user = (EcoUser) request.getSession().getAttribute("user");
+	public String updateProfile(@ModelAttribute("user") EcoUser user, BindingResult result, ModelMap model) {
 
-		user.setName(name);
-		user.setEmail(email);
-		user.setAddress(address);
-		user.setPhone(phone);
-		user.setCMND(CMND);
-		user.setDateOfBirth(dateOfBirth);
-		if (userSevice.update(user)) {
-			return "redirect:/user/profile.htm?message=success";
-		} else {
-			return "redirect:/user/profile.htm?message=success";
+		if (user.getName() == null || user.getName().isEmpty()) {
+			result.rejectValue("name", "user", "Vui lòng nhập tên!");
 		}
+		if (user.getEmail() == null || user.getEmail().isEmpty()) {
+			result.rejectValue("email", "user", "Vui lòng nhập email!");
+		}
+		if (user.getPhone() == null || user.getPhone().isEmpty()) {
+			result.rejectValue("phone", "user", "Vui lòng nhập số điện thoại!");
+		}
+		if (user.getAddress() == null || user.getAddress().isEmpty()) {
+			result.rejectValue("address", "user", "Vui lòng nhập địa chỉ!");
+		}
+		if (user.getDateOfBirth() == null) {
+			result.rejectValue("dateOfBirth", "user", "Vui lòng nhập ngày sinh!");
+		}
+		if (user.getCMND() == null || user.getCMND().isEmpty() || user.getCMND().isBlank()) {
+			result.rejectValue("CMND", "user", "Vui lòng nhập CMND!");
+		}
+		if (result.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây!");
+			return "home/pages/profile";
+		}
+		userSevice.update(user);
+		model.addAttribute("message", "Cập nhật thông tin thành công!");
+		
+		return "home/pages/profile";
 	}
+	
 	@RequestMapping("/changePassword")
 	public String changePassword() {
 		return "pages/changepassword";

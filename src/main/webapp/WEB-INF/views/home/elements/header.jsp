@@ -108,7 +108,7 @@
 									<h5>SUBTOTAL: ${ total }</h5>
 								</div>
 								<div class="cart-btns">
-									<a href="./cart.htm">View Cart</a> <a href="#">Checkout <i
+									<a href="./cart.htm">View Cart</a> <a href="./checkout.htm">Checkout <i
 										class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
