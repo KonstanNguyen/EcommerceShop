@@ -84,7 +84,8 @@ Trang web này có những chức năng cơ bản gồm:
     - Giao diện hiện thị cho người dùng.
     - Tìm kiếm sản phẩm.
     - Đăng nhập, đăng ký.
-    - Tìm kiếm/Lọc theo sản phẩm.
+    - Tìm kiếm theo sản phẩm.
+    - Lọc sản phẩm theo hãng.
     - Trang thông tin người dùng.
 - Admin:
     - Giao diện cho người quản trị viên.
