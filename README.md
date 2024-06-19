@@ -137,7 +137,7 @@ Trang web này có những chức năng cơ bản gồm:
         <td>
             <ul>
                 <li>Tạo trang checkout.</li>
-                <li>Hiện tại danh sách đơn đặt hàng và lịch sử đặt hàng của người dùng.</li>
+                <li>Hiện thị danh sách đơn đặt hàng và lịch sử đặt hàng của người dùng.</li>
             </ul>
         </td>
     </tr>
