@@ -154,7 +154,6 @@ Trang web này có những chức năng cơ bản gồm:
                 <li>Cắt giao diện trang tất cả sản phẩm.</li>
                 <li>Validation.</li>
                 <li>Kiểm lỗi cho team.</li>
-                <li>confict here</li>
             </ul>
         </td>
     </tr>
